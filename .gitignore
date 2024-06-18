@@ -1,0 +1,17 @@
+cartografia/
+
+# LaTeX
+# *.pdf
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.log
+*.aux
+*.synctex*
+
+*-blx.bib
+*.bbl
+*.blg
+*.run.xml
+*.out
+*.bcf
