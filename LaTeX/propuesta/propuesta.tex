@@ -10,34 +10,54 @@
 \usepackage{graphicx}
 \graphicspath{ {../img/} }
 
-% \usepackage[backend=biber,style=numeric]{biblatex}
-% \addbibresource{apt-bibliography.bib}
-% \hfuzz=14.999pt
+\usepackage[backend=biber,style=numeric]{biblatex}
+\addbibresource{propuesta.bib}
+\hfuzz=14.999pt
 
-\title{Uso de Redes Neuronales Convolucionales para la Interpretación de Imagenes Satelitales para la Identificación de Paleocauces}
-\author{Giovanni Dueck\\\UrlFont{giodueck@gmail.com}\\\\{\bf Universidad Católica Nuestra Señora de Asunción}}
-\date{Junio, 2024}
+% \title{Uso de Redes Neuronales Convolucionales para Interpretación de Imágenes Satelitales}
+% \author{Giovanni Dueck\\\UrlFont{giodueck@gmail.com}\\\\{\bf Universidad Católica Nuestra Señora de Asunción}}
+% \date{Junio, 2024}
 
 \begin{document}
 
 % \maketitle
 \begin{center}
-    \Large{\bf Uso de Redes Neuronales Convolucionales para la Interpretación de Imagenes Satelitales para la Identificación de Paleocauces}
+    \Large{\bf Uso de Redes Neuronales Convolucionales para Interpretación de Imágenes Satelitales}
 
     Propuesta de Tema - Proyecto Final de Carrera Ing. Informática
 
-    {\bf Alumno:} Giovanni Dueck - {\bf Tutor:} Alberto Ramírez
+    {\bf Alumno:} Giovanni Dueck
+
+    {\bf Tutor:} Alberto Ramírez - {\bf Cotutor:} Felix Carvallo
 \end{center}
 
 \section*{Introducción y Motivación}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In maximus consectetur ipsum, sit amet porta ligula viverra vitae. Pellentesque accumsan nunc lacus, id aliquam ex varius at. Proin feugiat convallis felis, aliquam viverra orci suscipit sit amet. Proin consequat ligula sit amet ex porta, non imperdiet enim tristique. Maecenas lacinia sit amet est sit amet consectetur. In sed ornare orci. Etiam a dictum ante. Aliquam condimentum at purus et aliquam. Ut eget tellus dolor. Nunc odio nisl, scelerisque ut arcu in, cursus eleifend sem.
+Imágenes satelitales o teledetección remota se refiere a imagenes capturadas por un sensor montado en un satélite artificial, para extraer información. Estas imágenes contienen información multiespectro, es decir, además de la luz visible se toman imágenes de bandas invisibles como por ejemplo la luz infrarroja. \autocite{globalforestlink-how-sat-imaging-work}
 
-Duis scelerisque, lectus non sollicitudin pulvinar, ligula nunc gravida massa, vitae blandit massa libero et purus. Sed dolor libero, sagittis ut malesuada ac, lacinia quis mi. Morbi eget tempor sem. Nam non porttitor eros. Donec vitae egestas lacus. Vivamus sit amet tincidunt purus, finibus pulvinar orci. Aenean posuere vitae ex non venenatis. Etiam ornare volutpat sem, vel aliquet mi volutpat sit amet.
+Para la captura de estas imágenes se emplean varios métodos, que se dividen en dos categorías: sensores pasivos recolectan radiación electromagnética reflejada del sol, mientras que sensores activos emiten su propia radiación y captan la reflexión de la tierra. Sensores pasivos requieren de una cantidad importante de energía para operar, pero tienen la ventaja de operar a cualquier hora del día y la capacidad de crear imágenes en bandas que el sol no emite. \autocite{globalforestlink-how-sat-imaging-work}
 
-In purus metus, pulvinar vel ex id, dapibus varius lorem. Duis a ante ex. Etiam eleifend quam lorem, non pulvinar turpis convallis ut. Donec egestas odio at mauris elementum imperdiet. Integer a feugiat libero, ac malesuada arcu. Etiam vulputate elit vel consequat pulvinar. Donec quam mi, rhoncus vehicula eleifend in, convallis id lectus.
+Diferentes suelos, vegetación, o humedad reflejan diferentes bandas de radiación. Estas imágenes son usadas en varias aplicaciones, desde Sistemas de Información Geográfica y mapas a meteorología y monitoreamiento de la salud de vegetación forestal. Un índice bastante común es el Índice de Vegetación de Diferencia Normalizada, o NDVI por sus siglas en inglés, el cual es usado para estimar la cantidad, calidad y desarrollo de la vegetación con base a la mediación. Estos datos ya se usan en sistemas de advertencia temprana de sequías y la predicción del rendimiento de la agricultura en los Estados Unidos a partir de los datos de la NASA. \autocite{earthdata-vegetation}
 
-Nunc porttitor gravida lacinia. Maecenas gravida tempor nunc sit amet pretium. Duis lacus orci, rhoncus eu tristique ac, hendrerit nec lacus. Integer ut pellentesque diam. Duis porttitor finibus neque vel dapibus. Aliquam erat volutpat. Donec scelerisque ante id bibendum lacinia. Quisque in vehicula arcu, eu eleifend ligula. Mauris porta egestas vulputate. Mauris a auctor magna. Nunc efficitur dui ut ullamcorper sodales. Fusce a volutpat justo.
+La importancia de la producción agropecuaria y agroganadera en el Paraguay también invita a considerar estas tecnologías para el monitoreamiento de la salud de la vegetación y el uso adecuado de la tierra. Actualmente, ya es están empleando tecnologías de teledetección y el NDVI en el sector agrícola en aplicaciones como la detección de malezas y predicción del orden idel de cosecha de campos cultivados. \autocite{onesoil-agricultura-paraguay}
 
-Pellentesque tempor et est a posuere. Ut laoreet arcu id lorem consectetur, vel tristique orci gravida. Etiam placerat sit amet ligula at sodales. Maecenas eu convallis sapien. Integer pellentesque sem tellus, nec blandit nisi facilisis vel. Nulla vel leo ac sem iaculis bibendum. Nullam ac nisl vel justo consequat consectetur fermentum ut sapien. Vestibulum fermentum cursus mauris, sed efficitur libero rutrum eget. Integer in odio ornare, facilisis velit venenatis, scelerisque sapien. Etiam justo erat, ornare sed massa et, aliquam dignissim mauris. 
+Con aproximadamente la mitad del territorio paraguayo hacia el norte del río Paraguay en la región semi-árida del Chaco, tecnologías que alivien las sequias y precipitaciones generalmente bajas son muy valiosas, tanto para la agricultura y ganadería en las estancias chaqueñas como para centros poblacionales más aislados como por ejemplo las misiones indígenas. Estos pueblos más aislados generalmente son caracterizados por pobreza, lo que se manifiesta en la falta de alimento y agua potable.
+
+Los paleocauces son formaciones geológicas que han sido propuestas como reservorios o conductos para el flujo subterráneo de agua dulce. Se consideran principalmente paleocauces arenosos, y estos pueden ser aprovechados para acceder al agua en áreas en las que la distribución habitual del agua no existe o está dañada de otra forma. \autocite{wikipedia-paleochannel} Con la abundancia de paleocauces en el Chaco central (ocupan un 15\% de la región), esta propuesta es una bastante prometedora que ya ha sido considerada en investigaciones anteriores. \autocite{conacyt-sistemas-captacion-agua}
+
+\section*{Objetivo General}
+Creación de modelos de redes neuronales convolucionales para la clasificación y/o caracterizacion de imagenes satelitales.
+
+\section*{Objetivos Específicos}
+\begin{enumerate}
+    \item Análisis de series temporales a partir de imagenes satelitales correspondientes a la region occidental del Paraguay
+    \item Identificación y clasificación de componentes de uso de suelo
+    \item Determinación de areas de ocurrencia de paleocauces
+\end{enumerate}
+
+\section*{Metodología y Cronología de Trabajo}
+
+\section*{Referencias}
+\printbibliography
+
 \end{document}
