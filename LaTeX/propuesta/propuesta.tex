@@ -3,16 +3,14 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
-
 \usepackage{csquotes}
 \usepackage{hyperref}
-
 \usepackage{graphicx}
 \graphicspath{ {../img/} }
-
 \usepackage[backend=biber,style=numeric]{biblatex}
 \addbibresource{propuesta.bib}
-\hfuzz=14.999pt
+\usepackage[table,svgnames]{xcolor}
+\hfuzz=15pt
 
 % \title{Uso de Redes Neuronales Convolucionales para Interpretación de Imágenes Satelitales}
 % \author{Giovanni Dueck\\\UrlFont{giodueck@gmail.com}\\\\{\bf Universidad Católica Nuestra Señora de Asunción}}
@@ -46,18 +44,49 @@ Con aproximadamente la mitad del territorio paraguayo hacia el norte del río Pa
 Los paleocauces son formaciones geológicas que han sido propuestas como reservorios o conductos para el flujo subterráneo de agua dulce. Se consideran principalmente paleocauces arenosos, y estos pueden ser aprovechados para acceder al agua en áreas en las que la distribución habitual del agua no existe o está dañada de otra forma. \autocite{wikipedia-paleochannel} Con la abundancia de paleocauces en el Chaco central (ocupan un 15\% de la región), esta propuesta es una bastante prometedora que ya ha sido considerada en investigaciones anteriores. \autocite{conacyt-sistemas-captacion-agua}
 
 \section*{Objetivo General}
-Creación de modelos de redes neuronales convolucionales para la clasificación y/o caracterizacion de imagenes satelitales.
+Creación de modelos a partir de redes neuronales convolucionales para la clasificación y/o caracterización de imágenes satelitales.
 
 \section*{Objetivos Específicos}
 \begin{enumerate}
-    \item Análisis de series temporales a partir de imagenes satelitales correspondientes a la region occidental del Paraguay
+    \item Análisis de series temporales a partir de imágenes satelitales correspondientes a la region occidental del Paraguay
     \item Identificación y clasificación de componentes de uso de suelo
-    \item Determinación de areas de ocurrencia de paleocauces
+    \item Determinación de áreas de ocurrencia de paleocauces
 \end{enumerate}
 
 \section*{Metodología y Cronología de Trabajo}
 
-\section*{Referencias}
+\begin{enumerate}
+    \item Estudio y análisis el estado del arte.
+    \item Recopilación de imágenes a ser utilizadas en las series temporales a analizar.
+    \item Creación de modelos de identificación y clasificación de uso de suelo.
+    \item Identificación de patrones detectados por los modelos creados.
+    \item Creación de modelos de identificación de áreas de ocurrencia de paleocauces.
+    \item Elaboración del libro de PFC.
+\end{enumerate}
+
+\begin{table}[h!]
+    \centering
+    \small
+    \begin{tabular}{ |>{\bf \columncolor{OrangeRed}} c|c|c|c|c|c|c|c|c|c| }
+        \hline
+        \rowcolor{OrangeRed}
+        \bf Etapa & \bf Jul. & \bf Ago. & \bf Sep. & \bf Oct. & \bf Nov. & \bf Dic. & \bf Ene. & \bf Feb. & \bf Mar. \\
+        \hline
+        1. & \cellcolor{Orange} & \cellcolor{Orange} & \cellcolor{Orange} & \cellcolor{Orange} & & & & & \\
+        \hline
+        2. & \cellcolor{Orange} & \cellcolor{Orange} & \cellcolor{Orange} & & & & & & \\
+        \hline
+        3. & & \cellcolor{Orange} & \cellcolor{Orange} & \cellcolor{Orange} & & & & & \\
+        \hline
+        4. & & & \cellcolor{Orange} & \cellcolor{Orange} & \cellcolor{Orange} & \cellcolor{Orange} & \cellcolor{Orange} & \cellcolor{Orange} & \\
+        \hline
+        5. & & & & & \cellcolor{Orange} & \cellcolor{Orange} & \cellcolor{Orange} & \cellcolor{Orange} & \\
+        \hline
+        6. & & & & & & & \cellcolor{Orange} & \cellcolor{Orange} & \cellcolor{Orange} \\
+        \hline
+    \end{tabular}
+\end{table}
+
 \printbibliography
 
 \end{document}
