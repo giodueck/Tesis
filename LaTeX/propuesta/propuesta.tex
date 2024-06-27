@@ -26,12 +26,12 @@
 
     {\bf Alumno:} Giovanni Dueck
 
-    {\bf Tutor:} Alberto Ramírez - {\bf Cotutor:} Felix Carvallo
+    {\bf Tutor:} Alberto Ramírez - {\bf Cotutor:} Félix Carvallo
 \end{center}
 
 \section*{Introducción y Motivación}
 
-Imágenes satelitales o teledetección remota se refiere a imagenes capturadas por un sensor montado en un satélite artificial, para extraer información. Estas imágenes contienen información multiespectro, es decir, además de la luz visible se toman imágenes de bandas invisibles como por ejemplo la luz infrarroja. \autocite{globalforestlink-how-sat-imaging-work}
+Imágenes satelitales o teledetección se refiere a imágenes capturadas por un sensor montado en un satélite artificial, para extraer información. Estas imágenes contienen información multiespectro, es decir, además de la luz visible se toman imágenes de bandas invisibles como por ejemplo la luz infrarroja. \autocite{globalforestlink-how-sat-imaging-work}
 
 Para la captura de estas imágenes se emplean varios métodos, que se dividen en dos categorías: sensores pasivos recolectan radiación electromagnética reflejada del sol, mientras que sensores activos emiten su propia radiación y captan la reflexión de la tierra. Sensores pasivos requieren de una cantidad importante de energía para operar, pero tienen la ventaja de operar a cualquier hora del día y la capacidad de crear imágenes en bandas que el sol no emite. \autocite{globalforestlink-how-sat-imaging-work}
 
@@ -41,14 +41,16 @@ La importancia de la producción agropecuaria y agroganadera en el Paraguay tamb
 
 Con aproximadamente la mitad del territorio paraguayo hacia el norte del río Paraguay en la región semi-árida del Chaco, tecnologías que alivien las sequias y precipitación baja son muy valiosas, tanto para la agricultura y ganadería en las estancias chaqueñas como para centros poblacionales más aislados como por ejemplo las misiones indígenas. Estos pueblos más aislados generalmente son caracterizados por pobreza, lo que se manifiesta en la falta de alimento y agua potable.
 
-Los paleocauces son formaciones geológicas que han sido propuestas como reservorios o conductos para el flujo subterráneo de agua dulce. Se consideran principalmente paleocauces arenosos, y estos pueden ser aprovechados para acceder al agua en áreas en las que la distribución habitual del agua no existe o está dificultada de alguna forma. \autocite{wikipedia-paleochannel} Con la abundancia de paleocauces en el Chaco central (ocupan un 15\% de la región), esta propuesta es una bastante prometedora que ya ha sido considerada en investigaciones anteriores. \autocite{conacyt-sistemas-captacion-agua}
+Un paleocauce es un cauce por el cual antiguamente fluía agua, como por ejemplo un antiguo lecho de un río. Los paleocauces han sido propuestos como reservorios o conductos para el flujo subterráneo de agua dulce. Se consideran de interés principalmente los paleocauces arenosos, y estos pueden ser aprovechados para acceder al agua en áreas en las que la distribución habitual del agua no existe o está dificultada de alguna forma. \autocite{wikipedia-paleochannel} Con la abundancia de paleocauces en el Chaco central (ocupan un 15\% de la región), esta propuesta es una bastante prometedora que ya ha sido considerada en investigaciones anteriores. \autocite{conacyt-sistemas-captacion-agua}
+
+La detección de estos paleocauces se haría a partir de imágenes satelitales en una serie temporal por medio de redes neuronales. Las redes convolucionales son una categoría de redes neuronales especializadas para el procesamiento de imágenes. El principio básico de su funcionamiento consiste en la convolución de grupos píxeles cercanos, una operación que permite tener en cuenta no solo el valor de cada píxel individual, sino el contexto de los mismos. \autocite{axiv-cnn-satellite-imaging}
 
 \section*{Objetivo General}
-Creación de modelos a partir de redes neuronales convolucionales para la clasificación y/o caracterización de imágenes satelitales.
+Creación de modelos a partir de redes neuronales convolucionales para la clasificación y caracterización de imágenes satelitales.
 
 \section*{Objetivos Específicos}
 \begin{enumerate}
-    \item Análisis de series temporales a partir de imágenes satelitales correspondientes a la region occidental del Paraguay
+    \item Análisis de series temporales a partir de imágenes satelitales correspondientes a la región occidental del Paraguay
     \item Identificación y clasificación de componentes de uso de suelo
     \item Determinación de áreas de ocurrencia de paleocauces
 \end{enumerate}
