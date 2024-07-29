@@ -1,0 +1,46 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage[margin=2.2cm]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\graphicspath{ {../img/} }
+\usepackage[backend=biber,style=numeric]{biblatex}
+\addbibresource{primera-presentacion.bib}
+\usepackage[table,svgnames]{xcolor}
+\hfuzz=15pt
+
+\begin{document}
+
+% \maketitle
+\begin{center}
+    \Large{\bf Uso de Redes Neuronales Convolucionales para Interpretación de Imágenes Satelitales}
+
+    Primera Presentación - Proyecto Final de Carrera
+
+    {
+        \small
+
+        {\bf Alumno:} Giovanni Dueck
+
+        {\bf Tutor:} Alberto Ramírez - {\bf Cotutor:} Félix Carvallo
+
+        Ing. Informática
+
+        Fecha \autocite{dummy}
+    }
+\end{center}
+
+\input{sections/introduccion-y-motivacion}
+
+\input{sections/estado-del-arte}
+
+\input{sections/propuesta-de-analisis-de-datos}
+
+\input{sections/pasos-a-seguir}
+
+\printbibliography
+
+\end{document}
