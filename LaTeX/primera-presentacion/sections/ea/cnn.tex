@@ -35,3 +35,31 @@ convolucionales son muy eficaces en el procesamiento de imágenes, y la cantidad
 imágenes satelitales facilitaría enormemente la aplicación en el tema de este proyecto.
 
 \subsubsection{Técnicas y arquitecturas}
+
+Las primeras CNN surgieron en los años 90, con LeNet siendo la primera implementación que ganó atención. Esta red se
+desarrolló para el reconocimiento de dígitos escritos a mano, y consistía de capas convolucionales, de pooling y capas
+completamente conectadas.
+
+Recién en 2012 con AlexNet se logró el siguiente salto, con una competencia de reconocimiento visual. AlexNet se diseñó
+con conjuntos de imágenes de gran escala en mente, compuesta de capas similares a LeNet, con algunas optimizaciones en
+las funciones de activación y en medidas contra overfitting.
+
+Nuevos desarrollos en los años siguientes se enfocaron en la optimización y la solución de problemas específicos.
+VGGNet, originando en Oxford, se popularizó por su simplicidad, con kernels pequeños de 3x3 y capas convolucionales en
+secuencias. Google introdujo GoogLeNet demostrando la efectividad del paralelismo con sus módulos {\it inception}, que
+además mejoraron la capacidad de generalización usando kernels de diferentes tamaños al mismo tiempo. Otra
+arquitectura, Redes Residuales o ResNets, abordaron el desafío de entrenar redes muy profundas por medio de conexiones
+que saltan una o varias capas, facilitando el entrenamiento de redes de hasta cientas de capas. Otra red diseñada por
+Google es MobileNet, una arquitecura disñada para ejecutarse en ambientes de recursos limitados como dispositivos
+móviles que busca equilibrar el rendimiento con la eficiencia.
+
+Otra arquitectura importante es la U-Net, diseñada para la segmentación de imágenes biomédicas, que funciona mediante
+reducciones sucesivas de resolución de la imagen de entrada, seguidas por aumentos sucesivos que se combinan con las
+reducciones respectivas ya procesadas. Esta técnica permite entrenar modelos con mejor segmentación y menos datos de
+entrenamiento, y con tarjetas gráficas modernas (de 2015 en adelante), procesar una imagen de $512 \times 512$ toma
+menos de un segundo. \autocite{ronneberger2015unetconvolutionalnetworksbiomedical} También se han utilizado U-Nets en
+aplicaciones de reducción de ruido en imágenes en modelos de difusión, lo cual se sigue utilizando en tecnologías de
+generación de imágenes como {\it DALL-E}, {\it Midjourney} y {\it Stable Diffusion}. \autocite{ho2020denoising} También
+se ha usado la arquitectura U-Net en segmentación de imágenes satelitales para identificar rasgos de imágenes, como
+recursos de agua, bosques o agricultura con una intersección de entre 81 y 96\% con marcaciones manuales.
+\autocite{khryashchev2018}
