@@ -1,0 +1,40 @@
+\subsection{Análisis de imágenes satelitales}
+
+Las formas más comunes de análisis de imágenes son la clasificación, la segmentación, la detección de cambios y las
+series de tiempo. Existen muchas técnicas usadas en aplicaciones más específicas, como la predicción del rendimiento de
+una plantación o la salud de la vegetación, la reducción de ruido o redes generativas, que no se aplican tan
+directamente para el objetivo de este trabajo.
+
+\subsubsection{Clasificación}
+
+La clasificación es una tarea fundamental en el análisis de datos de teledetección, en el cual el objetivo es etiquetar
+cada imagen, como por ejemplo \enquote{área urbana}, \enquote{bosque}, \enquote{agricultura}, etc. El proceso de
+asignar etiquetas a imágenes se conoce como clasificación a nivel de imagen. \autocite{repo-satellite-image-dl}
+
+Sin embargo, en algunos casos una imagen puede contener más de un tipo de uso de suelo, como por ejemplo un bosque con
+un río que lo divide, o una ciudad con áreas comerciales y residenciales. En estos casos, clasificación a nivel de
+imagen se vuelve más compleja e invuelve asignar múltiples etiquetas a cada imagen. Esto se puede lograr por medio de
+una combinación de extracción de características y algoritmos de {\it machine learning} para identificar los diferentes
+tipos de uso de suelo. \autocite{repo-satellite-image-dl}
+
+Es importante no confundir la clasificación a nivel de imagen con la clasificación a nivel de píxel, también conocida
+como segmentación semántica. Mientras que clasificación a nivel de imagen asigna una etiqueta a una imagen entera, la
+segmentación semántica asigna una etiqueta a cada píxel de la imagen, lo que resulta en una representación detallada y
+precisa del uso de suelo en una imagen. \autocite{cole-segmentation}
+
+\subsubsection{Segmentación}
+
+La segmentación consiste en dividir una imagen en segmentos o regiones semánticamente significativas. El proceso de
+segmentación de imágenes asigna una etiqueta de clase a cada píxel de una imagen, transformándola de una grilla 2D de
+píxeles a una grilla 2D de etiquetas. Una aplicación común es la segmentación de calles o edificios, donde el objetivo
+es separar las calles y los edificios de otras características de la imagen. \autocite{repo-satellite-image-dl}
+
+Para realizar esta tarea, modelos de una clase única son frecuentemente entrenados para detectar y diferenciar entre
+calles y el ambiente, o edificios y el ambiente. Estos modelos se diseñan para reconocer características específicas
+como el color, la textura y la forma que son típicas de una calle o un edificio para que puedan etiquetar los píxeles
+que forman parte de estas estructuras en una imagen. \autocite{cole-segmentation}
+
+Otras aplicaciones comunes se encuentran en la agricultura o clasificación de uso de suelo en una imagen. En este caso,
+se utilizan modelos multiclase que son capaces de diferenciar entre varias clases en una imagen, como por ejemplo
+bosques, áreas urbanas y tierra agrícola. Estos modelos son capaces de reconocer relaciones más complejas entre tipos
+de uso de suelo, y permiten un entendimiento más integral del contenido de la imagen. \autocite{cole-segmentation}
