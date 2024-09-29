@@ -16,3 +16,4 @@ ejemplos/
 *.run.xml
 *.out
 *.bcf
+*-SAVE-ERROR
