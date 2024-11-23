@@ -89,7 +89,38 @@ se plantean las siguientes preguntas de investigación:
 
 \subsection{Resultados}
 
-% TODO: cuadro 1
+\begin{center}
+    \begin{table}[h]
+        \small
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            \bf Proyecto & \bf Objetivos & \bf Métodos & \bf Observaciones \\
+            \hline
+            \autocite{langkvist-2016} & & & \\
+            \hline
+            \autocite{luengo-2016} & & & \\
+            \hline
+            \autocite{maggiori-2016-1} & & & \\
+            \hline
+            \autocite{sevo-2016} & & & \\
+            \hline
+            \autocite{zhong-2016} & & & \\
+            \hline
+            \autocite{sharma-2017} & & & \\
+            \hline
+            \autocite{pritt-2018} & & & \\
+            \hline
+            \autocite{rezaee-2018} & & & \\
+            \hline
+            \autocite{liu-2019} & & & \\
+            \hline
+            \autocite{amato-2023} & & & \\
+            \hline
+        \end{tabular}
+        \caption{Algunos proyectos de clasificación de imágenes de teledetección por medio de CNN}
+        \label{table:1}
+    \end{table}
+\end{center}
 
 \begin{center}
     \begin{table}[h]
@@ -97,19 +128,23 @@ se plantean las siguientes preguntas de investigación:
             \hline
             \bf Tipo & \bf Característica & \bf Referencias \\
             \hline
-            Ventaja & CNN patch-based (basado en pedazos) mejor que NN convencional o CNN basados en pixeles, SVN o RF & \autocite{sharma-2017} \\
+            Ventaja & CNN patch-based (basado en pedazos) mejor que NN convencional o CNN basados en pixeles, SVN o RF
+                    & \autocite{sharma-2017} \\
             \hline
             Ventaja & Clasificacion de datos multifuente por medio de CNN mejor que SVN y ELM & \autocite{xu-2017} \\
             \hline
-            Ventaja & Clasificacion de uso de suelo por CNN mucho mejor que RF, especialmente para terrenos dificiles & \autocite{rezaee-2018} \\
+            Ventaja & Clasificacion de uso de suelo por CNN mucho mejor que RF, especialmente para terrenos dificiles &
+            \autocite{rezaee-2018} \\
             \hline
-            Desventaja & CNN basado en píxeles comparable o peor que NN convencional, SVN o RF & \autocite{sharma-2017} \\
+            Desventaja & CNN basado en píxeles comparable o peor que NN convencional, SVN o RF & \autocite{sharma-2017}
+            \\
             \hline
-            Desventaja & Entrenamiento de modelos basados en redes neuronales es más computacionalmente costoso que SVN o RF & \autocite{sharma-2017,xu-2017,rezaee-2018} \\
+            Desventaja & Entrenamiento de modelos basados en redes neuronales es más computacionalmente costoso que SVN
+            o RF & \autocite{sharma-2017,xu-2017,rezaee-2018} \\
             \hline
         \end{tabular}
         \caption{Ventajas y desventajas de CNN en comparación con otras técnicas}
-        \label{table:1}
+        \label{table:2}
     \end{table}
 \end{center}
 
@@ -120,28 +155,57 @@ se plantean las siguientes preguntas de investigación:
             \hline
             \bf Técnica & \bf Descripción, $(+)$ Ventajas, $(-)$ Desventajas & \bf Referencias \\
             \hline
-            \makecell{Transferencia \\ (Transfer, Fine-tuning)} & Uso de modelo preentrenado con un conjunto de datos relevante y ajustado con un conjunto de datos nuevo. $(+)$ Mejor rendimiento, menos datos de entrenamiento, mejor generalizabilidad. $(-)$ Riesgo de reducción de rendimiento con transferencia a dominio diferente, tamaño de modelo grande. & \makecell{\autocite{safonova-2023,maggiori-2016-0,castelluccio-2015} \\ \autocite{nogueira-2017,zhong-2016,amato-2023}} \\
+            \makecell{Transferencia \\ (Transfer, Fine-tuning)} & Uso de modelo preentrenado con un conjunto de datos
+            relevante y ajustado con un conjunto de datos nuevo. $(+)$ Mejor rendimiento, menos datos de entrenamiento,
+            mejor generalizabilidad. $(-)$ Riesgo de reducción de rendimiento con transferencia a dominio diferente,
+            tamaño de modelo grande. & \makecell{\autocite{safonova-2023,maggiori-2016-0,castelluccio-2015} \\
+            \autocite{nogueira-2017,zhong-2016,amato-2023}} \\
             \hline
-            \makecell{Auto supervisado \\ (Self-supervised)} & Creación de un modelo con etiquetas creadas por el modelo, seguido de entrenamiento supervisado con etiquetas proveídas. $(+)$ Uso de datos no etiquetados, reconocimiento de patrones sin necesidad de etiquetación, mejor generalizabilidad. $(-)$ Computacionalmente caro, posibilidad de que el modelo deje de entrenarse con algunas técnicas. & \autocite{safonova-2023} \\
+            \makecell{Auto supervisado \\ (Self-supervised)} & Creación de un modelo con etiquetas creadas por el
+            modelo, seguido de entrenamiento supervisado con etiquetas proveídas. $(+)$ Uso de datos no etiquetados,
+            reconocimiento de patrones sin necesidad de etiquetación, mejor generalizabilidad. $(-)$ Computacionalmente
+            caro, posibilidad de que el modelo deje de entrenarse con algunas técnicas. & \autocite{safonova-2023} \\
             \hline
-            \makecell{Semi supervisado \\ (Semi-supervised)} & Mezcla de entrenamiento supervisado y no supervisado con conjuntos de datos etiquetados y no etiquetados. $(+)$ Uso de datos etiquetados y no etiquetados, mejor generalizabilidad. $(-)$ Computacionalmente caro, riesgo de \enquote{overfitting}, sensible a calidad de datos. & \autocite{safonova-2023} \\
+            \makecell{Semi supervisado \\ (Semi-supervised)} & Mezcla de entrenamiento supervisado y no supervisado con
+            conjuntos de datos etiquetados y no etiquetados. $(+)$ Uso de datos etiquetados y no etiquetados, mejor
+            generalizabilidad. $(-)$ Computacionalmente caro, riesgo de \enquote{overfitting}, sensible a calidad de
+            datos. & \autocite{safonova-2023} \\
             \hline
-            Few-shot & Entrenar modelos para generalizar para nuevos problemas con unos pocos ejemplos etiquetados por clase. $(+)$ Enfocado al problema de pocos datos, adaptación rapida del modelo, mejor generalizabilidad. $(-)$ Complejidad limitada, riesgo de \enquote{overfitting}, sensible a calidad de datos. & \autocite{safonova-2023} \\
+            Few-shot & Entrenar modelos para generalizar para nuevos problemas con unos pocos ejemplos etiquetados por
+            clase. $(+)$ Enfocado al problema de pocos datos, adaptación rapida del modelo, mejor generalizabilidad.
+            $(-)$ Complejidad limitada, riesgo de \enquote{overfitting}, sensible a calidad de datos. &
+            \autocite{safonova-2023} \\
             \hline
-            Zero-shot & Modelo Few-shot entrenado para reconocer clases que nunca ha visto antes. $(+)$ Adaptable a clases que no conoce, transferibilidad mejorada. $(-)$ Extremamente sensible a calidad de datos de nuevas instancias. & \autocite{safonova-2023} \\
+            Zero-shot & Modelo Few-shot entrenado para reconocer clases que nunca ha visto antes. $(+)$ Adaptable a
+            clases que no conoce, transferibilidad mejorada. $(-)$ Extremamente sensible a calidad de datos de nuevas
+            instancias. & \autocite{safonova-2023} \\
             \hline
-            \makecell{Débilmente supervisado \\ (Weakly-supervised)} & Desarrollo de un modelo con datos etiquetados parcialmente, imprecisamente o con ruido. $(+)$ Costo de etiquetamiento reducido, permite un modelo inexacto para permitir escalabilidad. $(-)$ Computacionalmente caro, menos exacto que entrenamiento (completamente) supervisado. & \autocite{safonova-2023} \\
+            \makecell{Débilmente supervisado \\ (Weakly-supervised)} & Desarrollo de un modelo con datos etiquetados
+            parcialmente, imprecisamente o con ruido. $(+)$ Costo de etiquetamiento reducido, permite un modelo
+            inexacto para permitir escalabilidad. $(-)$ Computacionalmente caro, menos exacto que entrenamiento
+            (completamente) supervisado. & \autocite{safonova-2023} \\
             \hline
-            Multi-task & Entrenamiento de modelo para reconocer patrones generales útiles para varias tareas. $(+)$ Eficiencia de entrenamiento para varias tareas, mejor generalización, requerimiento reducido de datos. $(-)$ Alta complejidad de modelamiento, interferencia de tareas, escalabilidad limitada. & \autocite{safonova-2023} \\
+            Multi-task & Entrenamiento de modelo para reconocer patrones generales útiles para varias tareas. $(+)$
+            Eficiencia de entrenamiento para varias tareas, mejor generalización, requerimiento reducido de datos.
+            $(-)$ Alta complejidad de modelamiento, interferencia de tareas, escalabilidad limitada. &
+            \autocite{safonova-2023} \\
             \hline
-            Conjunto (Ensemble) & Combinación de muchos modelos individuales que aprendieron patrones de forma diferente para la predicción. $(+)$ Mejor generalizabilidad, robustez contra perturbación de datos e incertidumbre. $(-)$ Computacionalente caro, peor interpretabilidad que un modelo simple. & \autocite{safonova-2023} \\
+            Conjunto (Ensemble) & Combinación de muchos modelos individuales que aprendieron patrones de forma
+            diferente para la predicción. $(+)$ Mejor generalizabilidad, robustez contra perturbación de datos e
+            incertidumbre. $(-)$ Computacionalente caro, peor interpretabilidad que un modelo simple. &
+            \autocite{safonova-2023,langkvist-2016,pritt-2018} \\
             \hline
-            \makecell{Consciente del proceso \\ (Process-aware)} & Incorporación de regulación del entrenamiento por medio de procesos. $(+)$ Aprendizaje mecánico, mejor transferibilidad. $(-)$ Riesgo de pérdida de rendimiento si se depende de una suposición equivocada. & \autocite{safonova-2023} \\
+            \makecell{Consciente del proceso \\ (Process-aware)} & Incorporación de regulación del entrenamiento por
+            medio de procesos. $(+)$ Aprendizaje mecánico, mejor transferibilidad. $(-)$ Riesgo de pérdida de
+            rendimiento si se depende de una suposición equivocada. & \autocite{safonova-2023} \\
             \hline
-            \makecell{Validación cruzada \\ (Cross-validation)} & Entrenar y validar un modelo varias veces usando diferentes particiones de datos para el entrenamiento y la validación. $(+)$ Modelo menos sesgado, evita reportaje sobreoptimista de rendimiento, mejor generalizabilidad. $(-)$ Computacionalmente caro & \autocite{safonova-2023} \\
+            \makecell{Validación cruzada \\ (Cross-validation)} & Entrenar y validar un modelo varias veces usando
+            diferentes particiones de datos para el entrenamiento y la validación. $(+)$ Modelo menos sesgado, evita
+            reportaje sobreoptimista de rendimiento, mejor generalizabilidad. $(-)$ Computacionalmente caro &
+            \autocite{safonova-2023} \\
             \hline
         \end{tabular}
         \caption{Técnicas para abarcar el problema de pocos datos}
-        \label{table:2}
+        \label{table:3}
     \end{table}
 \end{center}
