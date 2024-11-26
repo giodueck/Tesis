@@ -89,41 +89,77 @@ se plantean las siguientes preguntas de investigación:
 
 \subsection{Resultados}
 
+Las respuestas a las preguntas de investigación se encuentran resumidas en los cuadros \ref{table:1}, \ref{table:2}, y
+\ref{table:3}.
+
 \begin{center}
-    \begin{table}[h]
+    \begin{table}[h!]
         \small
-        \begin{tabular}{|c|c|c|c|}
+        \hbadness=10000
+        \begin{tabular}{|m{4cm}|m{5cm}|m{6.2cm}|}
             \hline
-            \bf Proyecto & \bf Objetivos & \bf Métodos & \bf Observaciones \\
+            \bf Proyecto & \bf Objetivos & \bf Métodos y Observaciones \\
             \hline
-            \autocite{langkvist-2016} & & & \\
+            Clasificación y Segmentación de Ortofotografía Satelital Usando Redes Neuronales Convolucionales.
+            \autocite{langkvist-2016} \hspace{-\textwidth} & Explorar el uso de CNN para la clasificación por píxel
+            completa, rápida y exacta de una ciudad pequeña. & Un CNN es apto para el análisis de imágenes
+            multiespectrales corregidas ortográficamente, junto con un modelo de superficie digital de una pequeña
+            ciudad. \\
             \hline
-            \autocite{luengo-2016} & & & \\
+            Identificación y Mapeo de Paleocauces Utilizando Imágenes Satelitales de Alta Resolución en la Llanura
+            Costera de la Bahía Samborombón, Argentina \autocite{luengo-2016} & Reconocimiento y análisis de
+            paleocauces por medio de sensores remotos de los paleocauces de los ríos Samborombón y Salado, en la zona
+            de su desembocadura, para la reconstrucción paleoambiental. & Se utilizan imágenes satelitales
+            multiespectrales de alta resolución en combinación con algunos filtros de dirección convolucionales. Sin
+            embargo, no se utilizan redes neuronales. \\
             \hline
-            \autocite{maggiori-2016-1} & & & \\
+            Redes Neuronales Completamente Convolucionales para Clasificación de Imágenes Satelitales
+            \autocite{maggiori-2016-1} & Demostrar un modelo CNN que utiliza solamente capas convolucionales, sin capas
+            tradicionales, para la clasificación de imágenes satelitales. & El modelo resultante tiene mejor
+            rendimiento que modelos CNN con capas tradicionales y menor tiempo de entrenamiento. \\
             \hline
-            \autocite{sevo-2016} & & & \\
+            Detección Automática de Objetos en Imágenes Aéreas basada en CNN \autocite{sevo-2016} & Aprovechamiento de
+            la cantidad de imágenes de teledetección por medio de CNN para la detección automática de objetos en
+            diversas aplicaciones. & CNNs son útiles para la detección de objetos, mejor que métodos basados en
+            \enquote{features} y varios otros modelos CNN. \\
             \hline
-            \autocite{zhong-2016} & & & \\
+            SatCNN: calsificación de datos de imágenes satelitales usando CNN ágiles \autocite{zhong-2016} & Diseño de
+            una arquitectura CNN especializada para el análisis de imágenes satelitales en vez de adaptar un modelo
+            existente creado para la clasificación de escenas naturales. & Pruebas en varias muestras de datos muestran
+            una efectividad de más de 99.5\%. \\
             \hline
-            \autocite{sharma-2017} & & & \\
+            Un CNN basado en pedazos (patch-based) para la clasificación de datos de teledetección
+            \autocite{sharma-2017} & Creación de un modelo para la clasificación de imágenes de resolución media, donde
+            estructuras finas no existen para la clasificación por píxel. & Mejora de hasta 25\% por encima de CNN
+            basados en clasificación por píxel. \\
             \hline
-            \autocite{pritt-2018} & & & \\
+            Clasificación de Imágenes Satelitales con Deep Learning \autocite{pritt-2017} & Creación de modelos CNN
+            para la automatización del análisis de grandes cantidades de imágenes satelitales de alta resolución. & El
+            modelo creado gana el segundo puesto en la competición de Functional Map of the World (fMoW) TopCoder, 15
+            de 63 clases clasificadas con exactitud de 95\%. \\
             \hline
-            \autocite{rezaee-2018} & & & \\
+            CNN para la Clasificación de Humedales Complejos Usando Imágenes de Teledetección Óptica
+            \autocite{rezaee-2018} & Entrenamiento de un modelo preentrenado para la clasificación de imágenes de alta
+            resolución. & Rendimiento mejor que RF, inclusive con menos características de entrada, con una exactitud
+            de 94\%. \\
             \hline
-            \autocite{liu-2019} & & & \\
+            DeepSat V2: CNN de Características Aumentadasa para la Clasificación de Imágenes Satelitales
+            \autocite{liu-2019} & Creación de conjuntos de datos de imágenes satelitales etiquetadas y un modelo CNN
+            con varias técnicas nuevas para su análisis. & El modelo resultante logra clasificar correctamente con más
+            de 99\% de exactitud en los nuevos conjuntos de datos. \\
             \hline
-            \autocite{amato-2023} & & & \\
+            Un CNN para la Detección de Anomalías Térmicas Volcánicas en Imágenes Satelitales \autocite{amato-2023} &
+            Entrenamiento de un modelo CNN para analizar imágenes de actividad volcánica en infrarrojo. & Un CNN
+            preentrenado adaptado a nuevos datos seleccionados a mano logra buena clasificación. \\
             \hline
         \end{tabular}
-        \caption{Algunos proyectos de clasificación de imágenes de teledetección por medio de CNN}
+        \caption{Algunos proyectos de clasificación y segmentación de imágenes de teledetección y CNN}
         \label{table:1}
     \end{table}
 \end{center}
 
 \begin{center}
-    \begin{table}[h]
+    \begin{table}[h!]
         \begin{tabular}{ |c|m{11cm}|c| }
             \hline
             \bf Tipo & \bf Característica & \bf Referencias \\
@@ -149,8 +185,8 @@ se plantean las siguientes preguntas de investigación:
 \end{center}
 
 \begin{center}
-    \begin{table}[ht!]
-        \small
+    \begin{table}[h!]
+        \footnotesize
         \begin{tabular}{ |c|m{9.5cm}|c| }
             \hline
             \bf Técnica & \bf Descripción, $(+)$ Ventajas, $(-)$ Desventajas & \bf Referencias \\
@@ -193,7 +229,7 @@ se plantean las siguientes preguntas de investigación:
             Conjunto (Ensemble) & Combinación de muchos modelos individuales que aprendieron patrones de forma
             diferente para la predicción. $(+)$ Mejor generalizabilidad, robustez contra perturbación de datos e
             incertidumbre. $(-)$ Computacionalente caro, peor interpretabilidad que un modelo simple. &
-            \autocite{safonova-2023,langkvist-2016,pritt-2018} \\
+            \autocite{safonova-2023,langkvist-2016,pritt-2017} \\
             \hline
             \makecell{Consciente del proceso \\ (Process-aware)} & Incorporación de regulación del entrenamiento por
             medio de procesos. $(+)$ Aprendizaje mecánico, mejor transferibilidad. $(-)$ Riesgo de pérdida de
