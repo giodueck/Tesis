@@ -41,7 +41,11 @@ También se incluyeron trabajos relevantes para la universidad y la realidad loc
 {\bf Criterios de selección} Se incluyen artículos, papers, conferencias, y otros trabajos formales debidamente
 documentados. Se establecen los siguientes criterios para juzgar si un trabajo es incluído o excluído de esta
 investigación:
+
+\vspace{-\topsep}
 \begin{itemize}
+    \setlength{\parskip}{0pt}
+    \setlength{\itemsep}{0pt plus 1pt}
     \item[] {\bf Inclusión 1} Trabajos que se enfoquen en la clasificación de imágenes satelitales por medio de redes
         neuronales en el rango de publicación de 2014 a 2024.
     \item[] {\bf Inclusión 2} Trabajos que coincidan en su contenido con los términos de búsqueda.
@@ -51,6 +55,7 @@ investigación:
     \item[] {\bf Exclusión 2} Trabajos que se centran en un término de busqueda pero no incluyen alguno de los demás.
     \item[] {\bf Exclusión 3} Trabajos con una cantidad mayoritaria de información irrelevante para el tema estudiado.
 \end{itemize}
+\vspace{-\topsep}
 
 {\bf Procedimientos de selección} El proceso de selección de trabajos se basa en responder las preguntas de
 investigación presentadas en la siguiente sección, con el fin de responderlas con información válida y actual.
@@ -95,6 +100,7 @@ Las respuestas a las preguntas de investigación se encuentran resumidas en los 
 \ref{table:3}.
 
 \begin{center}
+    \vspace{-\topsep}
     \begin{table}[h!]
         \small
         \hbadness=10000
@@ -158,9 +164,11 @@ Las respuestas a las preguntas de investigación se encuentran resumidas en los 
         \caption{Algunos proyectos de clasificación y segmentación de imágenes de teledetección y CNN}
         \label{table:1}
     \end{table}
+    \vspace{-\topsep}
 \end{center}
 
 \begin{center}
+    \vspace{-\topsep}
     \begin{table}[h!]
         \begin{tabular}{ |c|m{11cm}|c| }
             \hline
@@ -184,9 +192,11 @@ Las respuestas a las preguntas de investigación se encuentran resumidas en los 
         \caption{Ventajas y desventajas de CNN en comparación con otras técnicas}
         \label{table:2}
     \end{table}
+    \vspace{-\topsep}
 \end{center}
 
 \begin{center}
+    \vspace{-\topsep}
     \begin{table}[h!]
         \footnotesize
         \begin{tabular}{ |c|m{9.5cm}|c| }
@@ -209,34 +219,34 @@ Las respuestas a las preguntas de investigación se encuentran resumidas en los 
             generalizabilidad. $(-)$ Computacionalmente caro, riesgo de \enquote{overfitting}, sensible a calidad de
             datos. & \autocite{safonova-2023} \\
             \hline
-            Few-shot & Entrenar modelos para generalizar para nuevos problemas con unos pocos ejemplos etiquetados por
-            clase. $(+)$ Enfocado al problema de pocos datos, adaptación rapida del modelo, mejor generalizabilidad.
-            $(-)$ Complejidad limitada, riesgo de \enquote{overfitting}, sensible a calidad de datos. &
-            \autocite{safonova-2023} \\
-            \hline
-            Zero-shot & Modelo Few-shot entrenado para reconocer clases que nunca ha visto antes. $(+)$ Adaptable a
-            clases que no conoce, transferibilidad mejorada. $(-)$ Extremamente sensible a calidad de datos de nuevas
-            instancias. & \autocite{safonova-2023} \\
-            \hline
             \makecell{Débilmente supervisado \\ (Weakly-supervised)} & Desarrollo de un modelo con datos etiquetados
             parcialmente, imprecisamente o con ruido. $(+)$ Costo de etiquetamiento reducido, permite un modelo
             inexacto para permitir escalabilidad. $(-)$ Computacionalmente caro, menos exacto que entrenamiento
             (completamente) supervisado. & \autocite{safonova-2023} \\
             \hline
-            Multi-task & Entrenamiento de modelo para reconocer patrones generales útiles para varias tareas. $(+)$
-            Eficiencia de entrenamiento para varias tareas, mejor generalización, requerimiento reducido de datos.
-            $(-)$ Alta complejidad de modelamiento, interferencia de tareas, escalabilidad limitada. &
-            \autocite{safonova-2023} \\
-            \hline
+            % Few-shot & Entrenar modelos para generalizar para nuevos problemas con unos pocos ejemplos etiquetados por
+            % clase. $(+)$ Enfocado al problema de pocos datos, adaptación rapida del modelo, mejor generalizabilidad.
+            % $(-)$ Complejidad limitada, riesgo de \enquote{overfitting}, sensible a calidad de datos. &
+            % \autocite{safonova-2023} \\
+            % \hline
+            % Zero-shot & Modelo Few-shot entrenado para reconocer clases que nunca ha visto antes. $(+)$ Adaptable a
+            % clases que no conoce, transferibilidad mejorada. $(-)$ Extremamente sensible a calidad de datos de nuevas
+            % instancias. & \autocite{safonova-2023} \\
+            % \hline
+            % Multi-task & Entrenamiento de modelo para reconocer patrones generales útiles para varias tareas. $(+)$
+            % Eficiencia de entrenamiento para varias tareas, mejor generalización, requerimiento reducido de datos.
+            % $(-)$ Alta complejidad de modelamiento, interferencia de tareas, escalabilidad limitada. &
+            % \autocite{safonova-2023} \\
+            % \hline
             Conjunto (Ensemble) & Combinación de muchos modelos individuales que aprendieron patrones de forma
             diferente para la predicción. $(+)$ Mejor generalizabilidad, robustez contra perturbación de datos e
             incertidumbre. $(-)$ Computacionalente caro, peor interpretabilidad que un modelo simple. &
             \autocite{safonova-2023,langkvist-2016,pritt-2017} \\
             \hline
-            \makecell{Consciente del proceso \\ (Process-aware)} & Incorporación de regulación del entrenamiento por
-            medio de procesos. $(+)$ Aprendizaje mecánico, mejor transferibilidad. $(-)$ Riesgo de pérdida de
-            rendimiento si se depende de una suposición equivocada. & \autocite{safonova-2023} \\
-            \hline
+            % \makecell{Consciente del proceso \\ (Process-aware)} & Incorporación de regulación del entrenamiento por
+            % medio de procesos. $(+)$ Aprendizaje mecánico, mejor transferibilidad. $(-)$ Riesgo de pérdida de
+            % rendimiento si se depende de una suposición equivocada. & \autocite{safonova-2023} \\
+            % \hline
             \makecell{Validación cruzada \\ (Cross-validation)} & Entrenar y validar un modelo varias veces usando
             diferentes particiones de datos para el entrenamiento y la validación. $(+)$ Modelo menos sesgado, evita
             reportaje sobreoptimista de rendimiento, mejor generalizabilidad. $(-)$ Computacionalmente caro &
@@ -246,4 +256,24 @@ Las respuestas a las preguntas de investigación se encuentran resumidas en los 
         \caption{Técnicas para abarcar el problema de pocos datos}
         \label{table:3}
     \end{table}
+    \vspace{-\topsep}
 \end{center}
+
+\subsubsection*{Discusión de los resultados}
+
+El campo de análisis de datos de teledetección ha visto muchos proyectos en los últimos años, y las redes
+convolucionales han sido una pieza crucial para crear modelos mas poderosos y eficientes que las redes neuronales
+convencionales. Las exploración de alternativas a redes neuronales, como RF y SVN, indica que la CNN es la tecnología
+más prometedora para la clasificación de una gran cantidad de datos.
+
+La posibilidad de usar datos sin etiquetamiento en el entrenamiento indica que la falta de datos etiquetados no es
+razón para dejar de considerar el entrenamiento de modelos independientes. Sin embargo, gracias a la cantidad de
+cómputo necesaria para la tarea, el exploramiento que se realice en este trabajo necesariamente deberá ser limitado.
+Aun así, gracias a estos factores, el resultado debería reflejar con bastante precisión los métodos necesarios para
+crear modelos con objetivos poco comunes en terreno nuevo para la teledección a nivel nacional.
+
+También de importancia es la naturaleza altamente dinámica de los datos. Cada año la cantidad de datos de alta
+resolución se multiplica y se vuelve más accesible, y para mantenerse al tanto de estos cambios, son necesarios el
+mantenimiento y la actualización periódica de estos modelos. Por otro lado, una de las técnicas más utilizadas en los
+trabajos mencionados es la transferencia de modelos preentrenados por medio de \enquote{fine-tuning}, lo que hace el
+mantenimiento un obstáculo más facil de superar.
