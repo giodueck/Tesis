@@ -1,20 +1,35 @@
 \section{Propuesta de Solución}
 
-El proyecto consiste principalmente de dos fases: la recopilación y procesamiento de datos, y la clasificación de imágenes. El procesamiento de datos puede abarcar un amplio espectro de posibilidades, incluyendo preprocesamiento para eliminar defectos o disminuir la cantidad de datos, y la mejora de imágenes, que incluye la manipulación de los datos para aumentar el contraste, resaltar bordes, o combinar datos de varias bandas. A continuación se exploran algunos pasos a seguir.
+El proyecto consiste principalmente de dos fases: la recopilación y procesamiento de datos, y la clasificación de
+imágenes. El procesamiento de datos puede abarcar un amplio espectro de posibilidades, incluyendo preprocesamiento para
+eliminar defectos o disminuir la cantidad de datos, y la mejora de imágenes, que incluye la manipulación de los datos
+para aumentar el contraste, resaltar bordes, o combinar datos de varias bandas. A continuación se exploran algunos
+pasos a seguir.
 
 \subsection{Recopilación de Imágenes}
 
-La recopilación de datos principalmente consistirá de fuentes primarias de imágenes satelitales. La fuente de estos datos será el portal de datos abiertos de Copernicus, el programa de teledetección y observación terrestre de la Agencia Espacial Europea (ESA), la cual provee acceso libre y completo a cualquier persona u organización a los datos recolectados. Estas imágenes pueden ser descargadas con varios formatos, bandas espectrales, o segmentación básica como capas adicionales, con resoluciones de entre 10 y 60 metros por píxel.
+La recopilación de datos principalmente consistirá de fuentes primarias de imágenes satelitales. La fuente de estos
+datos será el portal de datos abiertos de Copernicus, el programa de teledetección y observación terrestre de la
+Agencia Espacial Europea (ESA), la cual provee acceso libre y completo a cualquier persona u organización a los datos
+recolectados. Estas imágenes pueden ser descargadas con varios formatos, bandas espectrales, o segmentación básica como
+capas adicionales, con resoluciones de entre 10 y 60 metros por píxel.
 
 % TODO https://www.copernicus.eu/en/access-data
 
-Adicionalmente, varias fuentes secundarias se utilizarán para la verificación de los resultados producidos por el modelo, como por ejemplo mapas y diagramas geológicos.
+Adicionalmente, varias fuentes secundarias se utilizarán para la verificación de los resultados producidos por el
+modelo, como por ejemplo mapas y diagramas geológicos.
 
 \subsection{Preprocesamiento de Imágenes}
 
-El objetivo del preprocesamiento es la corrección de errores y la exclusión de datos irrelevantes o demasiado degradados como para ser de uso. Se desea mejorar la utilidad de las imágenes sin alterar su esencia ni amplificar características individuales. Algunas de las técnicas a utilizarse son:
+El objetivo del preprocesamiento es la corrección de errores y la exclusión de datos irrelevantes o demasiado
+degradados como para ser de uso. Se desea mejorar la utilidad de las imágenes sin alterar su esencia ni amplificar
+características individuales. Algunas de las técnicas a utilizarse son:
 
-{\bf Eliminación de ruido}: ruido en una imagen satelital puede ser causado por una variedad de razones como interferencia electrónica entre componentes o mal funcionamiento de los sensores. Este ruido puede degradar una imagen e incluso ocultar información, y la eliminación de ruido tiene por objetivo disminuir el efecto del ruido sobre los datos recolectados. Las técnicas específicas dependen del tipo de ruido, es decir si es periódico (patrones de ruido que se repiten) o aleatorio, o una combinación de ambos.
+{\bf Eliminación de ruido}: ruido en una imagen satelital puede ser causado por una variedad de razones como
+interferencia electrónica entre componentes o mal funcionamiento de los sensores. Este ruido puede degradar una imagen
+e incluso ocultar información, y la eliminación de ruido tiene por objetivo disminuir el efecto del ruido sobre los
+datos recolectados. Las técnicas específicas dependen del tipo de ruido, es decir si es periódico (patrones de ruido
+que se repiten) o aleatorio, o una combinación de ambos.
 
 % TODO source
 
@@ -23,6 +38,38 @@ El objetivo del preprocesamiento es la corrección de errores y la exclusión de
 % TODO expand
 % TODO source but different from the previous one, I found this definition to be completely different
 
-{\bf Georreferenciación}: las imágenes satelitales son combinadas con una referencia en un sistema de coordenadas estándar, cada píxel es asociado con una coordenada. Debido a que las imágenes capturadas por el programa Copernicus ya contienen este dato, este paso se realiza al descargar las imágenes.
+{\bf Georreferenciación}: las imágenes satelitales son combinadas con una referencia en un sistema de coordenadas
+estándar, cada píxel es asociado con una coordenada. Debido a que las imágenes capturadas por el programa Copernicus ya
+contienen este dato, este paso se realiza al descargar las imágenes.
 
-{\bf Subconjuntos de bandas y creación de mosaicos}: el análisis de un subconjunto de capas y la omisión de datos de poco interés ayudan a disminuir el volumen de datos para analizar, y la creación de mosaicos a partir de multiples imágenes puede servir para cubrir áreas más amplias, o analizar estructuras que no fueron capturadas en su totalidad en una imagen.
+{\bf Subconjuntos de bandas y creación de mosaicos}: el análisis de un subconjunto de capas y la omisión de datos de
+poco interés ayudan a disminuir el volumen de datos para analizar, y la creación de mosaicos a partir de multiples
+imágenes puede servir para cubrir áreas más amplias, o analizar estructuras que no fueron capturadas en su totalidad en
+una imagen.
+
+\subsubsection{Mejora de Imágenes}
+
+Estos pasos se toman para aumentar la utilidad de las imágenes, resaltando ciertas características con el objetivo de
+ampliar la cantidad de información que se puede interpretar a partir de las imágenes. Algunas formas de mejora de
+imágenes incluyen las siguientes:
+
+{\bf Manipulación de contraste}: consiste en resaltar diferencias entre diferentes partes de una imagen. Existen varias
+técnicas de manipulación de contraste, como la umbralización de niveles de gris, la segmentación, o el estiramiento de
+contraste. La primera permite definir un nivel un nivel mínimo o máximo de brillo para cada píxel, aislando ciertas
+áreas. Esto permite, por ejemplo, resaltar cuerpos de agua. La segunda permite definir ciertos niveles de los píxeles
+de la imagen para realizar una segmentación. La tercera consiste en ampliar el rango de valores en una imagen, que
+puede hacer algunos detalles más visibles.
+
+{\bf Manipulación de características espaciales}: incluye filtros espaciales, filtros convolucionales y el realce de
+bordes. Filtros espaciales pueden incluir un amplio rango de filtros, y se usan para aumentar o eliminar ciertas
+características de una imagen, como la aumentación de nitidez o filtro de paso bajo. Filtros convolucionales también
+cumplen diversas funciones, y consisten de un cálculo por cada píxel en función a sus vecinos, lo que permite realzar
+cierta información local, como la detección de bordes, y permite mantener baja la cantidad de datos, combinando datos
+de muchos píxeles en uno. El realce de bordes consiste en realzar el contraste entre bordes de la imagen para aumentar
+su nitidez percibida.
+
+{\bf Manipulación de múltiples imágenes}: la creación de imágenes compuestas por la combinación de datos de varias
+bandas puede ser útil para realzar detalles que de otra manera no son visibles. Por ejemplo, la combinación de bandas
+de color rojo y bandas de infrarrojo cercano permite evaluar la salud de vegetación. Varios índices como NDVI, SAVI o
+NDSI presentan datos normalizados al rango de 0 a 1 que evalúan relaciones de este estilo entre varias bandas de una
+imagen.
