@@ -8,7 +8,7 @@ diversos campos de aplicación y cuáles técnicas son las más eficaces en el c
 
 Para la revisión de literatura se utilizaron términos referentes a [Redes Neuronales], [Teledetección], y
 [Clasificación y Detección]. Se tuvieron en cuenta principalmente obras en el idioma inglés, aunque se incluyen obras
-en español también. Para la búsqueda se uaron los siguientes términos:
+en español también. Para la búsqueda se usaron los siguientes términos:
 
 \begin{center}
     \begin{tabular}{ l | l }
@@ -33,13 +33,13 @@ fueron
 [{\it Convolutional Neural Network AND Satellite Imagery AND Detection }], y
 [{\it Deep Learning AND Remote Sensing AND Small Data }]
 
-El motor de búsqueda utilizado fue Google Scholar, poniendo mayor enfoque en resultados provinientes de bases de datos
+El motor de búsqueda utilizado fue Google Scholar, poniendo mayor enfoque en resultados provenientes de bases de datos
 reconocidas y establecidas como IEEE Xplore, ScienceDirect y ArXiv.
 
 También se incluyeron trabajos relevantes para la universidad y la realidad local del país, proveídos por los tutores.
 
 {\bf Criterios de selección} Se incluyen artículos, papers, conferencias, y otros trabajos formales debidamente
-documentados. Se establecen los siguientes criterios para juzgar si un trabajo es incluído o excluído de esta
+documentados. Se establecen los siguientes criterios para juzgar si un trabajo es incluido o excluido de esta
 investigación:
 
 \vspace{-\topsep}
@@ -52,7 +52,7 @@ investigación:
     \item[] {\bf Inclusión 3} Trabajos cuyo contenido sea relevante para la investigación.
     \item[] {\bf Exclusión 1} Trabajos que no contengan las palabras claves o son irrelevantes para el campo de
         investigación.
-    \item[] {\bf Exclusión 2} Trabajos que se centran en un término de busqueda pero no incluyen alguno de los demás.
+    \item[] {\bf Exclusión 2} Trabajos que se centran en un término de búsqueda pero no incluyen alguno de los demás.
     \item[] {\bf Exclusión 3} Trabajos con una cantidad mayoritaria de información irrelevante para el tema estudiado.
 \end{itemize}
 \vspace{-\topsep}
@@ -60,7 +60,7 @@ investigación:
 {\bf Procedimientos de selección} El proceso de selección de trabajos se basa en responder las preguntas de
 investigación presentadas en la siguiente sección, con el fin de responderlas con información válida y actual.
 
-Se limita el número de artículos incluídos a 20, y en caso de que se supere la cantidad encontrada se filtran por medio
+Se limita el número de artículos incluidos a 20, y en caso de que se supere la cantidad encontrada se filtran por medio
 de los siguientes criterios:
 
 \begin{itemize}
@@ -131,7 +131,7 @@ Las respuestas a las preguntas de investigación se encuentran resumidas en los 
             diversas aplicaciones. & CNNs son útiles para la detección de objetos, mejor que métodos basados en
             \enquote{features} y varios otros modelos CNN. \\
             \hline
-            SatCNN: calsificación de datos de imágenes satelitales usando CNN ágiles \autocite{zhong-2016} & Diseño de
+            SatCNN: clasificación de datos de imágenes satelitales usando CNN ágiles \autocite{zhong-2016} & Diseño de
             una arquitectura CNN especializada para el análisis de imágenes satelitales en vez de adaptar un modelo
             existente creado para la clasificación de escenas naturales. & Pruebas en varias muestras de datos muestran
             una efectividad de más de 99.5\%. \\
@@ -151,7 +151,7 @@ Las respuestas a las preguntas de investigación se encuentran resumidas en los 
             resolución. & Rendimiento mejor que RF, inclusive con menos características de entrada, con una exactitud
             de 94\%. \\
             \hline
-            DeepSat V2: CNN de Características Aumentadasa para la Clasificación de Imágenes Satelitales
+            DeepSat V2: CNN de Características Aumentadas para la Clasificación de Imágenes Satelitales
             \autocite{liu-2019} & Creación de conjuntos de datos de imágenes satelitales etiquetadas y un modelo CNN
             con varias técnicas nuevas para su análisis. & El modelo resultante logra clasificar correctamente con más
             de 99\% de exactitud en los nuevos conjuntos de datos. \\
@@ -177,9 +177,9 @@ Las respuestas a las preguntas de investigación se encuentran resumidas en los 
             Ventaja & CNN patch-based (basado en pedazos) mejor que NN convencional o CNN basados en pixeles, SVN o RF
                     & \autocite{sharma-2017} \\
             \hline
-            Ventaja & Clasificacion de datos multifuente por medio de CNN mejor que SVN y ELM & \autocite{xu-2017} \\
+            Ventaja & Clasificación de datos multifuente por medio de CNN mejor que SVN y ELM & \autocite{xu-2017} \\
             \hline
-            Ventaja & Clasificacion de uso de suelo por CNN mucho mejor que RF, especialmente para terrenos dificiles &
+            Ventaja & Clasificación de uso de suelo por CNN mucho mejor que RF, especialmente para terrenos difíciles &
             \autocite{rezaee-2018} \\
             \hline
             Desventaja & CNN basado en píxeles comparable o peor que NN convencional, SVN o RF & \autocite{sharma-2017}
@@ -220,7 +220,7 @@ Las respuestas a las preguntas de investigación se encuentran resumidas en los 
             datos. & \autocite{safonova-2023} \\
             \hline
             \makecell{Débilmente supervisado \\ (Weakly-supervised)} & Desarrollo de un modelo con datos etiquetados
-            parcialmente, imprecisamente o con ruido. $(+)$ Costo de etiquetamiento reducido, permite un modelo
+            parcialmente, de manera imprecisa o con ruido. $(+)$ Costo de etiquetamiento reducido, permite un modelo
             inexacto para permitir escalabilidad. $(-)$ Computacionalmente caro, menos exacto que entrenamiento
             (completamente) supervisado. & \autocite{safonova-2023} \\
             \hline
@@ -249,7 +249,7 @@ Las respuestas a las preguntas de investigación se encuentran resumidas en los 
             % \hline
             \makecell{Validación cruzada \\ (Cross-validation)} & Entrenar y validar un modelo varias veces usando
             diferentes particiones de datos para el entrenamiento y la validación. $(+)$ Modelo menos sesgado, evita
-            reportaje sobreoptimista de rendimiento, mejor generalizabilidad. $(-)$ Computacionalmente caro &
+            reportaje sobre-optimista de rendimiento, mejor generalizabilidad. $(-)$ Computacionalmente caro &
             \autocite{safonova-2023} \\
             \hline
         \end{tabular}
@@ -270,10 +270,10 @@ La posibilidad de usar datos sin etiquetamiento en el entrenamiento indica que l
 razón para dejar de considerar el entrenamiento de modelos independientes. Sin embargo, gracias a la cantidad de
 cómputo necesaria para la tarea, el exploramiento que se realice en este trabajo necesariamente deberá ser limitado.
 Aun así, gracias a estos factores, el resultado debería reflejar con bastante precisión los métodos necesarios para
-crear modelos con objetivos poco comunes en terreno nuevo para la teledección a nivel nacional.
+crear modelos con objetivos poco comunes en terreno nuevo para la teledetección a nivel nacional.
 
 También de importancia es la naturaleza altamente dinámica de los datos. Cada año la cantidad de datos de alta
 resolución se multiplica y se vuelve más accesible, y para mantenerse al tanto de estos cambios, son necesarios el
 mantenimiento y la actualización periódica de estos modelos. Por otro lado, una de las técnicas más utilizadas en los
 trabajos mencionados es la transferencia de modelos preentrenados por medio de \enquote{fine-tuning}, lo que hace el
-mantenimiento un obstáculo más facil de superar.
+mantenimiento un obstáculo más fácil de superar.
