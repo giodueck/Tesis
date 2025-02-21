@@ -11,10 +11,8 @@ pasos a seguir.
 La recopilación de datos principalmente consistirá de fuentes primarias de imágenes satelitales. La fuente de estos
 datos será el portal de datos abiertos de Copernicus, el programa de teledetección y observación terrestre de la
 Agencia Espacial Europea (ESA), la cual provee acceso libre y completo a cualquier persona u organización a los datos
-recolectados. Estas imágenes pueden ser descargadas con varios formatos, bandas espectrales, o segmentación básica como
-capas adicionales, con resoluciones de entre 10 y 60 metros por píxel.
-
-% TODO https://www.copernicus.eu/en/access-data
+recolectados.\autocite{copernicus-access} Estas imágenes pueden ser descargadas con varios formatos, bandas
+espectrales, o segmentación básica como capas adicionales, con resoluciones de entre 10 y 60 metros por píxel.
 
 Adicionalmente, varias fuentes secundarias se utilizarán para la verificación de los resultados producidos por el
 modelo, como por ejemplo mapas y diagramas geológicos.
@@ -29,23 +27,20 @@ características individuales. Algunas de las técnicas a utilizarse son:
 interferencia electrónica entre componentes o mal funcionamiento de los sensores. Este ruido puede degradar una imagen
 e incluso ocultar información, y la eliminación de ruido tiene por objetivo disminuir el efecto del ruido sobre los
 datos recolectados. Las técnicas específicas dependen del tipo de ruido, es decir si es periódico (patrones de ruido
-que se repiten) o aleatorio, o una combinación de ambos.
+que se repiten) o aleatorio, o una combinación de ambos. \autocite{lillesand-remote-sensing}
 
-% TODO source
-
-{\bf Corrección radiométrica}: implica la corrección de datos erróneos causados por la iluminación.
-
-% TODO expand
-% TODO source but different from the previous one, I found this definition to be completely different
+{\bf Corrección radiométrica}: implica la corrección de datos erróneos causados por distorsiones específicas
+provenientes de efectos atmosféricos o errores de calibración que pueden causar píxeles perdidos o bandedado en la
+imagen. \autocite{lillesand-remote-sensing}
 
 {\bf Georreferenciación}: las imágenes satelitales son combinadas con una referencia en un sistema de coordenadas
 estándar, cada píxel es asociado con una coordenada. Debido a que las imágenes capturadas por el programa Copernicus ya
-contienen este dato, este paso se realiza al descargar las imágenes.
+contienen este dato, este paso se realiza al descargar las imágenes. \autocite{lillesand-remote-sensing}
 
 {\bf Subconjuntos de bandas y creación de mosaicos}: el análisis de un subconjunto de capas y la omisión de datos de
 poco interés ayudan a disminuir el volumen de datos para analizar, y la creación de mosaicos a partir de múltiples
 imágenes puede servir para cubrir áreas más amplias, o analizar estructuras que no fueron capturadas en su totalidad en
-una imagen.
+una imagen. \autocite{lillesand-remote-sensing}
 
 \subsubsection{Mejora de Imágenes}
 
@@ -58,7 +53,7 @@ técnicas de manipulación de contraste, como la umbralización de niveles de gr
 contraste. La primera permite definir un nivel un nivel mínimo o máximo de brillo para cada píxel, aislando ciertas
 áreas. Esto permite, por ejemplo, resaltar cuerpos de agua. La segunda permite definir ciertos niveles de los píxeles
 de la imagen para realizar una segmentación. La tercera consiste en ampliar el rango de valores en una imagen, que
-puede hacer algunos detalles más visibles.
+puede hacer algunos detalles más visibles. \autocite{lillesand-remote-sensing}
 
 {\bf Manipulación de características espaciales}: incluye filtros espaciales, filtros convolucionales y el realce de
 bordes. Filtros espaciales pueden incluir un amplio rango de filtros, y se usan para aumentar o eliminar ciertas
@@ -66,13 +61,13 @@ características de una imagen, como la aumentación de nitidez o filtro de paso
 cumplen diversas funciones, y consisten de un cálculo por cada píxel en función a sus vecinos, lo que permite realzar
 cierta información local, como la detección de bordes, y permite mantener baja la cantidad de datos, combinando datos
 de muchos píxeles en uno. El realce de bordes consiste en realzar el contraste entre bordes de la imagen para aumentar
-su nitidez percibida. \autocite{usgs-spatial-filters}
+su nitidez percibida. \autocite{lillesand-remote-sensing, usgs-spatial-filters}
 
 {\bf Manipulación de múltiples imágenes}: la creación de imágenes compuestas por la combinación de datos de varias
 bandas puede ser útil para realzar detalles que de otra manera no son visibles. Por ejemplo, la combinación de bandas
 de color rojo y bandas de infrarrojo cercano permite evaluar la salud de vegetación. Varios índices como NDVI, SAVI o
 NDSI presentan datos normalizados al rango de 0 a 1 que evalúan relaciones de este estilo entre varias bandas de una
-imagen.
+imagen. \autocite{lillesand-remote-sensing}
 
 \subsubsection{Clasificación}
 
@@ -80,6 +75,7 @@ Este es el objetivo principal del proyecto, crear un modelo capaz de reemplazar 
 una persona entrenada por técnicas cuantitativas para automatizar la identificación de características en una escena.
 Para imágenes satelitales, esto implica el análisis de múltiples bandas de la imagen, que son en efecto dimensiones
 adicionales. El objetivo final es asignar etiquetas a cada píxel de una imagen de acuerdo a una lista de posibilidades.
+\autocite{lillesand-remote-sensing}
 
 La implementación de este modelo se hará en Python, que gracias a la multitud de librerías de Machine Learning y
 manipulación de imágenes facilita el prototipado y desarrollo de modelos de clasificación.
