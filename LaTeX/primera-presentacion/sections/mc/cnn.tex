@@ -22,10 +22,6 @@ convolución del grupo de píxeles. Con una representación adecuada de los dato
 llamados {\it kernels }, pueden usarse en la detección de bordes en cualquier orientación, reducción de ruido,
 aumentación de intensidad de píxeles de cierto color o brillo, entre otros. \autocite{ciresan-cnn}
 
-% TODO
-% Add figure of CNN
-% Add figure of convolution filter
-
 \subsubsection{Aplicaciones}
 
 CNN ya se han utilizado en todo tipo de aplicaciones relacionadas con imágenes y videos, entre ellas clasificación de
@@ -40,10 +36,9 @@ imágenes satelitales facilitaría enormemente la aplicación en el tema de este
 
 \subsubsection{Técnicas y arquitecturas}
 
-% TODO explain what pooling is
 Las primeras CNN surgieron en los años 90, con LeNet siendo la primera implementación que ganó atención. Esta red se
-desarrolló para el reconocimiento de dígitos escritos a mano, y consistía de capas convolucionales, de pooling y capas
-completamente conectadas.
+desarrolló para el reconocimiento de dígitos escritos a mano, y consistía de capas convolucionales, de {\it pooling},
+el proceso de reducir la resolución y agrupar información de la capa anterior, y capas densamente, es decir completamente, conectadas.
 
 Recién en 2012 con AlexNet se logró el siguiente salto, con una competencia de reconocimiento visual. AlexNet se diseñó
 con conjuntos de imágenes de gran escala en mente, compuesta de capas similares a LeNet, con algunas optimizaciones en
@@ -69,5 +64,11 @@ se ha usado la arquitectura U-Net en segmentación de imágenes satelitales para
 recursos de agua, bosques o agricultura con una intersección de entre 81 y 96\% con marcaciones manuales.
 \autocite{khryashchev2018}
 
-% TODO
-% Add figure of AlexNet
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/cnn-figure.png}
+    \caption{Ejemplo de red neuronal convolucional con varias capas de convolución y pooling, que preprocesan y
+    comprimen la imagen, y varias capas convencionales, densamente conectadas, que hacen el trabajo de
+    clasificación sobre un vector unidimensional.}
+    \label{fig:2}
+\end{figure}

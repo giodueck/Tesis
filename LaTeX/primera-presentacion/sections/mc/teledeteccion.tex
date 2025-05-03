@@ -17,6 +17,16 @@ Los primeros programas de observación de la tierra por medio de satélites surg
 el programa Landsat de los Estados Unidos en 1972, y le siguieron programas similares en India, Francia y la Unión
 Europea. \autocite{esa-space-year-2007}
 
+\begin{figure}
+    \centering
+    \subfloat[\centering Cámara digital normal]{\includegraphics[width=0.275\textwidth]{img/Death_Valley_from_space.JPG}}
+    \qquad
+    \subfloat[\centering Radar de Apertura Sintética]{\includegraphics[width=0.175\textwidth]{img/800px-Death-valley-sar.jpg}}
+    \caption{Imágenes satelitales del Valle de la Muerte con diferentes resoluciones espectrales. El área superior de (a)
+    coincide con el área inferior de (b).}
+    \label{fig:1}
+\end{figure}
+
 \subsubsection{Aplicaciones}
 
 Imágenes satelitales proveen información muy útil para todo tipo de estadísticas en áreas relacionadas con el
@@ -39,9 +49,10 @@ espectral, radiométrica y temporal.
 de entre 1 y 1000 $m^2$.
 
 {\bf Resolución espectral}: la longitud de onda de las diferentes bandas de frecuencia capturadas, normalmente
-relacionada a la cantidad de bandas de frecuencia. El sensor Hyperion en \enquote{Earth Observing-1}, por ejemplo, observa 220
-bandas entre 0,4 y 2,5 $\mu m$, con una resolución espectral de 0,10--1.11 $\mu m$ por banda.
-\autocite{earth-observatory-earth-observing-1}
+relacionada a la cantidad de bandas de frecuencia. El sensor Hyperion en \enquote{Earth Observing-1}, por ejemplo,
+observa 220 bandas entre 0,4 y 2,5 $\mu m$, con una resolución espectral de 0,10--1.11 $\mu m$ por
+banda. \autocite{earth-observatory-earth-observing-1} En imágenes de espectros no visibles, la visualización se hace
+con colores falsos, en donde cada banda es asignada un color visible. Un ejemplo se ve en la figura \ref{fig:1}.
 
 {\bf Resolución radiométrica}: la cantidad de niveles de intensidad de radiación detectable por el sensor. Típicamente
 entre 8 y 14 bits de información, correspondiente a 256 a 16384 niveles en cada banda. La cantidad de ruido en el
@@ -50,8 +61,13 @@ sensor también afecta la resolución radiométrica.
 {\bf Resolución temporal}: la cantidad de sobrevuelos del avión o satélite, importante solamente cuando se realizan
 series de tiempo, promedios o mosaicos, como por ejemplo en el monitoreamiento de la agricultura.
 
-% TODO
-% Add figure for multispectral image. Screenshots from QGIS
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/Electromagnetic_spectrum-es.svg.png}
+    \caption{Espectro electromagnético visualizado. Diferentes sustancias y materiales reflejan una variedad de
+    frecuencias más allá del espectro visible, que es relativamente reducido.}
+    \label{fig:3}
+\end{figure}
 
 \subsubsection{Disponibilidad de recursos}
 
