@@ -11,6 +11,9 @@ estado-del-arte/
 *.log
 *.aux
 *.synctex*
+*.lof
+*.lot
+*.toc
 
 *-blx.bib
 *.bbl

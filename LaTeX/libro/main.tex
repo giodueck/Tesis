@@ -1,0 +1,98 @@
+\documentclass[a4paper, 11pt, twoside]{article}
+\usepackage[margin=2.2cm]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[babel,spanish=mexican]{csquotes}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\graphicspath{ {../img/} }
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\usepackage{xurl}
+\usepackage[table,svgnames]{xcolor}
+\usepackage{makecell}
+\usepackage{subfig}
+\usepackage{multicol}
+\usepackage{todonotes}
+
+\addbibresource{libro.bib}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \includegraphics[width=160px]{img/logo-uca.png}\par
+    {\bfseries\LARGE Universidad Católica \enquote{Nuestra Señora de la Asunción} \par}
+    \vspace{1cm}
+    {\scshape\Large Facultad de Ciencias y Tecnología (CyT)\par
+    Departamento de Electrónica e Informática (DEI)\par}
+    \vspace{1cm}
+    {\Large Proyecto Final de Carrera \par
+    Grado en Ingeniería Informática \par}
+    \vspace{3cm}
+    {\scshape\LARGE Uso de Redes Neuronales Convolucionales para Interpretación de Imágenes Satelitales \par}
+    \vfill
+    \begin{multicols}{2}
+        \raggedright
+        {\bf\Large Alumno\par}
+        {\Large Giovanni Rene Dueck Neufeld\par}
+        \newcolumn
+        \raggedleft
+        {\bf\Large Tutores\par}
+        {\Large Dr. Alberto Ramírez\par Dr. Félix Carvallo\par}
+    \end{multicols}
+    \vfill
+    {\Large Noviembre 2025 \par}
+\end{titlepage}
+
+\pagenumbering{gobble}
+
+\newpage
+\ % Pag. vacia
+\newpage
+
+% Pag. Dedicatoria y agradecimientos
+
+\begin{center}
+    {\bf Dedicatoria}
+\end{center}
+
+Dedico este trabajo a mi esposa, quien ha sido mi motivación y apoyo constante en esta última etapa de estudio.
+\todo{complete}
+
+\begin{center}
+    {\bf Agradecimientos}
+\end{center}
+
+\todo{agradecimientos}
+
+\newpage
+\ % Pag. vacia
+\newpage
+
+% Indices
+\pagestyle{headings}
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\tableofcontents
+\newpage
+
+\addcontentsline{toc}{section}{\listfigurename}
+\listoffigures
+\newpage
+
+\addcontentsline{toc}{section}{\listtablename}
+\listoftables
+\newpage
+
+% Start each section on a new page.
+% clearpage is better than newpage when using floats
+\AddToHook{cmd/section/before}{\clearpage}
+
+\input{sections.tex}
+
+\newpage
+\addcontentsline{toc}{section}{Referencias}
+\printbibliography
+
+\end{document}
