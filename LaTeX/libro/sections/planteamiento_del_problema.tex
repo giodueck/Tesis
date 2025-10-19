@@ -2,16 +2,54 @@
 
 \subsection{Introducción a la problemática}
 
+Imágenes satelitales o teledetección se refiere a imágenes capturadas por un sensor montado en un satélite artificial, para extraer información. Estas imágenes contienen información multiespectro, es decir, además de la luz visible se toman imágenes de bandas invisibles como por ejemplo la luz infrarroja. \autocite{globalforestlink-how-sat-imaging-work}
+
+Para la captura de estas imágenes se emplean varios métodos, que se dividen en dos categorías: sensores pasivos recolectan radiación electromagnética reflejada del sol, mientras que sensores activos emiten su propia radiación y captan la reflexión de la tierra. Sensores activos requieren de una cantidad importante de energía para operar, pero tienen la ventaja de operar a cualquier hora del día y la capacidad de crear imágenes en bandas que el sol no emite. \autocite{globalforestlink-how-sat-imaging-work}
+
+Diferentes suelos, vegetación, o humedad reflejan diferentes bandas de radiación. Estas imágenes son usadas en varias aplicaciones, desde Sistemas de Información Geográfica y mapas a meteorología y monitoramiento de la salud de vegetación forestal. Un índice bastante común es el Índice de Vegetación de Diferencia Normalizada, o NDVI por sus siglas en inglés, el cual es usado para estimar la cantidad, calidad y desarrollo de la vegetación con base a la mediación. Estos datos ya se usan en sistemas de advertencia temprana de sequías y la predicción del rendimiento de la agricultura en los Estados Unidos a partir de los datos de la NASA. \autocite{earthdata-vegetation}
+
+La importancia de la producción agropecuaria y agroganadera en el Paraguay también invita a considerar estas tecnologías para el monitoreamiento de la salud de la vegetación y el uso adecuado de la tierra. Actualmente, ya se están empleando tecnologías de teledetección y el NDVI en el sector agrícola en aplicaciones como la detección de malezas y predicción del orden ideal de cosecha de campos cultivados. \autocite{onesoil-agricultura-paraguay}
+
+Con aproximadamente la mitad del territorio paraguayo hacia el norte del Río Paraguay en la región semi-árida del Chaco, tecnologías que alivien las sequías y precipitación baja son muy valiosas, tanto para la agricultura y ganadería en las estancias chaqueñas como para centros poblacionales aislados como por ejemplo las comunidades indígenas. Estos pueblos generalmente se caracterizan por la probreza, que se ve manifestada en una salud deteriorada producto de la deficitaria alimentación y falta de agua potable.
+
+Un paleocauce es un cauce por el cual antiguamente fluía agua, como por ejemplo un antiguo lecho de un río. Los paleocauces han sido propuestos como reservorios o conductos para el flujo subterráneo de agua dulce. Se consideran de interés principalmente los paleocauces arenosos, y estos pueden ser aprovechados para acceder al agua en áreas en las que la distribución habitual del agua no existe o está dificultada de alguna forma. \autocite{wikipedia-paleochannel} Con la abundancia de paleocauces en el Chaco central, que ocupan un 15\% de la región, esta propuesta es una bastante prometedora que ya ha sido considerada en investigaciones anteriores. \autocite{conacyt-sistemas-captacion-agua}
+
+La detección de estos paleocauces se haría a partir de imágenes satelitales tomadas a lo largo de un periodo amplio por medio de redes neuronales. Las redes convolucionales son una categoría de redes neuronales especializadas para el procesamiento de imágenes. El principio básico de su funcionamiento consiste en la convolución de grupos píxeles cercanos, una operación que permite tener en cuenta no solo el valor de cada píxel individual, sino el contexto de los mismos. \autocite{axiv-cnn-satellite-imaging}
+
 \subsection{Descripción del problema}
-\todo{TODO}
+La motivación principal del proyecto es la necesidad de mitigar las sequías prolongadas del Chaco Paraguayo, que impacta de forma más severa a zonas remotas o rurales. El objetivo del trabajo es aplicar técnicas de clasificación e interpretación de imágenes satelitales por medio de redes neuronales al problema de la identificación de usos de suelo, particularmente para identificar paleocauces.
+
+Cabe resaltar que los experimentos realizados en el marco de esta investigación se limitan a la clasificación y segmentación de imágenes satelitales. No forma parte de este trabajo el sondeo de paleocauces para determinar la cantidad o calidad del água subterranea o la creación de pozos.
 
 \subsection{Objetivos}
-\todo{TODO}
+
 \subsubsection{Objetivo general}
+
+Creación de modelos a partir de redes neuronales convolucionales para la clasificación y caracterización de imágenes satelitales.
+
 \subsubsection{Objetivos específicos}
+
+\begin{enumerate}
+    \item Análisis de imágenes satelitales correspondientes a la región occidental del Paraguay a lo largo de un periodo temporal amplio \todo{confirmar con el profe}
+    \item Identificación y clasificación de componentes de uso de suelo
+    \item Determinación de áreas de ocurrencia de paleocauces
+\end{enumerate}
 
 \subsection{Antecedentes}
 \todo{TODO}
 
 \subsection{Estructura del documento}
-\todo{TODO}
+
+La estructura del resto del documento se desarrolla como sigue:
+
+{\bf Sección 4:} Análisis, criterios, procedimientos y preguntas de investigación, y desarrollos previos relacionados con el proyecto. Identificación de las tendencias y tecnologías de vanguardia en el campo de análisis de imágenes satelitales.
+
+{\bf Sección 5:} Marco teórico relevante, definiciones de conceptos clave para este proyecto.
+
+{\bf Sección 6:} Marco metodológico, se describe detalladamente el área de estudio, las estrategias y técnicas empleadas para el procesamiento de los datos.
+
+{\bf Sección 7:} Experimentos y resultados, una descripción detallada de las metodologías utilizadas y sus resultados, además de la justificación de la elección de los métodos y las herramientas utilizadas.
+
+{\bf Sección 8:} Discusión de los resultados, en donde se relata la conclusión del proyecto y su relevancia en el contexto académico. Se incluyen recomendaciones para posibles implementaciones de la metodología y posibles futuras investigaciones, de acuerdo al impacto esperado y los beneficios potenciales que pudiera generar.
+
+\todo[inline]{reformat and reword to be more relevant to this project}
