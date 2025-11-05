@@ -1,11 +1,63 @@
 \section{Marco Metodológico}
 \todo{marco metodologico}
 
+En esta sección describimos la forma de la que se realizó el estudio. Se describen la recolección, selección, unificación, preparación y finalmente el análisis de los datos. Esta sección pretende describir un plan que asegure la calidad de los datos a ser analizados.
+
 \subsection{Área de estudio}
+
+El área de estudio incluye al Parque Nacional Médanos del Chaco en la zona noroeste del Chaco Paraguayo, en los departamentos de Boquerón y Alto Paraguay, y al abanico aluvial del río Pilcomayo, en las fronteras con Bolivia y Argentina.
+
+Los alrededores del Parque Nacional son las áreas de mayor interés, ya que forman parte del área ocupada por una serie de paleocauces originando en el río Parapeti en Bolivia. Sin embargo, el abanico aluvial del Pilcomayo representa un extenso sistema de paleocauces que son más prominentes. Por ende, el área del Pilcomayo puede servir de zona de pruebas de técnicas de análisis de datos antes de aplicarlos a las imágenes del Chaco central.
+
+\todo{map figures} % insert images of map with both areas highlighted
 
 \subsection{Estrategia de procesamiento de datos}
 \subsubsection{Recopilación de datos}
+
+Las imágenes utilizadas se obtuvieron del programa Copernicus de la ESA, a través de su portal {\it Copernicus Browser}. Las imágenes son multiespectrales, con 13 bandas capturadas por instrumentos a bordo de los satélites Sentinel-2, un par de satélites en la misma órbita polar desfasados en 180 grados.
+
+\todo{ref}
+% https://dataspace.copernicus.eu/data-collections/copernicus-sentinel-data/sentinel-2
+% https://documentation.dataspace.copernicus.eu/Data/SentinelMissions/Sentinel2.html#sentinel-2-level-2a-top-of-canopy-toc
+
+Los satélites capturan una franja de 290 kilómetros (km) de ancho con un tiempo de revisita de 5 días en el ecuador, capturando imágenes de resoluciones espaciales de 10, 20 y 60 metros (m). Estas imágenes se disponibilizan particionadas en teselas georeferenciadas de 110km x 110km que solapan con teselas adyacentes, en las cuales las bandas se acceden por medio de archivos individuales en formato JPEG2000 con valores entre 0 y 10 000 para cada píxel.
+
+Existen varios niveles que representan productos diferentes. El producto utilizado para este estudio es el nivel 2A (L2A).
+
+Además de los datos de las imágenes, las teselas incluyen metadatos representados en el cuadro \ref{table:metadata}.
+
+\begin{table}[h!]
+    \centering
+    % \begin{tabular}{ |>{\bf \columncolor{OrangeRed}} c|c|c|c|c|c|c|c|c|c| }
+    \begin{tabular}{ |>{\bf \columncolor{LightBlue}} c|m{4cm}|m{11cm}| }
+        \hline
+
+        \rowcolor{LightBlue}
+        & Metadato & Descripción \\
+        \hline
+
+        1 & Extensión & Área geográfica que abarcan los datos. Cada tesela es una imagen en geometría cartográfica (proyección WGS84). \\
+        \hline
+
+        2 & Dimensiones & Tamaño de la imagen en píxeles y la cantidad de bandas. Algunas imágenes se proveen en color, es decir contienen mas de una banda. \\
+        \hline
+
+        3 & Información espectral & Longitudes de onda y resolución del instrumento para cada banda capturada. \\
+        \hline
+
+        4 & Indicadores de calidad & Indicadores de interferencia atmosférica, por ejemplo porcentaje de cobertura de nubes y porcentaje de cobertura de vegetación o agua. \\
+        \hline
+
+    \end{tabular}
+    \caption{Metadatos incluidos con cada tesela del mosaico satelital}
+    \label{table:metadata}
+\end{table}
+
 \subsubsection{Selección de archivos}
+
 \subsubsection{Unificación y preparación de datos}
+
 \subsubsection{Análisis y limpieza de datos}
+
 \subsubsection{Resumen del procesamiento de los datos}
+
