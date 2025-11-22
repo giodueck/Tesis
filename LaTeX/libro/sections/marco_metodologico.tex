@@ -13,9 +13,7 @@ Los alrededores del Parque Nacional son las áreas de mayor interés, ya que for
 \subsection{Estrategia de procesamiento de datos}
 \subsubsection{Tecnologías utilizadas}
 
-Para el procesamiento de datos se utilizó el lenguaje de programación Python con algunas librerías ampliamente disponibles, en especial librerías de Machine Learning, como {\it PyTorch}, {\it Lightning}, {\it TorchGeo}, y {\it Scikit-Learn}, y librerías de procesamiento de imágenes satelitales, como {\it Rasterio}.
-
-Para la creación de imágenes de entrenamiento se utilizaron herramientas de dibujo digital, las cuales permiten crear máscaras de imágenes que se pueden utilizar en el entrenamiento de modelos de segmentación. Ejemplos de este tipo de programa incluyen {\it Krita} y {\it GIMP}.
+Para el procesamiento de datos se utilizó el lenguaje de programación Python con algunas librerías ampliamente disponibles, en especial librerías de Machine Learning, como {\it PyTorch}, {\it Lightning}, {\it TorchGeo}, y {\it Scikit-Learn}, y librerías de procesamiento de imágenes satelitales, como {\it Rasterio}. La función de las librerías utilizadas se detalla en la sección {\it Tecnologías utilizadas} del capítulo siguiente, {\it Experimentos y Resultados}.
 \todo{links or references?}
 
 \subsubsection{Recopilación de datos}
@@ -34,7 +32,7 @@ Además de los datos de las imágenes, las teselas incluyen metadatos representa
 \todo{ref}
 % https://sentiwiki.copernicus.eu/web/s2-products
 
-\begin{table}[h!]
+\begin{table}[ht!]
     \centering
     \begin{tabular}{ |>{\bf \columncolor{LightBlue}} c|m{4cm}|m{11cm}| }
         \hline
@@ -68,7 +66,7 @@ Ya que el tiempo de revisita de los satélites Sentinel-2 es corto, es posible s
 
 Las imágenes utilizadas se identifican por su número de tesela, asignado por Copernicus, y la fecha del sobrevuelo. Las imágenes utilizadas se listan en el cuadro \ref{table:tiles}.
 
-\begin{table}[h!]
+\begin{table}[ht!]
     \centering
     \begin{tabular}{|l|l|p{5cm}|l|l|}
         \hline
@@ -165,4 +163,4 @@ Como estas regiones faltantes (pero no erróneas) son sustanciales, dependiendo 
 
 El área de estudio está conformada por los alrededores del parque nacional Médanos del Chaco, y el conjunto de datos de entrenamiento se suplementa con teselas del abanico aluvial del Pilcomayo, ya que existen estudios preexistentes que analizan la ocurrencia de paleocauces en esta zona. Además, algunas teselas de prueba se agregan para comprobar el funcionamiento de los modelos entrenados en áreas que no forman parte del conjunto de entrenamiento.
 
-La fuente de datos principal proviene del programa Copernicus de la Agencia Espacial Europea, que adicionalmente provee una gran cantidad de metadatos y filtros para facilitar la selección de datos que requieren del menor preprocesamiento posible, de modo a acelerar el análisis de este estudio.
+La fuente de datos principal proviene del programa Copernicus de la Agencia Espacial Europea, que adicionalmente provee una gran cantidad de metadatos y filtros para facilitar la selección de datos que requieren el menor preprocesamiento posible, lo que acelera el análisis de los datos.
