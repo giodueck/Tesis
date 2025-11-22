@@ -23,12 +23,20 @@ Finalmente, una capa de abstracción adicional sobre Lightning es proveída por 
 
 Para la combinación de imágenes georreferenciadas, o para la inclusión de datos de georreferenciación a imágenes que no los tienen, se utilizó la librería Rasterio.
 
-\todo{ref}
+Los experimentos se realizaron exclusivamente en hardware de consumidor. Se utilizó una computadora portátil con un procesador de 12 núcleos lógicos, 16GiB de memoria RAM, y una tarjeta gráfica Nvidia GeForce GTX 1050 Ti, que cuenta con 4GiB de memoria de video. Cabe resaltar que los experimentos se vieron limitados por esta máquina en su envergadura, sin embargo son reproducibles en hardware más actual.
 
+\todo{ref} % https://www.software.ac.uk/publication/how-cite-and-describe-software
+\todo{add software and cuda versions in a table}
 
 \subsection{Partición de datos de entrenamiento}
 
-\todo{section about pytorch lightning}
+\todo{diagram of $random_grid_cell_assignment$}
+
+El conjunto de datos en PyTorch también se conoce como {\it Dataset}, y el componente que disponibiliza estos datos como {\it DataLoader}. Lightning provee una abstracción, el {\it DataModule}, que abstrae al Dataset y permite proveer DataLoaders distintos para las tareas de entrenamiento, validación, prueba e inferencia.
+
+Para la división de datos en datasets de entrenamiento, validación y prueba, se utilizaron métodos proveídos por TorchGeo. El procedimiento consiste en dividir los datos de entrenamiento en celdas, las cuales se asignan pseudoaleatoriamente a subconjuntos de entrenamiento, validación y prueba en una proporción de 70/20/10 respectivamente. Para cada subconjunto, luego, definimos un DataLoader que provee acceso a los datos.
+
+Las celdas en las cuales se dividen las imágenes no se solapan, y la estrategia de cada DataLoaders puede ser elegida de acuerdo a su tarea. Para el entrenamiento usamos un muestreo aleatorio, mientras que los DataLoaders de validación y de prueba hacen un muestreo en celdas, asegurando que toda el área de estos conjuntos se muestrean una sola vez.
 
 \todo{add subsections depending on experiments:
         - classification
