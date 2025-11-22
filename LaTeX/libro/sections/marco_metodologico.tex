@@ -12,23 +12,31 @@ Los alrededores del Parque Nacional son las áreas de mayor interés, ya que for
 \todo{map figures} % insert images of map with both areas highlighted
 
 \subsection{Estrategia de procesamiento de datos}
+\subsubsection{Tecnologías utilizadas}
+
+Para el procesamiento de datos se utilizó el lenguaje de programación Python con algunas librerías ampliamente disponibles, en especial librerías de Machine Learning, como {\it PyTorch}, {\it Lightning}, {\it TorchGeo}, y {\it Scikit-Learn}, y librerías de procesamiento de imágenes satelitales, como {\it Rasterio}.
+
+Para la creación de imágenes de entrenamiento se utilizaron herramientas de dibujo digital, las cuales permiten crear máscaras de imágenes que se pueden utilizar en el entrenamiento de modelos de segmentación. Ejemplos de este tipo de programa incluyen {\it Krita} y {\it GIMP}.
+\todo{links or references?}
+
 \subsubsection{Recopilación de datos}
 
-Las imágenes utilizadas se obtuvieron del programa Copernicus de la ESA, a través de su portal {\it Copernicus Browser}. Las imágenes son multiespectrales, con 13 bandas capturadas por instrumentos a bordo de los satélites Sentinel-2, un par de satélites en la misma órbita polar desfasados en 180 grados.
+Las imágenes utilizadas se obtuvieron del programa Copernicus de la ESA, a través de su portal {\it Copernicus Browser}. Las imágenes son multiespectrales, con 13 bandas capturadas por instrumentos a bordo de los satélites Sentinel-2, un par de satélites en la misma órbita polar desfasados en 180 grados. Estas imágenes son de acceso abierto a todo público, necesitando solamente la creación de un usuario.
 
 \todo{ref}
 % https://dataspace.copernicus.eu/data-collections/copernicus-sentinel-data/sentinel-2
 % https://documentation.dataspace.copernicus.eu/Data/SentinelMissions/Sentinel2.html#sentinel-2-level-2a-top-of-canopy-toc
 
-Los satélites capturan una franja de 290 kilómetros (km) de ancho con un tiempo de revisita de 5 días en el ecuador, capturando imágenes de resoluciones espaciales de 10, 20 y 60 metros (m). Estas imágenes se disponibilizan particionadas en teselas georeferenciadas de 110km x 110km que solapan con teselas adyacentes, en las cuales las bandas se acceden por medio de archivos individuales en formato JPEG2000 con valores entre 0 y 10 000 para cada píxel.
+Los satélites capturan una franja de 290 kilómetros (km) de ancho con un tiempo de revisita de 5 días en el ecuador, capturando imágenes de resoluciones espaciales de 10, 20 y 60 metros (m). Estas imágenes se disponibilizan particionadas en teselas georeferenciadas de 110km x 110km que solapan con teselas adyacentes, en las cuales las bandas se acceden por medio de archivos individuales en formato JPEG2000 con valores entre $0$ y $10'000$ para cada píxel.
 
 Existen varios niveles que representan productos diferentes. El producto utilizado para este estudio es el nivel 2A (L2A).
 
 Además de los datos de las imágenes, las teselas incluyen metadatos representados en el cuadro \ref{table:metadata}.
+\todo{ref}
+% https://sentiwiki.copernicus.eu/web/s2-products
 
 \begin{table}[h!]
     \centering
-    % \begin{tabular}{ |>{\bf \columncolor{OrangeRed}} c|c|c|c|c|c|c|c|c|c| }
     \begin{tabular}{ |>{\bf \columncolor{LightBlue}} c|m{4cm}|m{11cm}| }
         \hline
 
@@ -55,9 +63,99 @@ Además de los datos de las imágenes, las teselas incluyen metadatos representa
 
 \subsubsection{Selección de archivos}
 
+Una vez establecida el área de estudio, se seleccionan las teselas relevantes y se agregan en un conjunto de datos de entrenamiento y de prueba. Como el objetivo es una detección robusta sin importar la temporada, se seleccionan datos de varias fechas distribuidas a lo largo de los años.
+
+Ya que el tiempo de revisita de los satélites Sentinel-2 es corto, es posible ser exigente con la calidad de las imagenes. En este caso, solo se utilizaron imágenes con una cobertura de nubes no mayor que 10\%, lo cual el navegador de imágenes Copernicus Browser permite filtrar.
+
+Las imágenes utilizadas se identifican por su número de tesela, asignado por Copernicus, y la fecha del sobrevuelo. Las imágenes utilizadas se listan en el cuadro \ref{table:tiles}.
+
+\todo{add a test tile in Medanos}
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|l|p{5cm}|l|l|}
+        \hline
+
+        \rowcolor{LightBlue}
+        N° de tesela & \begin{tabular}[c]{@{}l@{}}Fechas \\ (año/mes/día)\end{tabular} & Descripción & Función & Imagen \\
+        \hline
+
+        T20KNA       &
+        \begin{tabular}[c]{@{}l@{}}
+            2024/10/03\\
+            2025/01/16\\
+            2025/06/20\\
+            2025/10/03\\
+        \end{tabular} &
+        Abanico aluvial Pilcomayo, frontera Paraguay-Argentina. &
+        Entrenamiento &
+        \raisebox{-1cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T20KNA.jpg}} \\
+        \hline
+
+        T20KNB       &
+        \begin{tabular}[c]{@{}l@{}}
+            2024/10/03\\
+            2025/01/16\\
+            2025/06/20\\
+            2025/10/03\\
+        \end{tabular} &
+        Abanico aluvial Pilcomayo, fronteras Paraguay-Argentina-Bolivia. &
+        Entrenamiento &
+        \raisebox{-1cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T20KNB.jpg}} \\
+        \hline
+
+        T20KPC       &
+        \begin{tabular}[c]{@{}l@{}}
+            2024/10/03\\
+            2025/01/16\\
+            2025/05/13\\
+            2025/10/03\\
+        \end{tabular} &
+        Médanos del Chaco, noroeste del departamento Boquerón. &
+        Entrenamiento &
+        \raisebox{-1cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T20KPC.jpg}} \\
+        \hline
+
+        T20KQV       &
+        \begin{tabular}[c]{@{}l@{}}
+            2025/10/20\\
+        \end{tabular} &
+        Ciudad de Neuland, aldeas de la colonia Neuland. &
+        Prueba &
+        \raisebox{-1.2cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T20KQV.jpg}} \\
+        \hline
+
+        T20KRA       &
+        \begin{tabular}[c]{@{}l@{}}
+            2025/10/20\\
+        \end{tabular} &
+        Ciudades Filadelfia y Loma Plata, aldeas de las colonias Fernheim y Menno. &
+        Prueba &
+        \raisebox{-1.2cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T20KRA.jpg}} \\
+        \hline
+
+    \end{tabular}
+    \caption{Teselas utilizadas y fechas de sobrevuelo}
+    \label{table:tiles}
+\end{table}
+
 \subsubsection{Unificación y preparación de datos}
 
-\subsubsection{Análisis y limpieza de datos}
+Seleccionados los datos, estos se mantienen en su formato y estructura de archivos original, de donde pueden ser leídas las imágenes para cada banda disponible para cada resolución (de 10m, 20m o 60m).
+
+Como las estructuras que se buscan reconocer son extensas, basta con utilizar imágenes con una resolución de 60m por píxel. Esto, además de reducir la potencial complejidad y el tamaño de los modelos que analizen las imágenes, permite utilizar ventanas de mayor área sin correr el riesgo de necesitar de una gran cantidad de recursos de memoria para realizar el análisis.
+
+Una clase proveída por la librería Torchgeo, {\it RasterDataset}, permite cargar imágenes satelitales de diversas bandas teniendo en cuenta su geolocalización. Esto permite un manejo abstracto del conjunto de datos, por lo cual no es necesario una preparación extensa de los datos obtenidos de Copernicus.
+
+\subsubsection{Limpieza de datos}
+
+Las teselas incluyen máscaras de píxeles erróneos. Como tenemos una gran cantidad de datos disponibles gracias al tiempo corto de revisita de los satélites, podemos simplemente descartar imágenes con significantes errores.
+
+Una inevitabilidad de las imágenes producidas por Sentinel-2 es la falta de datos de una porción de ciertas teselas. Esta es una consecuencia de la división de imágenes en teselas, algunas de las cuales abarcan los bordes de la franja capturada en un sobrevuelo. Los valores de los píxeles en estas regiones son 0.
+
+Como estas regiones faltantes (pero no erróneas) son sustanciales, dependiendo de la tesela escojida, estos píxeles no se modificaron en las imágenes afectadas. Nuestra expectativa fue que los modelos se adecuarían a este valor, ya que los valores posibles abarcan el rango entre $0$ y $10'000$, pero en imágenes libres de errores, nunca toman valores cercanos a $0$. Un ejemplo de este fenómeno se encuentra en el cuadro \ref{table:tiles}, en el margen izquierdo de la tesela {\it T20KPC}.
 
 \subsubsection{Resumen del procesamiento de los datos}
 
+El área de estudio está conformada por los alrededores del parque nacional Médanos del Chaco, y el conjunto de datos de entrenamiento se suplementa con teselas del abanico aluvial del Pilcomayo, ya que existen estudios preexistentes que analizan la ocurrencia de paleocauces en esta zona. Además, algunas teselas de prueba se agregan para comprobar el funcionamiento de los modelos entrenados en áreas que no forman parte del conjunto de entrenamiento.
+
+La fuente de datos principal proviene del programa Copernicus de la Agencia Espacial Europea, que adicionalmente provee una gran cantidad de metadatos y filtros para facilitar la selección de datos que requieren del menor preprocesamiento posible, de modo a acelerar el análisis de este estudio.
