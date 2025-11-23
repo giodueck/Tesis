@@ -55,10 +55,22 @@ Más allá de estos procedimientos simples, la mayoría del esfuerzo fue dedicad
 
 \subsection{Resultados}
 
-\todo{table of hparams and training results}
+% Show hparams for each model and the average over n training runs with the same seeds, the best and worst test losses (for the checkpoints)
+
+\todo{fcn results over several training runs}
+
+\todo{farseg results over several training runs}
+
+\todo{unet results over several training runs}
 
 \todo{figures of test plots and generated masks in appendix}
 
 \subsubsection{Predicción en conjunto}
 
 \todo{figures of generated masks for training and test tiles}
+
+Un problema con las máscaras generadas por los modelos es la cantidad de artefactos y diferencias en los resultados, aun con la misma arquitectura y la misma distribución de datos de entrenamiento. Por esta razón, también experimentamos con la creación de máscaras usando un conjunto de modelos, cuyos resultados fueron promediados para generar una sola máscara. Esto permite generar mapas de calor más consistentes, en los cuales los puntos ciegos de un modelo pueden ser cubiertos por los puntos fuertes de otro.
+
+Aun con las diferencias entre los modelos, es común encontrar zonas en las cuales ningún modelo predice ocurrencias de paleocauces, mientras que en otras zonas la mayoría predice positivamente con alta certeza.
+
+Sin embargo, se pueden observar varias áreas en las cuales parecen ocurrir paleocauces, pero en donde los modelos no predicen ocurrencias. Esto se puede atribuir a una cantidad limitada de datos de entrenamiento de alta calidad, lo que sería una forma de expandir sobre estos resultados.
