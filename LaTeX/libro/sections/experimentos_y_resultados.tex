@@ -6,27 +6,26 @@ En este capítulo se presentan los experimentos realizados, los modelos y las me
 
 Para las tareas de clasificación y segmentación es necesaria una verdad fundamental, ya sea una o varias etiquetas por cada imagen en el caso de la clasificación, o una máscara en el caso de la segmentación. Este es el objetivo que se quiere obtener a partir del modelo final.
 
-Las imágenes de referencia se sintetizaron a partir de estudios de la zona del abanico aluvial del Pilcomayo \todo{ref}, las cuales se imitaron a base del mejor esfuerzo. Para facilitar la identificación visual de los paleocauces, se utilizaron imágenes de color falso, en especial utilizando imágenes de luz infrarroja (IR) de onda corta (SWIR por sus siglas en ingles, short wave infrared) utilizando las bandas B12 (IR de onda corta), B8A (IR cercano) y B4 (verde) en los canales rojo, verde y azul respectivamente. Diferentes tipos de suelo y vegetación reflejan estas bandas de formas variadas, y esta combinación resalta paleocauces al ojo humano mejor que imágenes de color real. \todo{ref} % https://www.upstream.tech/posts/a-primer-on-false-color-imagery
+Las imágenes de referencia se sintetizaron a partir de estudios de la zona del abanico aluvial del Pilcomayo \todo{ref}, las cuales se imitaron a base del mejor esfuerzo. Para facilitar la identificación visual de los paleocauces, se utilizaron imágenes de color falso, en especial utilizando imágenes de luz infrarroja (IR) de onda corta (SWIR por sus siglas en ingles, short wave infrared) utilizando las bandas B12 (IR de onda corta), B8A (IR cercano) y B4 (verde) en los canales rojo, verde y azul respectivamente. Diferentes tipos de suelo y vegetación reflejan estas bandas de formas variadas, y esta combinación puede resaltar estructuras geológicas como paleocauces al ojo humano mejor que imágenes de color real. \cite{earth-observatory-false-color}
 
 \todo{figure of swir image and mask}
 
 Para la creación de estas máscaras de entrenamiento se utilizaron herramientas de dibujo digital. Ejemplos de este tipo de programa incluyen {\it Krita} y {\it GIMP}.
 
-\subsection{Tecnologías utilizadas}
+\subsection{Herramientas utilizadas}
 
 % python libs, cuda, docker, qgis
-La herramienta fundamental utilizada en los experimentos es la librería PyTorch, que implementa una gran cantidad de componentes básicos de Machine Learning, como las capas que componen a los modelos, los conjuntos de datos de entrenamiento, funciones de activación, funciones de utilidad, entre otros.
+La herramienta fundamental utilizada en los experimentos es la librería PyTorch \cite{Ansel_PyTorch_2_Faster_2024}, que implementa una gran cantidad de componentes básicos de Machine Learning, como las capas que componen a los modelos, los conjuntos de datos de entrenamiento, funciones de activación, funciones de utilidad, entre otros.
 
-La librería Lightning expande sobre esta base, añadiendo una capa de abstracción adicional que provee bucles de entrenamiento y validación y módulos de datos que facilitan la interacción con conjuntos de datos, permitiendo al usuario enfocarse en la arquitectura del modelo y los datos de entrenamiento en lugar del proceso de entrenamiento a bajo nivel.
+La librería Lightning \cite{Falcon_PyTorch_Lightning_2019} expande sobre esta base, añadiendo una capa de abstracción adicional que provee bucles de entrenamiento y validación y módulos de datos que facilitan la interacción con conjuntos de datos, permitiendo al usuario enfocarse en la arquitectura del modelo y los datos de entrenamiento en lugar del proceso de entrenamiento a bajo nivel.
 
-Finalmente, una capa de abstracción adicional sobre Lightning es proveída por TorchGeo, una librería especializada para el análisis de datos de observación terrestre. TorchGeo provee facilidades para la creación de conjuntos de datos que, además de los datos multiespectrales de la imagen propia, tienen en cuenta la geolocalización de cada imagen. También proveen algunos modelos, opcionalmente preentrenados.
+Finalmente, una capa de abstracción adicional sobre Lightning es proveída por TorchGeo \cite{Stewart_TorchGeo_Deep_Learning_2024}, una librería especializada para el análisis de datos de observación terrestre. TorchGeo provee facilidades para la creación de conjuntos de datos que, además de los datos multiespectrales de la imagen propia, tienen en cuenta la geolocalización de cada imagen. También proveen algunos modelos, opcionalmente preentrenados.
 
-Para la combinación de imágenes georreferenciadas, o para la inclusión de datos de georreferenciación a imágenes que no los tienen, se utilizó la librería Rasterio.
+Para la combinación de imágenes georreferenciadas, o para la inclusión de datos de georreferenciación a imágenes que no los tienen, se utilizó la librería Rasterio \cite{gillies_2019}.
 
 Los experimentos se realizaron exclusivamente en hardware de consumidor. Se utilizó una computadora portátil con un procesador de 12 núcleos lógicos, 16GiB de memoria RAM, y una tarjeta gráfica Nvidia GeForce GTX 1050 Ti, que cuenta con 4GiB de memoria de video. Cabe resaltar que los experimentos se vieron limitados por esta máquina en su envergadura, sin embargo son reproducibles en hardware más actual.
 
-\todo{ref} % https://www.software.ac.uk/publication/how-cite-and-describe-software
-\todo{add software and cuda versions in a table}
+\todo{add software and cuda versions in a table} % https://www.software.ac.uk/publication/how-cite-and-describe-software
 
 \subsection{Partición de datos de entrenamiento}
 
