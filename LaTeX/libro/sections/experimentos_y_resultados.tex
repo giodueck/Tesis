@@ -42,9 +42,7 @@ Cada DataLoader produce imágenes de 128$\times$128 píxeles recortadas de las c
 \subsection{Entrenamiento y validación}
 \todo{clasificacion} % explain setup and failure, or only in discusion?
 
-\todo{segmentacion} % explain setup and models used
-
-Para la tarea de segmentación, se utilizaron tres arquitecturas bien establecidas. Las arquitecturas proveídas por TorchGeo utilizadas fueron Foreground-Aware Relation Network, o FarSeg \cite{zheng2020foregroundawarerelationnetworkgeospatial}, y una red enteramente convolucional de cinco capas conocida simplemente como FCN por sus siglas en inglés, Fully-convolutional Network. Adicionalmente se utilizó una implementación de U-Net, una red enteramente convolucional muy conocida por sus aplicaciones en el campo de la medicina, pero tambien muy capaz en imágenes de teledetección. \todo{ref}
+Para la tarea de segmentación, se utilizaron tres arquitecturas bien establecidas. Las arquitecturas proveídas por TorchGeo utilizadas fueron Foreground-Aware Relation Network, o FarSeg \cite{zheng2020foregroundawarerelationnetworkgeospatial}, y una red enteramente convolucional de cinco capas conocida simplemente como FCN por sus siglas en inglés, Fully-convolutional Network. Adicionalmente se utilizó una implementación de U-Net, una red enteramente convolucional muy conocida por sus aplicaciones en el campo de la medicina, pero tambien muy capaz en imágenes de teledetección. \cite{ronneberger2015unetconvolutionalnetworksbiomedical, khryashchev2018}
 
 Lightning provee un componente llamado Trainer, que implementa bucles de entrenamiento, validación y prueba, y toma de entrada un modelo, un conjunto de datos, y parámetros de entrenamiento. Algunos parámetros son la cantidad mínima y máxima de épocas de entrenamiento, donde una época es una iteración del entrenamiento sobre el dataset, y una condición de detención temprana del entrenamiento si no mejora a lo largo de una cierta cantidad de tiempo.
 
@@ -111,23 +109,23 @@ Los hiperparámetros seleccionados para los experimentos se detallan en el cuadr
         Versión & \bf Canales de entrada & \bf Nro. de filtros & \bf Mejor época & \bf Pérdida en prueba \\
         \hline
 
-        1 & 11 & 64 & 1 & 0.4675 \\
+        1 & Todos (11) & 64 & 1 & 0.4675 \\
         \hline
 
-        2 & 11 & 96 & 2 & 0.4678 \\
+        2 & Todos (11) & 96 & 2 & 0.4678 \\
         \hline
 
-        3 & 11 & 128 & 8 & 0.4721 \\
+        3 & Todos (11) & 128 & 8 & 0.4721 \\
         \hline
 
-        4 & 11 & 256 & 4 & 0.4638 \\
+        4 & Todos (11) & 256 & 4 & 0.4638 \\
         \hline
 
-        5 & 11 & 256 & 4 & 0.4630 \\
+        5 & Todos (11) & 256 & 4 & 0.4630 \\
         \hline
 
     \end{tabular}
-    \caption{Hiperparámetros y resultados del modelo FCN}
+    \caption{Hiperparámetros y resultados de la arquitectura FCN}
     \label{table:fcn}
 \end{table}
 
@@ -169,7 +167,7 @@ Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres ca
         \hline
 
     \end{tabular}
-    \caption{Hiperparámetros y resultados del modelo FarSeg}
+    \caption{Hiperparámetros y resultados de la arquitectura FarSeg}
     \label{table:farseg}
 \end{table}
 
@@ -177,12 +175,51 @@ Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres ca
 
 Mientras que el use de backbone más simples no dio buenos resultados, los modelos más grandes dieron resultados significantes, tomando más tiempo para alcanzar el mejor resultado, aunque este patrón sólo se presenta en las versiones 3 y 5, entrenadas con las bandas de color.
 
-Las máscaras producidas por los modelos que utilizan las bandas B4, B3, B2 presentan bordes de apariencia borrosa, lo que podría ser una consecuencia de la resolución espacial de las imágenes utilizadas. La calidad de las predicciones no es muy buena, dado que existen pocos píxeles en los cuales todos los modelos coinciden en una predicción de paleocauce: mientras que el valor máximo del promedio de un píxel de las máscaras combinadas es 255, en la máscara generada se presenta un valor máximo de 87, lo que equivale a alrededor de un tercio del máximo.
+Las máscaras producidas por los modelos que utilizan las bandas B4, B3, B2 presentan bordes de apariencia borrosa, lo que podría ser una consecuencia de la resolución espacial de las imágenes utilizadas. La calidad de las predicciones no es muy buena, dado que existen pocos píxeles en los cuales todos los modelos coinciden en una predicción de paleocauce: mientras que el valor máximo del promedio de un píxel de las máscaras combinadas es 255, en la máscara generada se presenta un valor máximo de 87, lo que equivale a alrededor de un tercio del máximo. \todo[inline]{this belongs in the ensemble prediction section}
 
 Las máscaras producidas por los modelos entrenados con las bandas B12, B8A, B4 son similares a las producidas por FCN. Cada píxel de la máscara tiene el valor mínimo, y las pérdidas de las mejores versiones son mayores que la mayor versión de FCN.
 
 \subsubsection{U-Net}
-\todo{unet results over several training runs}
+
+Una de las arquitecturas más conocidas para la tarea de segmentación es U-Net. La estructura consiste de varios niveles por los cuales desciende la imagen de entrada hasta llegar a un nivel de cuello de botella, de donde asciende nuevamente por los niveles hasta llegar a la resolución de la imagen de salida, que en este caso es igual a la resolución de la imagen de entrada.
+
+En cada descenso a un nivel inferior, los datos crecen en la cantidad de canales y decrecen en la resolución de cada canal, es decir, la imagen disminuye en su tamaño. Inversamente, al ascender a un nivel superior, disminuye la cantidad de canales e incrementa la resolución de cada canal. El cuello de botella es el último nivel, en el cual la resolución es mínima y la cantidad de canales es máxima.
+
+En adición a las conexiones entre niveles adyacentes, existen conexiones entre los caminos descendientes y ascendientes del mismo nivel, saltando niveles en estas conexiones.
+
+Cada nivel tiene un tamaño que describe la cantidad de filtros, y debe ser el doble que el nivel anterior o la mitad del nivel siguiente. Cada nivel disminuye y aumenta la resolución de la imagen por un factor de 4, o sea un factor de 2 por cada dimensión.
+
+Los hiperparámetros utilizados y los resultados de los experimentos se visualizan en el cuadro \ref{table:unet}.
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{ |>{\bf \columncolor{LightBlue}} c|c|c|c|c| }
+        \hline
+
+        \rowcolor{LightBlue}
+        Versión & \bf Canales de entrada & \bf Niveles & \bf Mejor época & \bf Pérdida en prueba \\
+        \hline
+
+        1 & Todos (11) & 64, 128, 256, 512 & 10 & 0.4421 \\
+        \hline
+
+        2 & Todos (11) & 64, 128, 256, 512 & 10 & 0.4576 \\
+        \hline
+
+        3 & Todos (11) & 32, 64, 128, 256, 512 & 14 & 0.4535 \\
+        \hline
+
+        4 & Todos (11) & 32, 64, 128, 256, 512 & 3 & 0.4520 \\
+        \hline
+
+    \end{tabular}
+    \caption{Hiperparámetros y resultados de la arquitectura U-Net}
+    \label{table:unet}
+\end{table}
+
+\todo{one with 1024 as bottleneck}
+
+La pérdida de estos modelos es en general menor que la pérdida promedio de los modelos anteriores, y las máscaras generadas son mucho más detalladas.
 
 \todo{figures of test plots and generated masks in appendix}
 
