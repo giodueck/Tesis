@@ -68,7 +68,7 @@ Debido a limitaciones de hardware, el tamaño de lote es muy pequeño. Equivale 
         Nro. mínimo de épocas & 1 & Cantidad mínima de iteraciones por el conjunto de datos de entrenamiento. \\
         \hline
 
-        Nro. máximo de épocas & 2 & Cantidad máxima de iteraciones por el conjunto de datos de entrenamiento.\\
+        Nro. máximo de épocas & 50 & Cantidad máxima de iteraciones por el conjunto de datos de entrenamiento.\\
         \hline
 
         Paciencia & 7 & Cantidad de épocas en las que el modelo no mejora la pérdida de validación antes de detener el entrenamiento. \\
@@ -93,6 +93,10 @@ Debido a limitaciones de hardware, el tamaño de lote es muy pequeño. Equivale 
 Para cada arquitectura, se realizaron experimentos con diferentes hiperparámetros, los cuales se detallan a continuación, además de resultados concretos en la forma de valores de la función de pérdida para el conjunto de prueba.
 
 También se demuestran resultados en teselas nuevas, no utilizadas en el DataModule de entrenamiento, para demostrar las predicciones en datos completamente desconocidos. Estas teselas son aquellas cuya función es \enquote{Prueba} en el cuadro \ref{table:tiles} del capítulo anterior.
+
+Para la visualización de las predicciones, se convierten las matrices de salida al formato de imagen georreferenciada GeoTiff. Las predicciones de los modelos son matrices de números decimales, para los cuales un valor cercano a o mayor que $1.0$ significa una predicción de ocurrencia de paleocauce en ese píxel, mientras que un valor cercano a o menor que $0.0$ significa una predicción de ausencia de paleocauce en ese píxel. Estos valores se fijan al intérvalo $[0,1]$, con valores menores que 0 y mayores que 1 siendo convertidos a 0 y 1 respectivamente. La matriz resultante es la máscara de predicciones para una celda de $128\times128$ píxeles, y cada píxel se convierte a un valor en la escala de grises, con 0 y 1 correspondiendo a negro y blanco respectivamente.
+
+Estas celdas de $128\times128$ píxeles se combinan para formar un mosaico de predicciones. Para mitigar los artefactos que pueden surgir en los bordes de estas celdas, estas se solapan ligeramente. Se toman pasos de 100 y 112 píxeles, se combinan mosaicos de cada tamaño de paso por separado, y finalmente se toma un promedio de ambos mosaicos para generar una máscara de predicciones. El diagrama \todo[inline]{make diagram} muestra el procedimiento de forma visual.
 
 \subsubsection{FCN}
 
@@ -129,7 +133,7 @@ Los hiperparámetros seleccionados para los experimentos se detallan en el cuadr
     \label{table:fcn}
 \end{table}
 
-Una arquitectura así de simple necesita de patrones simples y obvios para ser útil. Tal vez predeciblemente, esta arquitectura no dio resultados, creando predicciones uniformes para cualquier tesela. Todos los experimentos resultan en un modelo que produce una máscara de probabilidades en la que cada píxel es asignado la probabilidad cero, y la cantidad de épocas necesarias para alcanzar este máximo sugiere que no se aprendieron patrones entre iteraciones.
+Una arquitectura así de simple necesita de patrones simples y obvios para ser útil. Tal vez predeciblemente, esta arquitectura no dio resultados útiles, creando predicciones uniformes para cualquier tesela. Todos los experimentos resultan en un modelo que produce una máscara de probabilidades en la que cada píxel es negro, y la cantidad de épocas necesarias para alcanzar la menor pérdida sugiere que no se aprendieron patrones entre iteraciones.
 
 \subsubsection{FarSeg}
 
@@ -154,16 +158,34 @@ Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres ca
         2 & B12, B8A, B4 & ResNet-18 & 3 & 0.5866 \\
         \hline
 
-        3 & B4, B3, B2 & ResNet-50 & 19 & 0.4514 \\
+        3 & B4, B3, B2 & ResNet-34 & 11 & 0.4682 \\
         \hline
 
-        4 & B12, B8A, B4 & ResNet-50 & 2 & 1.444 \\
+        4 & B12, B8A, B4 & ResNet-34 & 7 & 0.5324 \\
         \hline
 
-        5 & B4, B3, B2 & ResNet-50 & 27 & 0.4977 \\
+        5 & B4, B3, B2 & ResNet-50 & 19 & 0.4514 \\
         \hline
 
-        6 & B12, B8A, B4 & ResNet-50 & 4 & 1.056 \\
+        6 & B12, B8A, B4 & ResNet-50 & 2 & 1.444 \\
+        \hline
+
+        7 & B4, B3, B2 & ResNet-50 & 27 & 0.4977 \\
+        \hline
+
+        8 & B12, B8A, B4 & ResNet-50 & 4 & 1.056 \\
+        \hline
+
+        9 & B4, B3, B2 & ResNet-101 & 12 & 0.5897 \\
+        \hline
+
+        10 & B12, B8A, B4 & ResNet-101 & 10 & 0.9042 \\
+        \hline
+
+        11 & B4, B3, B2 & ResNet-101 & 8 & 0.6233 \\
+        \hline
+
+        12 & B12, B8A, B4 & ResNet-101 & 5 & 0.5351 \\
         \hline
 
     \end{tabular}
@@ -171,11 +193,11 @@ Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres ca
     \label{table:farseg}
 \end{table}
 
-\todo{try bigger resnet}
+Mientras que el use de backbone más simples no dio buenos resultados, los modelos más grandes dieron resultados significantes. Interesantemente, los modelos con backbone ResNet-50 y entrenados sobre las bandas de color visible tomaron, en promedio, muchas más épocas para alcanzar su mejor rendimiento que los demás.
 
-Mientras que el use de backbone más simples no dio buenos resultados, los modelos más grandes dieron resultados significantes, tomando más tiempo para alcanzar el mejor resultado, aunque este patrón sólo se presenta en las versiones 3 y 5, entrenadas con las bandas de color.
+Entre los resultados, los modelos con backbone ResNet-18 y ResNet-101 produjeron máscaras completamente negras, o con pocas áreas en las que predicen paleocauces. Sin embargo, aun más llamativo es el hecho que los modelos que utilizan las bandas B12, B8A, B4 producen máscaras enteramente negras, excepto con backbone ResNet-34.
 
-Las máscaras producidas por los modelos que utilizan las bandas B4, B3, B2 presentan bordes de apariencia borrosa, lo que podría ser una consecuencia de la resolución espacial de las imágenes utilizadas. La calidad de las predicciones no es muy buena, dado que existen pocos píxeles en los cuales todos los modelos coinciden en una predicción de paleocauce: mientras que el valor máximo del promedio de un píxel de las máscaras combinadas es 255, en la máscara generada se presenta un valor máximo de 87, lo que equivale a alrededor de un tercio del máximo. \todo[inline]{this belongs in the ensemble prediction section}
+Las máscaras producidas por los modelos que utilizan las bandas B4, B3, B2 presentan bordes de apariencia borrosa, lo que podría ser una consecuencia de la resolución espacial de las imágenes utilizadas.
 
 Las máscaras producidas por los modelos entrenados con las bandas B12, B8A, B4 son similares a las producidas por FCN. Cada píxel de la máscara tiene el valor mínimo, y las pérdidas de las mejores versiones son mayores que la mayor versión de FCN.
 
@@ -212,16 +234,24 @@ Los hiperparámetros utilizados y los resultados de los experimentos se visualiz
         4 & Todos (11) & 32, 64, 128, 256, 512 & 3 & 0.4520 \\
         \hline
 
+        5 & Todos (11) & 64, 128, 256, 512, 1024 & 10 & 0.5412 \\
+        \hline
+
+        6 & Todos (11) & 64, 128, 256, 512, 1024 & 10 & 0.4426 \\
+        \hline
+
     \end{tabular}
     \caption{Hiperparámetros y resultados de la arquitectura U-Net}
     \label{table:unet}
 \end{table}
 
-\todo{one with 1024 as bottleneck}
+La pérdida de estos modelos es en promedio menor que la pérdida promedio de los modelos anteriores, y las máscaras generadas son mucho más detalladas.
 
-La pérdida de estos modelos es en general menor que la pérdida promedio de los modelos anteriores, y las máscaras generadas son mucho más detalladas.
+Entre las tres arquitecturas, la implementada por las versiones 3 y 4 producen las predicciones más parecidas a las máscaras de entrenamiento, con grandes áreas incluidas que las demás arquitecturas no capturan. La arquitectura menos compleja, de las versiones 1 y 2, produce predicciones cuyas áreas son menos extensas, pero cuyos bordes son más pronunciados. El peor resultado es el que producen las versiones 5 y 6, con una máscara mucho más ruidosa que la de las versiones 1 y 2, y cubriendo un menor área que la de las versiones 3 y 4.
 
 \todo{figures of test plots and generated masks in appendix}
+
+\todo{try predictions with the same tile from a different day}
 
 \subsubsection{Predicción en conjunto}
 
