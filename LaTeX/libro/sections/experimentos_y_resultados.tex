@@ -44,7 +44,7 @@ Cada DataLoader produce imágenes de 128$\times$128 píxeles recortadas de las c
 
 \todo{segmentacion} % explain setup and models used
 
-Para la tarea de segmentación, se utilizaron tres arquitecturas bien establecidas. Las arquitecturas proveídas por TorchGeo utilizadas fueron Foreground-Aware Relation Network, o FarSeg \todo{ref}, y una red enteramente convolucional de cinco capas conocida simplemente como FCN por sus siglas en inglés, Fully-convolutional Network. Adicionalmente se utilizó una implementación de U-Net, una red enteramente convolucional muy conocida por sus aplicaciones en el campo de la medicina, pero tambien muy capaz en imágenes de teledetección. \todo{ref}
+Para la tarea de segmentación, se utilizaron tres arquitecturas bien establecidas. Las arquitecturas proveídas por TorchGeo utilizadas fueron Foreground-Aware Relation Network, o FarSeg \cite{zheng2020foregroundawarerelationnetworkgeospatial}, y una red enteramente convolucional de cinco capas conocida simplemente como FCN por sus siglas en inglés, Fully-convolutional Network. Adicionalmente se utilizó una implementación de U-Net, una red enteramente convolucional muy conocida por sus aplicaciones en el campo de la medicina, pero tambien muy capaz en imágenes de teledetección. \todo{ref}
 
 Lightning provee un componente llamado Trainer, que implementa bucles de entrenamiento, validación y prueba, y toma de entrada un modelo, un conjunto de datos, y parámetros de entrenamiento. Algunos parámetros son la cantidad mínima y máxima de épocas de entrenamiento, donde una época es una iteración del entrenamiento sobre el dataset, y una condición de detención temprana del entrenamiento si no mejora a lo largo de una cierta cantidad de tiempo.
 
@@ -54,12 +54,134 @@ Más allá de estos procedimientos simples, la mayoría del esfuerzo fue dedicad
 
 \subsection{Resultados}
 
-% Show hparams for each model and the average over n training runs with the same seeds, the best and worst test losses (for the checkpoints)
+Para todos los experimentos, las únicas variables son los modelos usados y sus parámetros configurables, también llamados hiperparámetros. Los parámetros del Trainer y del DataModule, así como la semilla del generador de números pseudoaleatorios (PRNG) son iguales para todos los experimentos, y se detallan en el cuadro \ref{table:trainer}.
 
-\todo{fcn results over several training runs}
+Debido a limitaciones de hardware, el tamaño de lote es muy pequeño. Equivale a $128\times128\times11\times3=540'672$ píxeles de 4 bytes por lote, o $2.1$MiB, cuando se usan las once bandas disponibles, y un número mayor causó errores de memoria al momento de realizar los experimentos.
 
-\todo{farseg results over several training runs}
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{ |l|r|p{10cm}| }
+        \hline
 
+        \rowcolor{LightBlue}
+        Parámetro & Valor & Descripción \\
+        \hline
+
+        Nro. mínimo de épocas & 1 & Cantidad mínima de iteraciones por el conjunto de datos de entrenamiento. \\
+        \hline
+
+        Nro. máximo de épocas & 2 & Cantidad máxima de iteraciones por el conjunto de datos de entrenamiento.\\
+        \hline
+
+        Paciencia & 7 & Cantidad de épocas en las que el modelo no mejora la pérdida de validación antes de detener el entrenamiento. \\
+        \hline
+
+        Semilla PRNG & 42 & Valor inicial del estado del generador de números semialeatorios, empleado en, entre otras funciones, la creación de los valores iniciales de los diversos parámetros entrenables del modelo. \\
+        \hline
+
+        Tamaño de época & 1200 & Tamaño efectivo del conjunto de datos de entrenamiento. Cantidad de imágenes, recortadas al azar de las celdas del dataset de entrenamiento, usadas para el entrenamiento en cada época. \\
+        \hline
+
+        Tamaño de imagen & 128 & Dimensión de cada recorte de los datasets en píxeles. Los recortes son cuadrados. \\
+        \hline
+
+        Tamaño de lote (batch) & 3 & Cantidad de imágenes cargadas y procesadas en cada paso de entrenamiento. Subdivide a cada época. \\
+        \hline
+    \end{tabular}
+    \caption{Parámetros de entrenamiento generales}
+    \label{table:trainer}
+\end{table}
+
+Para cada arquitectura, se realizaron experimentos con diferentes hiperparámetros, los cuales se detallan a continuación, además de resultados concretos en la forma de valores de la función de pérdida para el conjunto de prueba.
+
+También se demuestran resultados en teselas nuevas, no utilizadas en el DataModule de entrenamiento, para demostrar las predicciones en datos completamente desconocidos. Estas teselas son aquellas cuya función es \enquote{Prueba} en el cuadro \ref{table:tiles} del capítulo anterior.
+
+\subsubsection{FCN}
+
+La arquitectura más simple en este trabajo, consiste de cinco capas convolucionales con activación de tipo {\it LeakyReLU}, la cual mantiene valores positivos iguales y multiplica valores negativos por un número pequeño para minimizar su magnitud.
+
+Los hiperparámetros seleccionados para los experimentos se detallan en el cuadro \ref{table:fcn}.
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{ |>{\bf \columncolor{LightBlue}} c|c|c|c|c| }
+        \hline
+
+        \rowcolor{LightBlue}
+        Versión & \bf Canales de entrada & \bf Nro. de filtros & \bf Mejor época & \bf Pérdida en prueba \\
+        \hline
+
+        1 & 11 & 64 & 1 & 0.4675 \\
+        \hline
+
+        2 & 11 & 96 & 2 & 0.4678 \\
+        \hline
+
+        3 & 11 & 128 & 8 & 0.4721 \\
+        \hline
+
+        4 & 11 & 256 & 4 & 0.4638 \\
+        \hline
+
+        5 & 11 & 256 & 4 & 0.4630 \\
+        \hline
+
+    \end{tabular}
+    \caption{Hiperparámetros y resultados del modelo FCN}
+    \label{table:fcn}
+\end{table}
+
+Una arquitectura así de simple necesita de patrones simples y obvios para ser útil. Tal vez predeciblemente, esta arquitectura no dio resultados, creando predicciones uniformes para cualquier tesela. Todos los experimentos resultan en un modelo que produce una máscara de probabilidades en la que cada píxel es asignado la probabilidad cero, y la cantidad de épocas necesarias para alcanzar este máximo sugiere que no se aprendieron patrones entre iteraciones.
+
+\subsubsection{FarSeg}
+
+La arquitectura Foreground-Aware Relation Network es una arquitectura diseñada para la segmentación geoespacial de objetos en imágenes de alta resolución espacial \cite{zheng2020foregroundawarerelationnetworkgeospatial}. Mientras que solamente utilizamos imágenes de 60m de resolución espacial, dieron resultados mucho más prometedores que FCN. Estos se muestran en el cuadro \ref{table:farseg}, además de los hiperparámetros utilizados.
+
+La FarSeg utiliza una arquitectura de red neuronal en lo que se conoce como {\it Backbone}, o columna vertebral, en este caso ResNet \cite{he2015deepresiduallearningimage}. Esta columna cumple la función de extractor de características, las cuales son utilizadas por el resto del modelo para generar una predicción. Existe la opción de usar parámetros preentrenados para el Backbone, pero en estos experimentos se hizo el entrenamiento completo sin parámetros preentrenados. \todo{try pretrained}
+
+Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres canales de entrada, se utilizaron los conjuntos de bandas B4, B3, B2 (rojo, verde, azul) y B12, B8A, B4 (infrarrojo de onda corta o SWIR, infrarrojo de onda cercana o NIR, rojo).
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{ |>{\bf \columncolor{LightBlue}} c|c|c|c|c| }
+        \hline
+
+        \rowcolor{LightBlue}
+        Versión & \bf Canales de entrada & \bf Backbone & \bf Mejor época & \bf Pérdida en prueba \\
+        \hline
+
+        1 & B4, B3, B2 & ResNet-18 & 1 & 0.6560 \\
+        \hline
+
+        2 & B12, B8A, B4 & ResNet-18 & 3 & 0.5866 \\
+        \hline
+
+        3 & B4, B3, B2 & ResNet-50 & 19 & 0.4514 \\
+        \hline
+
+        4 & B12, B8A, B4 & ResNet-50 & 2 & 1.444 \\
+        \hline
+
+        5 & B4, B3, B2 & ResNet-50 & 27 & 0.4977 \\
+        \hline
+
+        6 & B12, B8A, B4 & ResNet-50 & 4 & 1.056 \\
+        \hline
+
+    \end{tabular}
+    \caption{Hiperparámetros y resultados del modelo FarSeg}
+    \label{table:farseg}
+\end{table}
+
+\todo{try bigger resnet}
+
+Mientras que el use de backbone más simples no dio buenos resultados, los modelos más grandes dieron resultados significantes, tomando más tiempo para alcanzar el mejor resultado, aunque este patrón sólo se presenta en las versiones 3 y 5, entrenadas con las bandas de color.
+
+Las máscaras producidas por los modelos que utilizan las bandas B4, B3, B2 presentan bordes de apariencia borrosa, lo que podría ser una consecuencia de la resolución espacial de las imágenes utilizadas. La calidad de las predicciones no es muy buena, dado que existen pocos píxeles en los cuales todos los modelos coinciden en una predicción de paleocauce: mientras que el valor máximo del promedio de un píxel de las máscaras combinadas es 255, en la máscara generada se presenta un valor máximo de 87, lo que equivale a alrededor de un tercio del máximo.
+
+Las máscaras producidas por los modelos entrenados con las bandas B12, B8A, B4 son similares a las producidas por FCN. Cada píxel de la máscara tiene el valor mínimo, y las pérdidas de las mejores versiones son mayores que la mayor versión de FCN.
+
+\subsubsection{U-Net}
 \todo{unet results over several training runs}
 
 \todo{figures of test plots and generated masks in appendix}
