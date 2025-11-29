@@ -26,6 +26,7 @@ Para la combinación de imágenes georreferenciadas, o para la inclusión de dat
 Los experimentos se realizaron exclusivamente en hardware de consumidor. Se utilizó una computadora portátil con un procesador de 12 núcleos lógicos, 16GiB de memoria RAM, y una tarjeta gráfica Nvidia GeForce GTX 1050 Ti, que cuenta con 4GiB de memoria de video. Cabe resaltar que los experimentos se vieron limitados por esta máquina en su envergadura, sin embargo son reproducibles en hardware más actual.
 
 \todo{add software and cuda versions in a table} % https://www.software.ac.uk/publication/how-cite-and-describe-software
+% maybe appendix only
 
 \subsection{Partición de datos de entrenamiento}
 
@@ -92,7 +93,7 @@ Debido a limitaciones de hardware, el tamaño de lote es muy pequeño. Equivale 
 
 Para cada arquitectura, se realizaron experimentos con diferentes hiperparámetros, los cuales se detallan a continuación, además de resultados concretos en la forma de valores de la función de pérdida para el conjunto de prueba.
 
-También se demuestran resultados en teselas nuevas, no utilizadas en el DataModule de entrenamiento, para demostrar las predicciones en datos completamente desconocidos. Estas teselas son aquellas cuya función es \enquote{Prueba} en el cuadro \ref{table:tiles} del capítulo anterior.
+También se demuestran resultados en teselas nuevas, no utilizadas en el DataModule de entrenamiento, para demostrar las predicciones en datos completamente desconocidos. Estas teselas son aquellas cuya función es \enquote{Prueba} en el cuadro \ref{table:tiles} del capítulo anterior. En particular, la tesela T20KNC que incluye la frontera entre Paraguay y Bolivia, una sección del oeste del Parque Nacional Médanos del Chaco, y un sistema de paleocauces prominente hacia el sur del rio Parapetí en Bolivia, será utilizada como imagen de prueba.
 
 Para la visualización de las predicciones, se convierten las matrices de salida al formato de imagen georreferenciada GeoTiff. Las predicciones de los modelos son matrices de números decimales, para los cuales un valor cercano a o mayor que $1.0$ significa una predicción de ocurrencia de paleocauce en ese píxel, mientras que un valor cercano a o menor que $0.0$ significa una predicción de ausencia de paleocauce en ese píxel. Estos valores se fijan al intérvalo $[0,1]$, con valores menores que 0 y mayores que 1 siendo convertidos a 0 y 1 respectivamente. La matriz resultante es la máscara de predicciones para una celda de $128\times128$ píxeles, y cada píxel se convierte a un valor en la escala de grises, con 0 y 1 correspondiendo a negro y blanco respectivamente.
 
@@ -141,7 +142,7 @@ La arquitectura Foreground-Aware Relation Network es una arquitectura diseñada 
 
 La FarSeg utiliza una arquitectura de red neuronal en lo que se conoce como {\it Backbone}, o columna vertebral, en este caso ResNet \cite{he2015deepresiduallearningimage}. Esta columna cumple la función de extractor de características, las cuales son utilizadas por el resto del modelo para generar una predicción. Existe la opción de usar parámetros preentrenados para el Backbone, pero en estos experimentos se hizo el entrenamiento completo sin parámetros preentrenados. \todo{try pretrained}
 
-Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres canales de entrada, se utilizaron los conjuntos de bandas B4, B3, B2 (rojo, verde, azul) y B12, B8A, B4 (infrarrojo de onda corta o SWIR, infrarrojo de onda cercana o NIR, rojo).
+Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres canales de entrada, se utilizaron los conjuntos de bandas B4, B3, B2 que corresponden a los colores visibles rojo, verde, azul (RGB), y B12, B8A, B4 que corresponden a las bandas infrarrojo de onda corta o SWIR, infrarrojo de onda cercana o NIR, rojo (SWIR).
 
 \begin{table}[ht!]
     \centering
@@ -193,7 +194,25 @@ Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres ca
     \label{table:farseg}
 \end{table}
 
+\begin{figure}
+    \centering
+    \subfloat[\centering Tesela T20KNC]{\includegraphics[width=0.4\textwidth]{img/T20KNC_large.png}}
+
+    \subfloat[\centering FarSeg v. 3 (RGB)]{\includegraphics[width=0.4\textwidth]{img/farseg-34-rgb.png}}
+    \quad
+    \subfloat[\centering FarSeg v. 4 (SWIR)]{\includegraphics[width=0.4\textwidth]{img/farseg-34-swir.png}}
+
+    \subfloat[\centering FarSeg v. 5 y 6 (RGB)]{\includegraphics[width=0.4\textwidth]{img/farseg-50-rgb.png}}
+    \quad
+    \subfloat[\centering FarSeg v. 9 y 11 (RGB)]{\includegraphics[width=0.4\textwidth]{img/farseg-101-rgb.png}}
+
+    \caption{Máscaras de predicción de paleocauces de los modelos FarSeg}
+    \label{fig:farseg}
+\end{figure}
+
 Mientras que el use de backbone más simples no dio buenos resultados, los modelos más grandes dieron resultados significantes. Interesantemente, los modelos con backbone ResNet-50 y entrenados sobre las bandas de color visible tomaron, en promedio, muchas más épocas para alcanzar su mejor rendimiento que los demás.
+
+La figura \ref{fig:farseg} muestra las máscaras generadas por estos modelos.
 
 Entre los resultados, los modelos con backbone ResNet-18 y ResNet-101 produjeron máscaras completamente negras, o con pocas áreas en las que predicen paleocauces. Sin embargo, aun más llamativo es el hecho que los modelos que utilizan las bandas B12, B8A, B4 producen máscaras enteramente negras, excepto con backbone ResNet-34.
 
@@ -245,20 +264,48 @@ Los hiperparámetros utilizados y los resultados de los experimentos se visualiz
     \label{table:unet}
 \end{table}
 
-La pérdida de estos modelos es en promedio menor que la pérdida promedio de los modelos anteriores, y las máscaras generadas son mucho más detalladas.
+\begin{figure}
+    \centering
+    \subfloat[\centering Tesela T20KNC]{\includegraphics[width=0.4\textwidth]{img/T20KNC_large.png}}
+    \quad
+    \subfloat[\centering U-Net v. 1 y 2]{\includegraphics[width=0.4\textwidth]{img/unet-small.png}}
+
+    \subfloat[\centering U-Net v. 3 y 4]{\includegraphics[width=0.4\textwidth]{img/unet-medium.png}}
+    \quad
+    \subfloat[\centering U-Net v. 5 y 6]{\includegraphics[width=0.4\textwidth]{img/unet-large.png}}
+
+    \caption{Máscaras de predicción de paleocauces de los modelos U-Net}
+    \label{fig:unet}
+\end{figure}
+
+La pérdida de estos modelos es en promedio menor que la pérdida promedio de los modelos anteriores, y las máscaras generadas son mucho más detalladas. Estas máscaras se muestran en la figura \ref{fig:unet}.
 
 Entre las tres arquitecturas, la implementada por las versiones 3 y 4 producen las predicciones más parecidas a las máscaras de entrenamiento, con grandes áreas incluidas que las demás arquitecturas no capturan. La arquitectura menos compleja, de las versiones 1 y 2, produce predicciones cuyas áreas son menos extensas, pero cuyos bordes son más pronunciados. El peor resultado es el que producen las versiones 5 y 6, con una máscara mucho más ruidosa que la de las versiones 1 y 2, y cubriendo un menor área que la de las versiones 3 y 4.
-
-\todo{figures of test plots and generated masks in appendix}
 
 \todo{try predictions with the same tile from a different day}
 
 \subsubsection{Predicción en conjunto}
 
-\todo{figures of generated masks for training and test tiles}
-
 Un problema con las máscaras generadas por los modelos es la cantidad de artefactos y diferencias en los resultados, aun con la misma arquitectura y la misma distribución de datos de entrenamiento. Por esta razón, también experimentamos con la creación de máscaras usando un conjunto de modelos, cuyos resultados fueron promediados para generar una sola máscara. Esto permite generar mapas de calor más consistentes, en los cuales los puntos ciegos de un modelo pueden ser cubiertos por los puntos fuertes de otro.
 
 Aun con las diferencias entre los modelos, es común encontrar zonas en las cuales ningún modelo predice ocurrencias de paleocauces, mientras que en otras zonas la mayoría predice positivamente con alta certeza.
 
-Sin embargo, se pueden observar varias áreas en las cuales parecen ocurrir paleocauces, pero en donde los modelos no predicen ocurrencias. Esto se puede atribuir a una cantidad limitada de datos de entrenamiento de alta calidad, lo que sería una forma de expandir sobre estos resultados.
+\begin{figure}
+    \centering
+    \subfloat[\centering Tesela T20KNC]{\includegraphics[width=0.4\textwidth]{img/T20KNC_large.png}}
+
+    \subfloat[\centering Combinación FarSeg]{\includegraphics[width=0.4\textwidth]{img/farseg-combined.png}}
+    \quad
+    \subfloat[\centering Tesela T20KNC con máscara combinada FarSeg]{\includegraphics[width=0.4\textwidth]{img/farseg-combined-screen.png}}
+
+    \subfloat[\centering Combinación U-Net]{\includegraphics[width=0.4\textwidth]{img/unet-combined.png}}
+    \quad
+    \subfloat[\centering Tesela T20KNC con máscara combinada U-Net]{\includegraphics[width=0.4\textwidth]{img/unet-combined-screen.png}}
+
+    \caption{Máscaras de predicción producidas por una combinación de las predicciones anteriores}
+    \label{fig:combined}
+\end{figure}
+
+La figura \ref{fig:combined} muestra máscaras generadas por una combinación de las predicciones de varios modelos, presentando predicciones más completas.
+
+Sin embargo, se pueden observar varias áreas en las cuales parecen ocurrir paleocauces, pero en donde los modelos no predicen ocurrencias. Esto se puede atribuir a una cantidad limitada de datos de entrenamiento de alta calidad, lo que sería una forma de expandir sobre estos resultados. \todo{this belongs in discussion}
