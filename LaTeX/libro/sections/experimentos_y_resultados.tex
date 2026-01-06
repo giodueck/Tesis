@@ -23,7 +23,14 @@ Finalmente, una capa de abstracción adicional sobre Lightning es proveída por 
 
 Para la combinación de imágenes georreferenciadas, o para la inclusión de datos de georreferenciación a imágenes que no los tienen, se utilizó la librería Rasterio \cite{gillies_2019}.
 
-Los experimentos se realizaron exclusivamente en hardware de consumidor. Se utilizó una computadora portátil con un procesador de 12 núcleos lógicos, 16GiB de memoria RAM, y una tarjeta gráfica Nvidia GeForce GTX 1050 Ti, que cuenta con 4GiB de memoria de video. Cabe resaltar que los experimentos se vieron limitados por esta máquina en su envergadura, sin embargo son reproducibles en hardware más actual.
+Los experimentos se realizaron exclusivamente en hardware de consumidor. Se utilizaron dos máquinas:
+
+\begin{enumerate}
+    \item Una computadora portátil con un procesador de 12 núcleos lógicos, 16GiB de memoria RAM, y una tarjeta gráfica Nvidia GeForce GTX 1050 Ti, que cuenta con 4GiB de memoria de video
+    \item Una computadora de escritorio con un procesador de 12 núcleos lógicos, 32GiB de memoria RAM, y una tarjeta gráfica AMD Radeon RX 7600, que cuenta con 8GiB de memoria de video
+\end{enumerate}
+
+Cabe resaltar que los experimentos se vieron limitados por estas en su envergadura, sin embargo son reproducibles en hardware más actual o profesional. En donde sea relevante, la máquina en la cual se hizo el entrenamiento se referencia por la enumeración anterior.
 
 \todo{add software and cuda versions in a table} % https://www.software.ac.uk/publication/how-cite-and-describe-software
 % maybe appendix only
@@ -55,36 +62,34 @@ Más allá de estos procedimientos simples, la mayoría del esfuerzo fue dedicad
 
 Para todos los experimentos, las únicas variables son los modelos usados y sus parámetros configurables, también llamados hiperparámetros. Los parámetros del Trainer y del DataModule, así como la semilla del generador de números pseudoaleatorios (PRNG) son iguales para todos los experimentos, y se detallan en el cuadro \ref{table:trainer}.
 
-Debido a limitaciones de hardware, el tamaño de lote es muy pequeño. Equivale a $128\times128\times11\times3=540'672$ píxeles de 4 bytes por lote, o $2.1$MiB, cuando se usan las once bandas disponibles, y un número mayor causó errores de memoria al momento de realizar los experimentos.
-
 \begin{table}[ht!]
     \centering
-    \begin{tabular}{ |l|r|p{10cm}| }
+    \begin{tabular}{ |l|r|r|p{8cm}| }
         \hline
 
         \rowcolor{LightBlue}
-        Parámetro & Valor & Descripción \\
+        Parámetro & Máquina 1 & Máq. 2 & Descripción \\
         \hline
 
-        Nro. mínimo de épocas & 1 & Cantidad mínima de iteraciones por el conjunto de datos de entrenamiento. \\
+        Nro. mínimo de épocas & 1 & 1 & Cantidad mínima de iteraciones por el conjunto de datos de entrenamiento. \\
         \hline
 
-        Nro. máximo de épocas & 50 & Cantidad máxima de iteraciones por el conjunto de datos de entrenamiento.\\
+        Nro. máximo de épocas & 50 & 50 & Cantidad máxima de iteraciones por el conjunto de datos de entrenamiento.\\
         \hline
 
-        Paciencia & 7 & Cantidad de épocas en las que el modelo no mejora la pérdida de validación antes de detener el entrenamiento. \\
+        Paciencia & 7 & 7 & Cantidad de épocas en las que el modelo no mejora la pérdida de validación antes de detener el entrenamiento. \\
         \hline
 
-        Semilla PRNG & 42 & Valor inicial del estado del generador de números semialeatorios, empleado en, entre otras funciones, la creación de los valores iniciales de los diversos parámetros entrenables del modelo. \\
+        Semilla PRNG & 42 & 42 & Valor inicial del estado del generador de números semialeatorios, empleado en, entre otras funciones, la creación de los valores iniciales de los diversos parámetros entrenables del modelo. \\
         \hline
 
-        Tamaño de época & 1200 & Tamaño efectivo del conjunto de datos de entrenamiento. Cantidad de imágenes, recortadas al azar de las celdas del dataset de entrenamiento, usadas para el entrenamiento en cada época. \\
+        Tamaño de época & 1200 & 1200 & Tamaño efectivo del conjunto de datos de entrenamiento. Cantidad de imágenes, recortadas al azar de las celdas del dataset de entrenamiento, usadas para el entrenamiento en cada época. \\
         \hline
 
-        Tamaño de imagen & 128 & Dimensión de cada recorte de los datasets en píxeles. Los recortes son cuadrados. \\
+        Tamaño de imagen & 128 & 192 & Dimensión de cada recorte de los datasets en píxeles. Los recortes son cuadrados. \\
         \hline
 
-        Tamaño de lote (batch) & 3 & Cantidad de imágenes cargadas y procesadas en cada paso de entrenamiento. Subdivide a cada época. \\
+        Tamaño de lote (batch) & 3 & 12 & Cantidad de imágenes cargadas y procesadas en cada paso de entrenamiento. Subdivide a cada época. \\
         \hline
     \end{tabular}
     \caption{Parámetros de entrenamiento generales}
@@ -95,9 +100,9 @@ Para cada arquitectura, se realizaron experimentos con diferentes hiperparámetr
 
 También se demuestran resultados en teselas nuevas, no utilizadas en el DataModule de entrenamiento, para demostrar las predicciones en datos completamente desconocidos. Estas teselas son aquellas cuya función es \enquote{Prueba} en el cuadro \ref{table:tiles} del capítulo anterior. En particular, la tesela T20KNC que incluye la frontera entre Paraguay y Bolivia, una sección del oeste del Parque Nacional Médanos del Chaco, y un sistema de paleocauces prominente hacia el sur del rio Parapetí en Bolivia, será utilizada como imagen de prueba.
 
-Para la visualización de las predicciones, se convierten las matrices de salida al formato de imagen georreferenciada GeoTiff. Las predicciones de los modelos son matrices de números decimales, para los cuales un valor cercano a o mayor que $1.0$ significa una predicción de ocurrencia de paleocauce en ese píxel, mientras que un valor cercano a o menor que $0.0$ significa una predicción de ausencia de paleocauce en ese píxel. Estos valores se fijan al intérvalo $[0,1]$, con valores menores que 0 y mayores que 1 siendo convertidos a 0 y 1 respectivamente. La matriz resultante es la máscara de predicciones para una celda de $128\times128$ píxeles, y cada píxel se convierte a un valor en la escala de grises, con 0 y 1 correspondiendo a negro y blanco respectivamente.
+Para la visualización de las predicciones, se convierten las matrices de salida al formato de imagen georreferenciada GeoTiff. Las predicciones de los modelos son matrices de números decimales, para los cuales un valor cercano a o mayor que $1.0$ significa una predicción de ocurrencia de paleocauce en ese píxel, mientras que un valor cercano a o menor que $0.0$ significa una predicción de ausencia de paleocauce en ese píxel. Estos valores se fijan al intérvalo $[0,1]$, con valores menores que 0 y mayores que 1 siendo convertidos a 0 y 1 respectivamente. La matriz resultante es la máscara de predicciones para una celda de $128\times128$ o $192\times192$ píxeles, y cada píxel se convierte a un valor en la escala de grises, con 0 y 1 correspondiendo a negro y blanco respectivamente.
 
-Estas celdas de $128\times128$ píxeles se combinan para formar un mosaico de predicciones. Para mitigar los artefactos que pueden surgir en los bordes de estas celdas, estas se solapan ligeramente. Se toman pasos de 100 y 112 píxeles, se combinan mosaicos de cada tamaño de paso por separado, y finalmente se toma un promedio de ambos mosaicos para generar una máscara de predicciones. El diagrama \todo[inline]{make diagram} muestra el procedimiento de forma visual.
+Estas celdas de $128\times128$ o $192\times192$ píxeles se combinan para formar un mosaico de predicciones. Para mitigar los artefactos que pueden surgir en los bordes de estas celdas, estas se solapan ligeramente. Se toman pasos de 100 y 112 píxeles para predicciones de 128 y 172 y 180 píxeles para predicciones de 192, se combinan mosaicos de cada tamaño de paso por separado, y finalmente se toma un promedio de ambos mosaicos para generar una máscara de predicciones. El diagrama \todo[inline]{make diagram?} muestra el procedimiento de forma visual.
 
 \subsubsection{FCN}
 
@@ -130,7 +135,7 @@ Los hiperparámetros seleccionados para los experimentos se detallan en el cuadr
         \hline
 
     \end{tabular}
-    \caption{Hiperparámetros y resultados de la arquitectura FCN}
+    \caption{Hiperparámetros y resultados de la arquitectura FCN. Entrenamiento en máquina 1.}
     \label{table:fcn}
 \end{table}
 
@@ -140,7 +145,7 @@ Una arquitectura así de simple necesita de patrones simples y obvios para ser �
 
 La arquitectura Foreground-Aware Relation Network es una arquitectura diseñada para la segmentación geoespacial de objetos en imágenes de alta resolución espacial \cite{zheng2020foregroundawarerelationnetworkgeospatial}. Mientras que solamente utilizamos imágenes de 60m de resolución espacial, dieron resultados mucho más prometedores que FCN. Estos se muestran en el cuadro \ref{table:farseg}, además de los hiperparámetros utilizados.
 
-La FarSeg utiliza una arquitectura de red neuronal en lo que se conoce como {\it Backbone}, o columna vertebral, en este caso ResNet \cite{he2015deepresiduallearningimage}. Esta columna cumple la función de extractor de características, las cuales son utilizadas por el resto del modelo para generar una predicción. Existe la opción de usar parámetros preentrenados para el Backbone, pero en estos experimentos se hizo el entrenamiento completo sin parámetros preentrenados. \todo{try pretrained}
+La FarSeg utiliza una arquitectura de red neuronal en lo que se conoce como {\it Backbone}, o columna vertebral, en este caso ResNet \cite{he2015deepresiduallearningimage}. Esta columna cumple la función de extractor de características, las cuales son utilizadas por el resto del modelo para generar una predicción. Existe la opción de usar parámetros preentrenados para el Backbone, pero en estos experimentos se hizo el entrenamiento completo sin parámetros preentrenados.
 
 Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres canales de entrada, se utilizaron los conjuntos de bandas B4, B3, B2 que corresponden a los colores visibles rojo, verde, azul (RGB), y B12, B8A, B4 que corresponden a las bandas infrarrojo de onda corta o SWIR, infrarrojo de onda cercana o NIR, rojo (SWIR).
 
@@ -190,7 +195,7 @@ Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres ca
         \hline
 
     \end{tabular}
-    \caption{Hiperparámetros y resultados de la arquitectura FarSeg}
+    \caption{Hiperparámetros y resultados de la arquitectura FarSeg. Entrenamiento en máquina 1.}
     \label{table:farseg}
 \end{table}
 
@@ -260,7 +265,7 @@ Los hiperparámetros utilizados y los resultados de los experimentos se visualiz
         \hline
 
     \end{tabular}
-    \caption{Hiperparámetros y resultados de la arquitectura U-Net}
+    \caption{Hiperparámetros y resultados de la arquitectura U-Net. Entrenamiento en máquina 1.}
     \label{table:unet}
 \end{table}
 
