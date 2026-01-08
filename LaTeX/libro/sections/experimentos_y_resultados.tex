@@ -89,7 +89,7 @@ Para todos los experimentos, las únicas variables son los modelos usados y sus 
         Tamaño de imagen & 128 & 192 & Dimensión de cada recorte de los datasets en píxeles. Los recortes son cuadrados. \\
         \hline
 
-        Tamaño de lote (batch) & 3 & 12 & Cantidad de imágenes cargadas y procesadas en cada paso de entrenamiento. Subdivide a cada época. \\
+        Tamaño de lote (batch) & 3 & 3 & Cantidad de imágenes cargadas y procesadas en cada paso de entrenamiento. Subdivide a cada época. \\
         \hline
     \end{tabular}
     \caption{Parámetros de entrenamiento generales}
@@ -102,7 +102,9 @@ También se demuestran resultados en teselas nuevas, no utilizadas en el DataMod
 
 Para la visualización de las predicciones, se convierten las matrices de salida al formato de imagen georreferenciada GeoTiff. Las predicciones de los modelos son matrices de números decimales, para los cuales un valor cercano a o mayor que $1.0$ significa una predicción de ocurrencia de paleocauce en ese píxel, mientras que un valor cercano a o menor que $0.0$ significa una predicción de ausencia de paleocauce en ese píxel. Estos valores se fijan al intérvalo $[0,1]$, con valores menores que 0 y mayores que 1 siendo convertidos a 0 y 1 respectivamente. La matriz resultante es la máscara de predicciones para una celda de $128\times128$ o $192\times192$ píxeles, y cada píxel se convierte a un valor en la escala de grises, con 0 y 1 correspondiendo a negro y blanco respectivamente.
 
-Estas celdas de $128\times128$ o $192\times192$ píxeles se combinan para formar un mosaico de predicciones. Para mitigar los artefactos que pueden surgir en los bordes de estas celdas, estas se solapan ligeramente. Se toman pasos de 100 y 112 píxeles para predicciones de 128 y 172 y 180 píxeles para predicciones de 192, se combinan mosaicos de cada tamaño de paso por separado, y finalmente se toma un promedio de ambos mosaicos para generar una máscara de predicciones. El diagrama \todo[inline]{make diagram?} muestra el procedimiento de forma visual.
+Estas celdas de $128\times128$ o $192\times192$ píxeles se combinan para formar un mosaico de predicciones. Para mitigar los artefactos que pueden surgir en los bordes de estas celdas, estas se solapan ligeramente. Se toman pasos de 64 píxeles para predicciones de 128 y 96 píxeles para predicciones de 192, se combinan mosaicos de cada tamaño de paso por separado, y finalmente se toma un promedio de ambos mosaicos para generar una máscara de predicciones. El diagrama \todo[inline]{make diagram?} muestra el procedimiento de forma visual.
+
+El tamaño de lote fue elegido por una limitación de memoria en la máquina 1, pero también se observó que un tamaño de lote mayor afecta negativamente al modelo resultante, inclusive en la máquina 2 con suficiente memoria.
 
 \subsubsection{FCN}
 
@@ -235,7 +237,7 @@ En adición a las conexiones entre niveles adyacentes, existen conexiones entre 
 
 Cada nivel tiene un tamaño que describe la cantidad de filtros, y debe ser el doble que el nivel anterior o la mitad del nivel siguiente. Cada nivel disminuye y aumenta la resolución de la imagen por un factor de 4, o sea un factor de 2 por cada dimensión.
 
-Los hiperparámetros utilizados y los resultados de los experimentos se visualizan en el cuadro \ref{table:unet}.
+Los hiperparámetros utilizados y los resultados de los experimentos se visualizan en los cuadros \ref{table:unet1} y \ref{table:unet2}.
 
 \begin{table}[ht!]
     \centering
@@ -265,19 +267,57 @@ Los hiperparámetros utilizados y los resultados de los experimentos se visualiz
         \hline
 
     \end{tabular}
-    \caption{Hiperparámetros y resultados de la arquitectura U-Net. Entrenamiento en máquina 1.}
-    \label{table:unet}
+    \caption{Hiperparámetros y resultados de la arquitectura U-Net para imágenes de $128\times128$. Entrenamiento en máquina 1.}
+    \label{table:unet1}
+\end{table}
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{ |>{\bf \columncolor{LightBlue}} c|c|c|c|c| }
+        \hline
+
+        \rowcolor{LightBlue}
+        Versión & \bf Canales de entrada & \bf Niveles & \bf Mejor época & \bf Pérdida en prueba \\
+        \hline
+
+        7 & Todos (11) & 64, 128, 256, 512 & 11 & 0.4385 \\
+        \hline
+
+        8 & Todos (11) & 64, 128, 256, 512 & 6 & 0.4138 \\
+        \hline
+
+        9 & Todos (11) & 32, 64, 128, 256, 512 & 12 & 0.4205 \\
+        \hline
+
+        10 & Todos (11) & 32, 64, 128, 256, 512 & 12 & 0.4205 \\
+        \hline
+
+        11 & Todos (11) & 64, 128, 256, 512, 1024 & 12 & 0.4250 \\
+        \hline
+
+        12 & Todos (11) & 64, 128, 256, 512, 1024 & 16 & 0.4172 \\
+        \hline
+
+    \end{tabular}
+    \caption{Hiperparámetros y resultados de la arquitectura U-Net para imágenes de $192\times192$. Entrenamiento en máquina 2.}
+    \label{table:unet2}
 \end{table}
 
 \begin{figure}
     \centering
-    \subfloat[\centering Tesela T20KNC]{\includegraphics[width=0.4\textwidth]{img/T20KNC_large.png}}
-    \quad
-    \subfloat[\centering U-Net v. 1 y 2]{\includegraphics[width=0.4\textwidth]{img/unet-small.png}}
+    \subfloat[\centering Tesela T20KNC]{\includegraphics[width=0.5\textwidth]{img/T20KNC_large.png}}
 
-    \subfloat[\centering U-Net v. 3 y 4]{\includegraphics[width=0.4\textwidth]{img/unet-medium.png}}
+    \subfloat[\centering U-Net v. 1 y 2]{\includegraphics[width=0.3\textwidth]{img/unet-1_1-2.png}}
     \quad
-    \subfloat[\centering U-Net v. 5 y 6]{\includegraphics[width=0.4\textwidth]{img/unet-large.png}}
+    \subfloat[\centering U-Net v. 3 y 4]{\includegraphics[width=0.3\textwidth]{img/unet-1_3-4.png}}
+    \quad
+    \subfloat[\centering U-Net v. 5 y 6]{\includegraphics[width=0.3\textwidth]{img/unet-1_5-6.png}}
+
+    \subfloat[\centering U-Net v. 7 y 8]{\includegraphics[width=0.3\textwidth]{img/unet-2_7-8.png}}
+    \quad
+    \subfloat[\centering U-Net v. 9 y 10]{\includegraphics[width=0.3\textwidth]{img/unet-2_9-10.png}}
+    \quad
+    \subfloat[\centering U-Net v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/unet-2_11-12.png}}
 
     \caption{Máscaras de predicción de paleocauces de los modelos U-Net}
     \label{fig:unet}
@@ -285,27 +325,29 @@ Los hiperparámetros utilizados y los resultados de los experimentos se visualiz
 
 La pérdida de estos modelos es en promedio menor que la pérdida promedio de los modelos anteriores, y las máscaras generadas son mucho más detalladas. Estas máscaras se muestran en la figura \ref{fig:unet}.
 
-Entre las tres arquitecturas, la implementada por las versiones 3 y 4 producen las predicciones más parecidas a las máscaras de entrenamiento, con grandes áreas incluidas que las demás arquitecturas no capturan. La arquitectura menos compleja, de las versiones 1 y 2, produce predicciones cuyas áreas son menos extensas, pero cuyos bordes son más pronunciados. El peor resultado es el que producen las versiones 5 y 6, con una máscara mucho más ruidosa que la de las versiones 1 y 2, y cubriendo un menor área que la de las versiones 3 y 4.
+Observando los resultados producidos por los modelos entrenados, es evidente que el análisis de imágenes más pequeñas produce resultados más limitados, en donde solamente áreas con un contraste más pronunciado son detectadas como áreas de paleocauces, mientras que el análisis de imágenes que cubren un área más extensa producen predicciones más similares a las máscaras de entrenamiento. Las versiones 11 y 12 son las únicas que producen una predicción sustancial para los paleocauces a lo largo del margen izquierdo de la imagen.
 
-\todo{try predictions with the same tile from a different day}
+Una ventaja de las versiones 1-6 es que sus predicciones son más consistentes, con las versiones 7-12 dependiendo mucho más de la composición de los niveles.
 
 \subsubsection{Predicción en conjunto}
 
-Un problema con las máscaras generadas por los modelos es la cantidad de artefactos y diferencias en los resultados, aun con la misma arquitectura y la misma distribución de datos de entrenamiento. Por esta razón, también experimentamos con la creación de máscaras usando un conjunto de modelos, cuyos resultados fueron promediados para generar una sola máscara. Esto permite generar mapas de calor más consistentes, en los cuales los puntos ciegos de un modelo pueden ser cubiertos por los puntos fuertes de otro.
+Un problema con las máscaras generadas por los modelos es la cantidad de artefactos y diferencias en los resultados, aun con la misma arquitectura y la misma distribución de datos de entrenamiento. Por esta razón, también experimentamos con la creación de máscaras usando un conjunto de modelos, cuyos resultados fueron adicionados para generar una sola máscara. Esto permite generar mapas de calor más consistentes, en los cuales los puntos ciegos de un modelo pueden ser cubiertos por los puntos fuertes de otro.
 
 Aun con las diferencias entre los modelos, es común encontrar zonas en las cuales ningún modelo predice ocurrencias de paleocauces, mientras que en otras zonas la mayoría predice positivamente con alta certeza.
 
 \begin{figure}
     \centering
-    \subfloat[\centering Tesela T20KNC]{\includegraphics[width=0.4\textwidth]{img/T20KNC_large.png}}
-
     \subfloat[\centering Combinación FarSeg]{\includegraphics[width=0.4\textwidth]{img/farseg-combined.png}}
     \quad
     \subfloat[\centering Tesela T20KNC con máscara combinada FarSeg]{\includegraphics[width=0.4\textwidth]{img/farseg-combined-screen.png}}
 
-    \subfloat[\centering Combinación U-Net]{\includegraphics[width=0.4\textwidth]{img/unet-combined.png}}
+    \subfloat[\centering Combinación U-Net 1-6]{\includegraphics[width=0.4\textwidth]{img/unet-combined.png}}
     \quad
-    \subfloat[\centering Tesela T20KNC con máscara combinada U-Net]{\includegraphics[width=0.4\textwidth]{img/unet-combined-screen.png}}
+    \subfloat[\centering Tesela T20KNC con máscara combinada U-Net 1-6]{\includegraphics[width=0.4\textwidth]{img/unet-combined-screen.png}}
+
+    \subfloat[\centering Combinación U-Net 7-12]{\includegraphics[width=0.4\textwidth]{img/unet-combined-large.png}}
+    \quad
+    \subfloat[\centering Tesela T20KNC con máscara combinada U-Net 7-12]{\includegraphics[width=0.4\textwidth]{img/unet-combined-large-screen.png}}
 
     \caption{Máscaras de predicción producidas por una combinación de las predicciones anteriores}
     \label{fig:combined}
@@ -313,4 +355,4 @@ Aun con las diferencias entre los modelos, es común encontrar zonas en las cual
 
 La figura \ref{fig:combined} muestra máscaras generadas por una combinación de las predicciones de varios modelos, presentando predicciones más completas.
 
-Sin embargo, se pueden observar varias áreas en las cuales parecen ocurrir paleocauces, pero en donde los modelos no predicen ocurrencias. Esto se puede atribuir a una cantidad limitada de datos de entrenamiento de alta calidad, lo que sería una forma de expandir sobre estos resultados. \todo{this belongs in discussion}
+\todo[inline]{add section about argentina and neuland predictions in another subsection}
