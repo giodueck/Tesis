@@ -23,3 +23,6 @@ estado-del-arte/
 *.out
 *.bcf
 *-SAVE-ERROR
+
+# Misc
+*.png~

@@ -4,12 +4,25 @@ En esta sección describimos la forma de la que se realizó el estudio. Se descr
 
 \subsection{Área de estudio}
 
-El área de estudio incluye al Parque Nacional Médanos del Chaco en la zona noroeste del Chaco Paraguayo, en los departamentos de Boquerón y Alto Paraguay, y al abanico aluvial del río Pilcomayo, en las fronteras con Bolivia y Argentina.
+El área de estudio incluye al Parque Nacional Médanos del Chaco en la zona noroeste del Chaco Paraguayo, en los departamentos de Boquerón y Alto Paraguay, y al Abanico Aluvial del río Pilcomayo, en las fronteras con Bolivia y Argentina.
 
-Los alrededores del Parque Nacional son las áreas de mayor interés, ya que forman parte del área ocupada por una serie de paleocauces originando en el río Parapeti en Bolivia. Sin embargo, el abanico aluvial del Pilcomayo representa un extenso sistema de paleocauces que son más prominentes. Por ende, el área del Pilcomayo puede servir de zona de pruebas de técnicas de análisis de datos antes de aplicarlos a las imágenes del Chaco central.
+Los alrededores del Parque Nacional son las áreas de mayor interés, ya que forman parte del área ocupada por una serie de paleocauces originando en el río Parapeti en Bolivia. Sin embargo, el abanico aluvial del Pilcomayo representa un extenso sistema de paleocauces que son más prominentes. Por ende, el área del Pilcomayo puede servir de zona de pruebas de técnicas de análisis de datos antes de aplicarlos a las imágenes del Chaco central. Esta última abarca la región de la triple frontera entre Paraguay, Bolivia y Argentina. La figura \ref{fig:4} incluye todas las zonas descritas.
 
-\todo{map figures} % insert images of map with both areas highlighted
-% get from OSM layer in copernicus browser
+En el mapa de Regiones y Subregiones de Humedales del Paraguay en la figura \ref{fig:5} , elaborado por la Ex Secretaria del Ambiente (SEAM) del Paraguay, actualmente Ministerio del Ambiente y Desarrollo Sostenible (MADES), las áreas de estudio se ubican en las regiones PY01 y PY02, los Grandes Abanicos Aluviales del Chaco de la Cuenca del Bajo Chaco, y PY03, Humedales de ríos senescente y temporarios. Estas son las regiones de colores celeste, amarillo y rojo en el Chaco, respectivamente.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/osm-area-estudio.png}
+    \caption{Parque Nacional Médanos del Chaco (verde) y Abanico Aluvial del Pilcomayo (azul). Elaboración propia con el mapa de OpenStreetMap. \cite{OpenStreetMap}}
+    \label{fig:4}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{img/mapa-humedales.png}
+    \caption{Mapa de Regiones y Subregiones de Humedales de Paraguay. \cite{seam-2015}}
+    \label{fig:5}
+\end{figure}
 
 \subsection{Estrategia de procesamiento de datos}
 \subsubsection{Herramientas utilizadas}
@@ -57,7 +70,10 @@ Además de los datos de las imágenes, las teselas incluyen metadatos representa
 Una vez establecida el área de estudio, se seleccionan las teselas relevantes y se agregan en un conjunto de datos de entrenamiento y de prueba. Como el objetivo es una detección robusta sin importar la temporada, se seleccionan datos de varias fechas distribuidas a lo largo de los años.
 
 Ya que el tiempo de revisita de los satélites Sentinel-2 es corto, es posible ser exigente con la calidad de las imagenes. En este caso, solo se utilizaron imágenes con una cobertura de nubes no mayor que 10\%, lo cual el navegador de imágenes Copernicus Browser permite filtrar.
-\todo{explain rain season impact}
+
+Dado que el nivel de humedad debido a precipitaciones impacta la información recolectada por los sensores, es importante prestar atención a las temporadas de lluvias y sequías en las zonas estudiadas. Por lo general, la temporada de lluvias en el Chaco abarca la primavera y el verano, meses en los cuales las lluvias pueden hacer difícil reconocer las características propias del suelo. Preferimos, entonces, el uso de imágenes de entre abril y octubre, pero sin excluir totalmente imágenes de otros meses.
+
+Por otro lado, sequías severas pueden tener un efecto similar y opuesto, ocultando áreas típicamente húmedas. Una sequía prolongada se dio entre los años 2020 y 2022 \cite{elnacional-2022}, e imágenes de estos años reflejan una correspondiente falta de agua, por lo que las imágenes de estos años no son adecuadas para este estudio.
 
 Las imágenes utilizadas se identifican por su número de tesela, asignado por Copernicus, y la fecha del sobrevuelo. Las imágenes utilizadas se listan en el cuadro \ref{table:tiles}.
 
@@ -72,9 +88,7 @@ Las imágenes utilizadas se identifican por su número de tesela, asignado por C
 
         T20KNA       &
         \begin{tabular}[c]{@{}l@{}}
-            2015/12/30\\
             2016/04/28\\
-            2022/08/10\\
             2024/10/03\\
             2025/01/16\\
             2025/06/20\\
@@ -87,7 +101,6 @@ Las imágenes utilizadas se identifican por su número de tesela, asignado por C
 
         T20KNB       &
         \begin{tabular}[c]{@{}l@{}}
-            2022/08/10\\
             2024/10/03\\
             2025/01/16\\
             2025/06/20\\
@@ -110,7 +123,6 @@ Las imágenes utilizadas se identifican por su número de tesela, asignado por C
         T20KPC       &
         \begin{tabular}[c]{@{}l@{}}
             2016/08/26\\
-            2022/08/10\\
             2024/10/03\\
             2025/01/16\\
             2025/05/13\\
@@ -121,31 +133,46 @@ Las imágenes utilizadas se identifican por su número de tesela, asignado por C
         \raisebox{-1cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T20KPC.jpg}} \\
         \hline
 
+        T20KQA       &
+        \begin{tabular}[c]{@{}l@{}}
+            2025/09/10\\
+        \end{tabular} &
+        Ciudad de Mariscal Estigarribia y alrededores. &
+        Prueba &
+        \raisebox{-1.2cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T20KQA.jpg}} \\
+        \hline
+
         T20KQV       &
         \begin{tabular}[c]{@{}l@{}}
-            2015/09/08\\
-            2025/07/22\\
-            2025/10/20\\
+            2024/08/01\\
         \end{tabular} &
         Ciudad de Neuland, aldeas de la colonia Neuland. &
         Prueba &
         \raisebox{-1.2cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T20KQV.jpg}} \\
         \hline
 
-        T20KRA       &
+        T21JTL       &
         \begin{tabular}[c]{@{}l@{}}
-            2025/10/20\\
+            2022/08/14\\
         \end{tabular} &
-        Ciudades Filadelfia y Loma Plata, aldeas de las colonias Fernheim y Menno. &
+        General San Martín y alrededores, Chaco Argentino. Rio Bermejo. &
         Prueba &
-        \raisebox{-1.2cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T20KRA.jpg}} \\
+        \raisebox{-1.2cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T21JTL.jpg}} \\
+        \hline
+
+        T21JUL       &
+        \begin{tabular}[c]{@{}l@{}}
+            2025/11/26\\
+        \end{tabular} &
+        Desembocadura del Rio Bermejo en el Rio Paraguay, frontera Argentina-Paraguay. &
+        Prueba &
+        \raisebox{-1.2cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T21JUL.jpg}} \\
         \hline
 
     \end{tabular}
     \caption{Teselas utilizadas y fechas de sobrevuelo}
     \label{table:tiles}
 \end{table}
-\todo{update}
 
 \subsubsection{Unificación y preparación de datos}
 
