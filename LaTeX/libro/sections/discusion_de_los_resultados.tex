@@ -1,6 +1,28 @@
 \section{Discusión de los Resultados}
 \todo{discusion de los resultados}
 
+% Conclusion:
+% - fcn models not appropriate for this task, farseg shows promise and probably needs better training data
+% - unet very good in relation to the quality of the training data
+% - since training data is best-effort, results are not perfect or even the best possible with the architecture
+% - results useful for a first review of an area
+% Strengths:
+% - short training time
+% - simple architectures
+% - simple training data setup
+% - good for active/humid palaeochannels
+% - decent for colmatado palaeochannels
+% Limitations:
+% - noisy in urban/cultivated areas
+% - very dependent on time of year: rainy seasons and droughts both have very negative impacts
+% - tipically a result model good for active pc is bad for colmatado, and vice-versa
+% Possible improvements:
+% - 192 has nicer results than 128, larger could be even better
+% - 60m images were used here, larger images could make 20m or 10m resolution useful as well
+% - using professional cards or higher end cosumer hardware will lift some limitations related to memory and video-memory
+% - training masks can still be improved, will likely eliminate some of the noisy output and make results more consistent
+% - u-nets have variants, some are sure to improve results, e.g. unet++
+
 \subsection{Conclusión}
 
 \subsection{Recomendaciones}
