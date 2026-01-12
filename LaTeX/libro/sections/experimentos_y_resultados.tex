@@ -378,7 +378,9 @@ Los hiperparámetros utilizados y los resultados de los experimentos se visualiz
 
 La pérdida de estos modelos es en promedio menor que la pérdida promedio de los modelos anteriores, y las máscaras generadas son mucho más detalladas. Estas máscaras se muestran en la figura \ref{fig:unet}.
 
-Observando los resultados producidos por los modelos entrenados, es evidente que el análisis de imágenes más pequeñas produce resultados más limitados, en donde solamente áreas con un contraste más pronunciado son detectadas como áreas de paleocauces, mientras que el análisis de imágenes que cubren un área más extensa producen predicciones más similares a las máscaras de entrenamiento. Las versiones 11 y 12 son las únicas que producen una predicción sustancial para los paleocauces a lo largo del margen izquierdo de la imagen.
+Observando los resultados producidos por los modelos entrenados, es evidente que el análisis de imágenes más pequeñas produce predicciones más limitadas, en donde solamente áreas con un contraste más pronunciado son designadas como áreas de paleocauces, mientras que el análisis de imágenes que cubren un área más extensa producen predicciones más similares a las máscaras de entrenamiento. Por ejemplo, las versiones 11 y 12 son las únicas que producen una predicción sustancial para los paleocauces a lo largo del margen izquierdo de la imagen.
+
+Las versiones 9 y 10 producen predicciones muy limitadas para esta zona, que presenta características de paleocauces colmatados. Aquellas zonas, en las que estas versiones producen predicciones significantes, son húmedas, sugeriendo un posible sesgo hacia los paleocauces activos. Aun así, los resultados de estas versiones son claramente limitados, posiblemente debido a su arquitectura que presenta un nivel inicial de 32 capas en lugar de 64.
 
 Una ventaja de las versiones 1-6 es que sus predicciones son más consistentes, con las versiones 7-12 dependiendo mucho más de la composición de los niveles.
 
@@ -408,9 +410,7 @@ Aun con las diferencias entre los modelos, es común encontrar zonas en las cual
 
 La figura \ref{fig:combined} muestra máscaras generadas por una combinación de las predicciones de varios modelos, presentando predicciones más completas.
 
-\todo[inline]{add section about argentina and neuland predictions in another subsection}
-\todo[inline]{Add plenty of graphics}
-\todo[inline]{Explain that colmatado paleochannels are important in the Chaco, and why. Maybe focus on that in conclusion and in marco teorico}
+\todo[inline]{add section about argentina and mariscal predictions in another subsection}
 
 \subsection{Comparación con trabajos anteriores}
 
@@ -426,4 +426,47 @@ El área de estudio del trabajo se encuentra en el Departamento de Libertador Sa
 
 Cabe destacar que las ubicaciones en las cuales se reportan pozos y sondeos se encuentran todas al sur del río Bermejo. En esta zona, se pueden observar una serie de paleocauces que se extienden en paralelo al río, en su mayoría siendo paleocauces activos con mucha vegetación y una gran cantidad de lagunas en meandros de ríos, es decir, caminos sinusoidales creados por un río.
 
-Creando máscaras de predicción y combinándolas con mapas del área, podemos comprobar si el modelo predice que estos pozos y sondeos se realizaron en zonas de ocurrencia de paleocauces. \todo{graphics}
+Creando máscaras de predicción y combinándolas con mapas del área, podemos comprobar si el modelo predice que estos pozos y sondeos se realizaron en zonas de ocurrencia de paleocauces. Los mapas de los alrededores de varias zonas estudiadas y las predicciones superpuestas sobre los mismos se encuentran en la figura \ref{fig:inti}, en donde zonas blancas son aquellas en las que los modelos predicen ocurrencia de paleocauces.
+
+Las áreas incluidas se escojieron debido a la presencia de pozos en la cercanía de los sondeos, lo cual es un buen indicador de la posible ocurrencia de paleocauces en la zona. Estas son: Localidad Selvas del Río de Oro - Municipio La Eduviges correspondiente mapa (a) en la figura \ref{fig:inti}, Localidad Laguna Limpia correspondiente al mapa (d), Paraje Buena Vista - Predio Educacional EFA correspondiente al mapa (g), y Paraje 10 de Mayo correspondiente al mapa (j). Una de las zonas descritas en la investigación no fue sondeada, sin embargo contiene varios pozos utilizados por la comunidad en la Cuarta Legua 14, correspondiente al mapa (m) en la figura \ref{fig:inti}. Por esta razón, decidimos incluirla también.
+
+Todas las localidades caen dentro de áreas en donde los modelos versiones 11 y 12, descritos en la tabla \ref{table:unet2}, predicen ocurrencias de paleocauces. Sin embargo, las versiones 9 y 10 predicen que solo dos de las cinco áreas sondeadas se encuentran sobre paleocauces, una se encuentra en la cercanía de una predicción significante, y las dos restantes se encuentran lejos de predicciones significantes.
+
+Mientras que las versiones 9 y 10 parecen predecir positivamente sólo áreas muy húmedas, las versiones 11 y 12 son mucho más generales. Como
+
+\begin{figure}
+    \centering
+
+    \subfloat[\centering SEVs izq. a der.: Hermelinda González (HG), Romina Aveiro (RA), Juana Amarilla (JA)]{\includegraphics[width=0.3\textwidth]{img/inti-ja_ra_hg.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{img/inti-ja_ra_hg-9-10.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/inti-ja_ra_hg-11-12.png}}
+
+    \subfloat[\centering SEVs izq. a der.: Teófilo Cabrera (TC), Familia Zapata (Z)]{\includegraphics[width=0.3\textwidth]{img/inti-tc_z.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{img/inti-tc_z-9-10.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/inti-tc_z-11-12.png}}
+
+    \subfloat[\centering SEV Predio Educacional EFA]{\includegraphics[width=0.3\textwidth]{img/inti-efa.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{img/inti-efa-9-10.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/inti-efa-11-12.png}}
+
+    \subfloat[\centering SEV Paraje 10 de Mayo]{\includegraphics[width=0.3\textwidth]{img/inti-p10m.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{img/inti-p10m-9-10.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/inti-p10m-11-12.png}}
+
+    \subfloat[\centering Pozo Cuarta Legua 14]{\includegraphics[width=0.3\textwidth]{img/inti-l14.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{img/inti-l14-9-10.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/inti-l14-11-12.png}}
+
+    \caption{Predicciones en el área de estudio de las investigaciones del INTI en la provincia de Chaco, Argentina.}
+    \label{fig:inti}
+\end{figure}
