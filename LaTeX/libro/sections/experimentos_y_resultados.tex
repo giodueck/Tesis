@@ -95,7 +95,7 @@ Las máscaras utilizadas para el entrenamiento, es decir, aquellas correspoindie
 
 \subsection{Partición de datos de entrenamiento}
 
-\todo{diagram of $random_grid_cell_assignment$}
+% \todo{diagram of $random_grid_cell_assignment$}
 
 El conjunto de datos en PyTorch también se conoce como {\it Dataset}, y el componente que disponibiliza estos datos como {\it DataLoader}. Lightning provee una abstracción, el {\it DataModule}, que abstrae al Dataset y permite proveer DataLoaders distintos para las tareas de entrenamiento, validación, prueba e inferencia.
 
@@ -106,7 +106,7 @@ Las celdas en las cuales se dividen las imágenes no se solapan, y la estrategia
 Cada DataLoader produce imágenes de 128$\times$128 o 192$\times$192 píxeles recortadas de las celdas asignadas al DataLoader, correspondiente a áreas de 7680m$\times$7680m y 11520m$\times$11520m respectivamente. Las imágenes de cada tesela tienen dimensiones de 1830$\times$1830 píxeles de 60m$\times$60m, abarcando un área de $109'800$m por lado, o alrededor de 110km. La grilla en la que se dividen es de seis celdas de largo, abarcando cada celda un área cuadrada de 305 píxeles de largo, lo que permite producir 4 imágenes de validación o prueba por celda.
 
 \subsection{Entrenamiento y validación}
-\todo{clasificacion} % explain setup and failure, or only in discusion?
+% \todo{clasificacion} % explain setup and failure, or only in discusion?
 
 Para la tarea de segmentación, se utilizaron tres arquitecturas bien establecidas. Las arquitecturas proveídas por TorchGeo utilizadas fueron Foreground-Aware Relation Network, o FarSeg \cite{zheng2020foregroundawarerelationnetworkgeospatial}, y una red enteramente convolucional de cinco capas conocida simplemente como FCN por sus siglas en inglés, Fully-convolutional Network. Adicionalmente se utilizó una implementación de U-Net, una red enteramente convolucional muy conocida por sus aplicaciones en el campo de la medicina, pero tambien muy capaz en imágenes de teledetección. \cite{ronneberger2015unetconvolutionalnetworksbiomedical, khryashchev2018}
 
@@ -425,19 +425,54 @@ Dos investigaciones son de gran interés, la primera por parte del Instituto Nac
 
 \subsubsection{Provincia de Chaco, Argentina}
 
-Los estudios geoeléctricos del INTI en la provincia de Chaco en Argentina, realizados en el año 2014, tuvieron como objetivos la transferencia de conocimientos especiales en lo referente a captación de águas subterráneas y la evaluación su disponibilidad mediante sondeos eléctricos verticales (SEV). El trabajo incluye la ubicación de estos sondeos, además de algunos pozos utilizados por miembros de la comunidad. \cite{inti-2015}
+Los estudios geoeléctricos del INTI en la provincia de Chaco en Argentina se detallan en \enquote{Estudios Geoeléctricos En El Departamento Libertador San Martín - Provincia De Chaco}. Realizados en el año 2014, tuvieron como objetivos la transferencia de conocimientos especiales en lo referente a captación de águas subterráneas y la evaluación su disponibilidad mediante sondeos eléctricos verticales (SEV). El trabajo incluye la ubicación de estos sondeos, además de algunos pozos utilizados por miembros de la comunidad. \cite{inti-2015}
 
 El área de estudio del trabajo se encuentra en el Departamento de Libertador San Martín, y en este los municipios de General San Martín, Laguna Limpia, La Eduvigis y Pampa del Indio. En estos municipios se realizaron sondeos y encuestas en los predios de varias familias de cada comunidad.
 
 Cabe destacar que las ubicaciones en las cuales se reportan pozos y sondeos se encuentran todas al sur del río Bermejo. En esta zona, se pueden observar una serie de paleocauces que se extienden en paralelo al río, en su mayoría siendo paleocauces activos con mucha vegetación y una gran cantidad de lagunas en meandros de ríos, es decir, caminos sinusoidales creados por un río.
 
-Creando máscaras de predicción y combinándolas con mapas del área, podemos comprobar si el modelo predice que estos pozos y sondeos se realizaron en zonas de ocurrencia de paleocauces. Los mapas de los alrededores de varias zonas estudiadas y las predicciones superpuestas sobre los mismos se encuentran en la figura \ref{fig:inti}, en donde zonas blancas son aquellas en las que los modelos predicen ocurrencia de paleocauces.
+Creando máscaras de predicción y combinándolas con mapas del área, podemos comprobar si el modelo predice que estos pozos y sondeos se realizaron en zonas de ocurrencia de paleocauces. Los mapas de los alrededores de varias zonas estudiadas y las predicciones superpuestas sobre los mismos se encuentran en la figura \ref{fig:inti}, en donde zonas blancas son aquellas en las que los modelos predicen ocurrencia de paleocauces. Los mapas corresponden a las teselas T20JQS, T21JTL, T21JTM y T21JUL en la tabla \ref{table:tiles}.
 
-Las áreas incluidas se escojieron debido a la presencia de pozos en la cercanía de los sondeos, lo cual es un buen indicador de la posible ocurrencia de paleocauces en la zona. Estas son: Localidad Selvas del Río de Oro - Municipio La Eduviges correspondiente mapa (a) en la figura \ref{fig:inti}, Localidad Laguna Limpia correspondiente al mapa (d), Paraje Buena Vista - Predio Educacional EFA correspondiente al mapa (g), y Paraje 10 de Mayo correspondiente al mapa (j). Una de las zonas descritas en la investigación no fue sondeada, sin embargo contiene varios pozos utilizados por la comunidad en la Cuarta Legua 14, correspondiente al mapa (m) en la figura \ref{fig:inti}. Por esta razón, decidimos incluirla también.
+Las áreas incluidas se escojieron debido a la presencia de pozos en la cercanía de los sondeos, lo cual es un buen indicador de la posible ocurrencia de paleocauces en la zona. Estas se listan en la tabla \ref{table:inti}.
 
-Todas las localidades caen dentro de áreas en donde los modelos versiones 11 y 12, descritos en la tabla \ref{table:unet2}, predicen ocurrencias de paleocauces. Sin embargo, las versiones 9 y 10 predicen que solo dos de las cinco áreas sondeadas se encuentran sobre paleocauces, una se encuentra en la cercanía de una predicción significante, y las dos restantes se encuentran lejos de predicciones significantes.
+Todas las localidades caen dentro de áreas en donde los modelos versiones 11 y 12, descritos en la tabla \ref{table:unet2}, predicen ocurrencias de paleocauces. Sin embargo, las versiones 9 y 10 predicen que solo dos de las cinco áreas sondeadas se encuentran sobre paleocauces, una se encuentra en la cercanía de una predicción significante, y las dos restantes se encuentran lejos de predicciones significantes. Ya que las predicciones de las versiones 7 y 8 son muy similares a las de las versiones 11 y 12 en las zonas de los sondeos, no las incluimos en la figura \ref{fig:inti}.
 
 Mientras que las versiones 9 y 10 parecen predecir positivamente sólo áreas muy húmedas, las versiones 11 y 12 son mucho más generales. Como
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{ |c|c|l|l| }
+        \hline
+
+        \rowcolor{LightBlue}
+        Tipo & Coordenadas & Lugar & Predio \\
+        \hline
+
+        SEV & 26°47'07.7''S; 58°57'59.7''W & Selvas del Río de Oro & Juana Amarilla \\
+        \hline
+
+        SEV & 26°48'07.0''S; 58°58'42.2''W & Selvas del Río de Oro & Hermelinda González \\
+        \hline
+
+        SEV & 26°47'57.7''S; 58°58'17.4''W & Selvas del Río de Oro & Romina Aveiro \\
+        \hline
+
+        SEV & 26°31'04.1''S; 59°40'44.6''W & Laguna Limpia & Familia Zapata \\
+        \hline
+
+        SEV & 26°30'52.5''S; 59°13'33.2''W & Paraje Buena Vista & Predio Educativo - EFA \\
+        \hline
+
+        SEV & 25°49'05.0''S; 60°04'36.0''W & Pampa del Indio & Parador 1° de Mayo \\
+        \hline
+
+        Pozo & 26°03'08.8''S; 59°53'19.5''W & Cuarta legua 14 & Comunidad QOM \\
+        \hline
+
+    \end{tabular}
+    \caption{Algunas de las localidades analizadas en el estudio. \cite{inti-2015}}
+    \label{table:inti}
+\end{table}
 
 \begin{figure}
     \centering
@@ -460,7 +495,7 @@ Mientras que las versiones 9 y 10 parecen predecir positivamente sólo áreas mu
     \qquad
     \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/inti-efa-11-12.png}}
 
-    \subfloat[\centering SEV Paraje 10 de Mayo]{\includegraphics[width=0.3\textwidth]{img/inti-p10m.png}}
+    \subfloat[\centering SEV Paraje 1° de Mayo]{\includegraphics[width=0.3\textwidth]{img/inti-p10m.png}}
     \qquad
     \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{img/inti-p10m-9-10.png}}
     \qquad
@@ -474,4 +509,91 @@ Mientras que las versiones 9 y 10 parecen predecir positivamente sólo áreas mu
 
     \caption{Predicciones en el área de estudio de las investigaciones del INTI en la provincia de Chaco, Argentina.}
     \label{fig:inti}
+\end{figure}
+
+\subsubsection{Distrito de Mariscal Estigarribia}
+
+La investigación realizada en Mariscal Estigarribia \enquote{Análisis De Recursos Hídricos Para El Aprovechamiento Múltiple En La Ciudad De Mariscal Estigarribia Y Zona Periurbana, Departamento Boquerón}, como parte de un proyecto de la organización WWF, tiene como objetivo el análisis de recursos hídricos en la ciudad y en la zona periurbana. El acuífero principal a investigar es el Sistema Acuífero Paleocauce (SAP), conformado por el sistema de paleocauces en el Chaco central. Fuera del área de trabajo, un segundo acuífero es accesible mediante pozos profundos, el Sistema Acuífero Yrendá. \cite{garcia-2021}
+
+Como parte del análisis, se reporta una lista de pozos en la zona de trabajo y sus alrededores. De esta lista se seleccionan diez pozos para una red de monitoreo de calidad de agua, los cuales se encuentran listados con sus coordenadas en sistema de coordenadas universal transversal de Mercator (UTM por sus siglas en inglés) en la tabla \ref{table:mariscal}. Solo uno de estos pozos, el pozo número 12, no se encuentra en la zona estudiada, pero se selecciona debido a la alta calidad del agua que provee, siendo este un pozo profundo perteneciendo al Acuífero profundo Yrendá.
+
+En esta zona, ya que las predicciones de las versiones 9 y 10 de los modelos son mínimas y muy diferentes a las demás, decidimos excluirlas. Esto se debe potencialmente a la humedad reducida del suelo en esta región en contraste con las imágenes de la provindia de Chaco en Argentina, para la cual las predicciones de estos modelos sí son significantes.
+
+Los mapas de los pozos y las predicciones superpuestas se encuentran en la figura \ref{fig:mariscal}. Corresponden a las teselas T20KPA y T20KQA referenciadas en la tabla \ref{table:tiles}.
+
+La mayoría de los pozos se predicen correctamente como ubicados en paleocauces. Notablemente, los modelos no predicen paleocauces alrededor del pozo 2, que sin embargo es fácilmente visible en imágenes satelitales. Alrededor del pozo 12, ubicado fuera de cualquier paleocauce, se predice correctamente la ausencia de los mismos.
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{ |>{\bf \columncolor{LightBlue}} c|c|c|c|l|l| }
+        \hline
+
+        \rowcolor{LightBlue}
+        N° de Pozo & X & Y & Z & Lugar & Ubicación \\
+        \hline
+
+        2 & 744775 & 7515442 & 20 & Campo Loa & Aldea Jotoicha \\
+        \hline
+
+        7 & 759018 & 7537734 & 20 & Laguna Negra & Aldea Timoteo \\
+        \hline
+
+        12 & 668178 & 7570260 & 20 & Picada 500 al oeste & Zona Santa Rosa - Austria í Cué \\
+        \hline
+
+        15 & 747201 & 7564109 & 20 & Ciudad de Mariscal & B° Fase 3 Pozo 2 \\
+        \hline
+
+        16 & 747264 & 7564721 & 20 & Ciudad de Mariscal & Sr. Víctor Campuzano \\
+        \hline
+
+        18 & 740384 & 7567062 & 20 & Ciudad de Mariscal & 10 Cué \\
+        \hline
+
+        20 & 747519 & 7563297 & 20 & Ciudad de Mariscal & Sr. Bernardo Castillo Pozo 2 \\
+        \hline
+
+        28 & 745645 & 7562494 & 20 & Ciudad de Mariscal & 3er. Cuerpo ESSAP S.A. \\
+        \hline
+
+        34 & 749747 & 7560233 & 20 & Misión Santa Teresita & B° Santa Lucía \\
+        \hline
+
+        41 & 750331 & 7560065 & 20 & Misión Santa Teresita & B° Santa Cecilia Pozo 1 \\
+        \hline
+
+    \end{tabular}
+    \caption{Pozos seleccionados para la red de monitoreo. Coordenadas X, Y, Z corresponden a coordenadas UTM. \cite{garcia-2021}}
+    \label{table:mariscal}
+\end{table}
+
+\begin{figure}[h!]
+    \centering
+
+    \subfloat[\centering Pozo 2]{\includegraphics[width=0.3\textwidth]{img/wwf-p2.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 7 y 8]{\includegraphics[width=0.3\textwidth]{img/wwf-p2-7-8.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/wwf-p2-11-12.png}}
+
+    \subfloat[\centering Pozo 7]{\includegraphics[width=0.3\textwidth]{img/wwf-p7.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 7 y 8]{\includegraphics[width=0.3\textwidth]{img/wwf-p7-7-8.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/wwf-p7-11-12.png}}
+
+    \subfloat[\centering Pozo 12, ubicado fuera de paleocauces]{\includegraphics[width=0.3\textwidth]{img/wwf-p12.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 7 y 8]{\includegraphics[width=0.3\textwidth]{img/wwf-p12-7-8.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/wwf-p12-11-12.png}}
+
+    \subfloat[\centering De arriba para abajo: Pozos 18, 16, 15, 20, 28, 34, 41]{\includegraphics[width=0.3\textwidth]{img/wwf-p15_16_18_20_28_34_41.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 7 y 8]{\includegraphics[width=0.3\textwidth]{img/wwf-p15_16_18_20_28_34_41-7-8.png}}
+    \qquad
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/wwf-p15_16_18_20_28_34_41-11-12.png}}
+
+    \caption{Predicciones en el área de trabajo del análisis de recursos hídricos en Marical Estigarribia.}
+    \label{fig:mariscal}
 \end{figure}

@@ -133,6 +133,15 @@ Las imágenes utilizadas se identifican por su número de tesela, asignado por C
         \raisebox{-1cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T20KPC.jpg}} \\
         \hline
 
+        T20KPA       &
+        \begin{tabular}[c]{@{}l@{}}
+            2025/09/10\\
+        \end{tabular} &
+        Zona hacia el oeste de la Ciudad de Mariscal Estigarribia. &
+        Prueba &
+        \raisebox{-1.2cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T20KPA.jpg}} \\
+        \hline
+
         T20KQA       &
         \begin{tabular}[c]{@{}l@{}}
             2025/09/10\\
@@ -142,14 +151,14 @@ Las imágenes utilizadas se identifican por su número de tesela, asignado por C
         \raisebox{-1.2cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T20KQA.jpg}} \\
         \hline
 
-        T20KQV       &
-        \begin{tabular}[c]{@{}l@{}}
-            2024/08/01\\
-        \end{tabular} &
-        Ciudad de Neuland, aldeas de la colonia Neuland. &
-        Prueba &
-        \raisebox{-1.2cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T20KQV.jpg}} \\
-        \hline
+        % T20KQV       &
+        % \begin{tabular}[c]{@{}l@{}}
+        %     2024/08/01\\
+        % \end{tabular} &
+        % Ciudad de Neuland, aldeas de la colonia Neuland. &
+        % Prueba &
+        % \raisebox{-1.2cm}{\includegraphics[width=64px,trim=-10px -10px -10px -10px]{img/T20KQV.jpg}} \\
+        % \hline
 
         T20JQS       &
         \begin{tabular}[c]{@{}l@{}}
@@ -206,7 +215,7 @@ Las teselas incluyen máscaras de píxeles erróneos. Como tenemos una gran cant
 
 Una inevitabilidad de las imágenes producidas por Sentinel-2 es la falta de datos de una porción de ciertas teselas. Esta es una consecuencia de la división de imágenes en teselas, algunas de las cuales abarcan los bordes de la franja capturada en un sobrevuelo. Los valores de los píxeles en estas regiones son 0.
 
-Como estas regiones faltantes (pero no erróneas) son sustanciales, dependiendo de la tesela escojida, estos píxeles no se modificaron en las imágenes afectadas. Nuestra expectativa fue que los modelos se adecuarían a este valor, ya que los valores posibles abarcan el rango entre $0$ y $10'000$, pero en imágenes libres de errores, nunca toman valores cercanos a $0$. Un ejemplo de este fenómeno se encuentra en el cuadro \ref{table:tiles}, en el margen izquierdo de la tesela {\it T20KPC}.
+Como estas regiones faltantes (pero no erróneas) son sustanciales, dependiendo de la tesela escojida, estos píxeles no se modificaron en las imágenes afectadas. Nuestra expectativa fue que los modelos se adecuarían a este valor, dado que mientras los valores posibles abarcan el rango entre $0$ y $10'000$, nunca toman valores cercanos a $0$ en imágenes libres de errores. Un ejemplo de este fenómeno se encuentra en el cuadro \ref{table:tiles}, en el margen izquierdo de la tesela {\it T20KPC}.
 
 \subsubsection{Resumen del procesamiento de los datos}
 
