@@ -1,5 +1,4 @@
 \section{Discusión de los Resultados}
-\todo{discusion de los resultados}
 
 \todo[inline]{Explain that colmatado paleochannels are important in the Chaco, and why. Maybe focus on that in conclusion and in marco teorico}
 
@@ -25,10 +24,52 @@
 % - training masks can still be improved, will likely eliminate some of the noisy output and make results more consistent
 % - u-nets have variants, some are sure to improve results, e.g. unet++
 
+En esta sección se presentan las conclusiones obtenidas a partir de los resultados de los experimentos realizados a lo largo de este trabajo Proyecto Final de Carrera. También se discuten recomendaciones para trabajos futuros así como para posibles implementaciones, se detallan las contribuciones del proyecto, y posibilidades para expandir sobre este proyecto en trabajos posteriores.
+
 \subsection{Conclusión}
+
+En el curso de este trabajo se han buscado e implementado métodos de creación de modelos de redes neuronales convolucionales (CNN) para su uso en el análisis de imágenes satelitales. Se consideraron tareas de clasificación y segmentación de imágenes, llegando a la conclusión que la clasificación es inadecuada para la tarea específica de la detección de paleocauces. Se evaluó la viabilidad del uso de varias arquitecturas de modelos CNN y se experimentó con los parámetros de los mismos.
+
+Las imágenes utilizadas cubren rangos temporales a lo largo del año, teniendo en cuenta temporadas de lluvia así como sequías históricas para la selección de imágenes para el entrenamiento y la comprobación de modelos de segmentación. Se encontró un efecto detrimental atribuible a imágenes tomadas dentro de poco tiempo siguiendo precipitaciones. De manera similar, sequías prolongadas también demostraron ser de poco uso para el entrenamiento. Además de filtrar imágenes con demasiada humedad o sequía, el único criterio para determinar si una imagen es apta para el uso con modelos de segmentación fue la cobertura de nubes en la imagen. Ya que el par de satélites Sentinel tienen un tiempo de revisita de alrededor de cinco días, hay una abundancia de imágenes disponibles a escoger.
+
+Por medio de una herramienta desarrollada para este trabajo, Torchbearer, el entrenamiento de modelos se realizó de forma paramétrica, con los modelos resultantes siendo empleados directamente en la creación de mapas de inferencia.
+
+Entre las arquitecturas presentados en el capítulo de Experimentos y Resultados, la menos apta para la tarea de segmentación es el FCN, o red enteramente contectada. Esta arquitectura produce modelos que producen predicciones completamente uniformes.
+
+La arquitectura FarSeg, o Foreground-Aware Relation Network, produjo resultados más prometedores. Mientras que no son predicciones muy significantes, los resultados dependen enteramente de la selección de tres bandas de la imagen. Es posible que una selección diferente a las utilizadas en los experimentos produzca resultados más concretos. Aun así, los mejores resultados de estos modelos produjeron predicciones muy poco extensas.
+
+Una limitación potencial para estas arquitecturas son los datos de entrenamiento, creados en base a un mejor esfuerzo para recrear mapas de paleocauces ya conocidos en el Gran Chaco. Datos de mejor calidad podrían ser lo que hace viable a ambas arquitecturas.
+
+La mejor arquitectura estudiada es U-Net, bien conocida por su capacidad de segmentación de imágenes médicas. Los resultados de estos modelos dependen también de los datos de entrenamiento, aunque parecen producir predicciones más generales. Dado que las imágenes procesadas por esta arquitectura pasan por filtros que reducen la resolución de la imagen, y luego por filtros que sintetizan datos nuevos al aumentar nuevamente la resolución, estos modelos pueden aprender los patrones deseados de forma muy general.
+
+En comparaciones hechas entre trabajos de campo en el Chaco Argentino, algunas versiones de los modelos U-Net lograron una predicción correcta en todas las áreas de sondeos geoeléctricos y pozos. En el Chaco Paraguayo, los modelos predicen correctamente entre ocho y nueve de las localidades de pozos dentro y fuera de paleocauces, de un total de diez. Excluyendo versiones del modelo desproporcionalmente limitadas en su eficacia, esto resulta en una correctitud de entre 80\% y 100\%.
+
+Los modelos producen predicciones para ambos tipos de paleocauces, activos y colmatados. Los paleocauces activos, más fácilmente detectables debido a su alto grado de humedad en la superficie, producen predicciones más fácilmente. Sin embargo, predicciones de paleocauces colmatados en el Chaco Paraguayo son mucho más importantes debido a su capacidad de capturar agua por tiempos prolongados y, por ende, abastecer más consistentemente a las comunidades locales.
 
 \subsection{Recomendaciones}
 
-\subsection{Contribución}
+Una posible mejora se puede alcanzar por medio de la especialización de modelos para cada tipo de paleocauce. La creación de modelos especializados podría necesitar de más datos de entrenamiento, tomadas en el área que corresponde para cada tipo. El Chaco Paraguayo, que presenta un grande sistema de paleocauces colmatados, y el Chaco Argentino, con grandes cantidades de paleocauces activos, proveerían datos de entrenamiento para cada tipo de paleocauce.
+
+Otra posibilidad es el uso de hardware profesional para permitir el análisis de ventanas más grandes y resoluciones más altas que 60 metros.
+
+\subsection{Contribuciones}
+
+Partiendo de las conclusiones en las secciones anteriores, podemos afirmar que alcanzamos los objetivos propuestos para este trabajo PFC. Las contribuciones principales del trabajo son las siguientes:
+
+\begin{itemize}
+    \item El desarrollo de metodologías y herramientas para la creación de modelos de clasificación de uso de suelo a partir de tecnologías bien establecidas en el estado del arte.
+    \item La evaluación de varias arquitecturas de modelos CNN para su uso en tareas de segmentación.
+\end{itemize}
 
 \subsection{Trabajos futuros}
+
+Este trabajo expande el estado del arte en lo referente al uso de modelos CNN en aplicaciones de segmentación y determinación de uso de suelo por medio de imágenes satelitales. Existen varias posibilidades para construir sobre este Proyecto Final de Carrera:
+
+\begin{itemize}
+    \item Implementación y comprobación de la eficacia de más modelos, por ejemplo las variantes más complejas de U-Net.
+    \item La creación de metodologías más rigurosas para la síntesis de conjuntos de datos de entrenamiento.
+    \item Expansión de los modelos para la generación de predicciones de múltiples etiquetas, en lugar de una sola.
+    \item Mejora de resultados de arquitecturas CNN menos complejas, reduciendo el costo y tiempo de entrenamiento e inferencia.
+    \item Trabajos de campo para la exploración de zonas de paleocauces menos estudiados.
+    \item Análisis de datos provenientes de otros proveedores, haciendo uso de un conjunto sensores diferentes.
+\end{itemize}
