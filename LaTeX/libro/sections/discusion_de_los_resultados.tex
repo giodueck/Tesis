@@ -1,7 +1,5 @@
 \section{Discusión de los Resultados}
 
-\todo[inline]{Explain that colmatado paleochannels are important in the Chaco, and why. Maybe focus on that in conclusion and in marco teorico}
-
 % Conclusion:
 % - fcn models not appropriate for this task, farseg shows promise and probably needs better training data
 % - unet very good in relation to the quality of the training data
@@ -40,7 +38,7 @@ La arquitectura FarSeg, o Foreground-Aware Relation Network, produjo resultados 
 
 Una limitación potencial para estas arquitecturas son los datos de entrenamiento, creados en base a un mejor esfuerzo para recrear mapas de paleocauces ya conocidos en el Gran Chaco. Datos de mejor calidad podrían ser lo que hace viable a ambas arquitecturas.
 
-La mejor arquitectura estudiada es U-Net, bien conocida por su capacidad de segmentación de imágenes médicas. Los resultados de estos modelos dependen también de los datos de entrenamiento, aunque parecen producir predicciones más generales. Dado que las imágenes procesadas por esta arquitectura pasan por filtros que reducen la resolución de la imagen, y luego por filtros que sintetizan datos nuevos al aumentar nuevamente la resolución, estos modelos pueden aprender los patrones deseados de forma muy general.
+La mejor arquitectura estudiada es U-Net, bien conocida por su capacidad de segmentación de imágenes médicas. Los resultados de estos modelos dependen también de los datos de entrenamiento, aunque parecen producir predicciones más generales. Dado que las imágenes procesadas por esta arquitectura pasan por filtros que reducen la resolución de la imagen, y luego por filtros que sintetizan datos nuevos al aumentar nuevamente la resolución, estos modelos pueden aprender los patrones deseados de forma muy general, incluso con datos de entrenamiento imperfectos.
 
 En comparaciones hechas entre trabajos de campo en el Chaco Argentino, algunas versiones de los modelos U-Net lograron una predicción correcta en todas las áreas de sondeos geoeléctricos y pozos. En el Chaco Paraguayo, los modelos predicen correctamente entre ocho y nueve de las localidades de pozos dentro y fuera de paleocauces, de un total de diez. Excluyendo versiones del modelo desproporcionalmente limitadas en su eficacia, esto resulta en una correctitud de entre 80\% y 100\%.
 
@@ -50,7 +48,7 @@ Los modelos producen predicciones para ambos tipos de paleocauces, activos y col
 
 Una posible mejora se puede alcanzar por medio de la especialización de modelos para cada tipo de paleocauce. La creación de modelos especializados podría necesitar de más datos de entrenamiento, tomadas en el área que corresponde para cada tipo. El Chaco Paraguayo, que presenta un grande sistema de paleocauces colmatados, y el Chaco Argentino, con grandes cantidades de paleocauces activos, proveerían datos de entrenamiento para cada tipo de paleocauce.
 
-Otra posibilidad es el uso de hardware profesional para permitir el análisis de ventanas más grandes y resoluciones más altas que 60 metros.
+Otra posibilidad es el uso de hardware profesional para permitir el análisis de ventanas más grandes y resoluciones más altas que 60 metros. Dado que los resultados con ventanas de 192 píxeles de lado son mejores que con ventanas de 128, es posible que ventanas aun más amplias produzcan predicciones aun mejores.
 
 \subsection{Contribuciones}
 
@@ -66,8 +64,9 @@ Partiendo de las conclusiones en las secciones anteriores, podemos afirmar que a
 Este trabajo expande el estado del arte en lo referente al uso de modelos CNN en aplicaciones de segmentación y determinación de uso de suelo por medio de imágenes satelitales. Existen varias posibilidades para construir sobre este Proyecto Final de Carrera:
 
 \begin{itemize}
-    \item Implementación y comprobación de la eficacia de más modelos, por ejemplo las variantes más complejas de U-Net.
-    \item La creación de metodologías más rigurosas para la síntesis de conjuntos de datos de entrenamiento.
+    \item Implementación y comprobación de la eficacia de más modelos, como por ejemplo las variantes más complejas de U-Net.
+    \item Implementación en equipamiento profesional para hacer uso de grandes imágenes o mosaicos de imágenes.
+    \item La creación de metodologías más rigurosas para la creación de conjuntos de datos de entrenamiento.
     \item Expansión de los modelos para la generación de predicciones de múltiples etiquetas, en lugar de una sola.
     \item Mejora de resultados de arquitecturas CNN menos complejas, reduciendo el costo y tiempo de entrenamiento e inferencia.
     \item Trabajos de campo para la exploración de zonas de paleocauces menos estudiados.
