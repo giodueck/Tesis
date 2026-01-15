@@ -79,16 +79,16 @@ Las máscaras utilizadas para el entrenamiento, es decir, aquellas correspoindie
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\textwidth]{img/abanico-pilcomayo.png}
+    \includegraphics[width=\textwidth]{abanico-pilcomayo.png}
     \caption{Mapa de geomorfología del abanico aluvial del Pilcomayo. \cite{baudino-2023}}
     \label{fig:6}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
-    \subfloat[Mapa SWIR de referencia, tesela T20KNA]{\includegraphics[width=0.4\textwidth]{img/T20KNA_swir.jpg}}
+    \subfloat[Mapa SWIR de referencia, tesela T20KNA]{\includegraphics[width=0.4\textwidth]{T20KNA_swir.jpg}}
     \qquad
-    \subfloat[Máscara de paleocauces]{\includegraphics[width=0.4\textwidth]{img/T20KNA_mask.jpg}}
+    \subfloat[Máscara de paleocauces]{\includegraphics[width=0.4\textwidth]{T20KNA_mask.jpg}}
     \caption{La creación de datos de entrenamiento implica la creación manual de máscaras que definen el objetivo.}
     \label{fig:7}
 \end{figure}
@@ -261,15 +261,15 @@ Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres ca
 
 \begin{figure}
     \centering
-    \subfloat[\centering Tesela T20KNC]{\includegraphics[width=0.4\textwidth]{img/T20KNC_large.png}}
+    \subfloat[\centering Tesela T20KNC]{\includegraphics[width=0.4\textwidth]{T20KNC_large.png}}
 
-    \subfloat[\centering FarSeg v. 3 (RGB)]{\includegraphics[width=0.4\textwidth]{img/farseg-34-rgb.png}}
+    \subfloat[\centering FarSeg v. 3 (RGB)]{\includegraphics[width=0.4\textwidth]{farseg-34-rgb.png}}
     \quad
-    \subfloat[\centering FarSeg v. 4 (SWIR)]{\includegraphics[width=0.4\textwidth]{img/farseg-34-swir.png}}
+    \subfloat[\centering FarSeg v. 4 (SWIR)]{\includegraphics[width=0.4\textwidth]{farseg-34-swir.png}}
 
-    \subfloat[\centering FarSeg v. 5 y 6 (RGB)]{\includegraphics[width=0.4\textwidth]{img/farseg-50-rgb.png}}
+    \subfloat[\centering FarSeg v. 5 y 6 (RGB)]{\includegraphics[width=0.4\textwidth]{farseg-50-rgb.png}}
     \quad
-    \subfloat[\centering FarSeg v. 9 y 11 (RGB)]{\includegraphics[width=0.4\textwidth]{img/farseg-101-rgb.png}}
+    \subfloat[\centering FarSeg v. 9 y 11 (RGB)]{\includegraphics[width=0.4\textwidth]{farseg-101-rgb.png}}
 
     \caption{Máscaras de predicción de paleocauces de los modelos FarSeg}
     \label{fig:farseg}
@@ -363,19 +363,19 @@ Los hiperparámetros utilizados y los resultados de los experimentos se visualiz
 
 \begin{figure}
     \centering
-    \subfloat[\centering Tesela T20KNC]{\includegraphics[width=0.5\textwidth]{img/T20KNC_large.png}}
+    \subfloat[\centering Tesela T20KNC]{\includegraphics[width=0.5\textwidth]{T20KNC_large.png}}
 
-    \subfloat[\centering U-Net v. 1 y 2]{\includegraphics[width=0.3\textwidth]{img/unet-1_1-2.png}}
+    \subfloat[\centering U-Net v. 1 y 2]{\includegraphics[width=0.3\textwidth]{unet-1_1-2.png}}
     \quad
-    \subfloat[\centering U-Net v. 3 y 4]{\includegraphics[width=0.3\textwidth]{img/unet-1_3-4.png}}
+    \subfloat[\centering U-Net v. 3 y 4]{\includegraphics[width=0.3\textwidth]{unet-1_3-4.png}}
     \quad
-    \subfloat[\centering U-Net v. 5 y 6]{\includegraphics[width=0.3\textwidth]{img/unet-1_5-6.png}}
+    \subfloat[\centering U-Net v. 5 y 6]{\includegraphics[width=0.3\textwidth]{unet-1_5-6.png}}
 
-    \subfloat[\centering U-Net v. 7 y 8]{\includegraphics[width=0.3\textwidth]{img/unet-2_7-8.png}}
+    \subfloat[\centering U-Net v. 7 y 8]{\includegraphics[width=0.3\textwidth]{unet-2_7-8.png}}
     \quad
-    \subfloat[\centering U-Net v. 9 y 10]{\includegraphics[width=0.3\textwidth]{img/unet-2_9-10.png}}
+    \subfloat[\centering U-Net v. 9 y 10]{\includegraphics[width=0.3\textwidth]{unet-2_9-10.png}}
     \quad
-    \subfloat[\centering U-Net v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/unet-2_11-12.png}}
+    \subfloat[\centering U-Net v. 11 y 12]{\includegraphics[width=0.3\textwidth]{unet-2_11-12.png}}
 
     \caption{Máscaras de predicción de paleocauces de los modelos U-Net}
     \label{fig:unet}
@@ -397,17 +397,17 @@ Aun con las diferencias entre los modelos, es común encontrar zonas en las cual
 
 \begin{figure}
     \centering
-    \subfloat[\centering Combinación FarSeg]{\includegraphics[width=0.4\textwidth]{img/farseg-combined.png}}
+    \subfloat[\centering Combinación FarSeg]{\includegraphics[width=0.4\textwidth]{farseg-combined.png}}
     \quad
-    \subfloat[\centering Tesela T20KNC con máscara combinada FarSeg]{\includegraphics[width=0.4\textwidth]{img/farseg-combined-screen.png}}
+    \subfloat[\centering Tesela T20KNC con máscara combinada FarSeg]{\includegraphics[width=0.4\textwidth]{farseg-combined-screen.png}}
 
-    \subfloat[\centering Combinación U-Net 1-6]{\includegraphics[width=0.4\textwidth]{img/unet-combined.png}}
+    \subfloat[\centering Combinación U-Net 1-6]{\includegraphics[width=0.4\textwidth]{unet-combined.png}}
     \quad
-    \subfloat[\centering Tesela T20KNC con máscara combinada U-Net 1-6]{\includegraphics[width=0.4\textwidth]{img/unet-combined-screen.png}}
+    \subfloat[\centering Tesela T20KNC con máscara combinada U-Net 1-6]{\includegraphics[width=0.4\textwidth]{unet-combined-screen.png}}
 
-    \subfloat[\centering Combinación U-Net 7-12]{\includegraphics[width=0.4\textwidth]{img/unet-combined-large.png}}
+    \subfloat[\centering Combinación U-Net 7-12]{\includegraphics[width=0.4\textwidth]{unet-combined-large.png}}
     \quad
-    \subfloat[\centering Tesela T20KNC con máscara combinada U-Net 7-12]{\includegraphics[width=0.4\textwidth]{img/unet-combined-large-screen.png}}
+    \subfloat[\centering Tesela T20KNC con máscara combinada U-Net 7-12]{\includegraphics[width=0.4\textwidth]{unet-combined-large-screen.png}}
 
     \caption{Máscaras de predicción producidas por una combinación de las predicciones anteriores}
     \label{fig:combined}
@@ -475,35 +475,35 @@ Mientras que las versiones 9 y 10 parecen predecir positivamente sólo áreas mu
 \begin{figure}
     \centering
 
-    \subfloat[\centering SEVs izq. a der.: Hermelinda González (HG), Romina Aveiro (RA), Juana Amarilla (JA)]{\includegraphics[width=0.3\textwidth]{img/inti-ja_ra_hg.png}}
+    \subfloat[\centering SEVs izq. a der.: Hermelinda González (HG), Romina Aveiro (RA), Juana Amarilla (JA)]{\includegraphics[width=0.3\textwidth]{inti-ja_ra_hg.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{img/inti-ja_ra_hg-9-10.png}}
+    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{inti-ja_ra_hg-9-10.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/inti-ja_ra_hg-11-12.png}}
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{inti-ja_ra_hg-11-12.png}}
 
-    \subfloat[\centering SEVs izq. a der.: Teófilo Cabrera (TC), Familia Zapata (Z)]{\includegraphics[width=0.3\textwidth]{img/inti-tc_z.png}}
+    \subfloat[\centering SEVs izq. a der.: Teófilo Cabrera (TC), Familia Zapata (Z)]{\includegraphics[width=0.3\textwidth]{inti-tc_z.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{img/inti-tc_z-9-10.png}}
+    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{inti-tc_z-9-10.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/inti-tc_z-11-12.png}}
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{inti-tc_z-11-12.png}}
 
-    \subfloat[\centering SEV Predio Educacional EFA]{\includegraphics[width=0.3\textwidth]{img/inti-efa.png}}
+    \subfloat[\centering SEV Predio Educacional EFA]{\includegraphics[width=0.3\textwidth]{inti-efa.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{img/inti-efa-9-10.png}}
+    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{inti-efa-9-10.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/inti-efa-11-12.png}}
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{inti-efa-11-12.png}}
 
-    \subfloat[\centering SEV Paraje 1° de Mayo]{\includegraphics[width=0.3\textwidth]{img/inti-p10m.png}}
+    \subfloat[\centering SEV Paraje 1° de Mayo]{\includegraphics[width=0.3\textwidth]{inti-p10m.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{img/inti-p10m-9-10.png}}
+    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{inti-p10m-9-10.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/inti-p10m-11-12.png}}
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{inti-p10m-11-12.png}}
 
-    \subfloat[\centering Pozo Cuarta Legua 14]{\includegraphics[width=0.3\textwidth]{img/inti-l14.png}}
+    \subfloat[\centering Pozo Cuarta Legua 14]{\includegraphics[width=0.3\textwidth]{inti-l14.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{img/inti-l14-9-10.png}}
+    \subfloat[\centering Superposición pred. v. 9 y 10]{\includegraphics[width=0.3\textwidth]{inti-l14-9-10.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/inti-l14-11-12.png}}
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{inti-l14-11-12.png}}
 
     \caption{Predicciones en el área de estudio de las investigaciones del INTI en la provincia de Chaco, Argentina.}
     \label{fig:inti}
@@ -568,29 +568,29 @@ La mayoría de los pozos se predicen correctamente como ubicados en paleocauces.
 \begin{figure}[h!]
     \centering
 
-    \subfloat[\centering Pozo 2]{\includegraphics[width=0.3\textwidth]{img/wwf-p2.png}}
+    \subfloat[\centering Pozo 2]{\includegraphics[width=0.3\textwidth]{wwf-p2.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 7 y 8]{\includegraphics[width=0.3\textwidth]{img/wwf-p2-7-8.png}}
+    \subfloat[\centering Superposición pred. v. 7 y 8]{\includegraphics[width=0.3\textwidth]{wwf-p2-7-8.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/wwf-p2-11-12.png}}
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{wwf-p2-11-12.png}}
 
-    \subfloat[\centering Pozo 7]{\includegraphics[width=0.3\textwidth]{img/wwf-p7.png}}
+    \subfloat[\centering Pozo 7]{\includegraphics[width=0.3\textwidth]{wwf-p7.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 7 y 8]{\includegraphics[width=0.3\textwidth]{img/wwf-p7-7-8.png}}
+    \subfloat[\centering Superposición pred. v. 7 y 8]{\includegraphics[width=0.3\textwidth]{wwf-p7-7-8.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/wwf-p7-11-12.png}}
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{wwf-p7-11-12.png}}
 
-    \subfloat[\centering Pozo 12, ubicado fuera de paleocauces]{\includegraphics[width=0.3\textwidth]{img/wwf-p12.png}}
+    \subfloat[\centering Pozo 12, ubicado fuera de paleocauces]{\includegraphics[width=0.3\textwidth]{wwf-p12.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 7 y 8]{\includegraphics[width=0.3\textwidth]{img/wwf-p12-7-8.png}}
+    \subfloat[\centering Superposición pred. v. 7 y 8]{\includegraphics[width=0.3\textwidth]{wwf-p12-7-8.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/wwf-p12-11-12.png}}
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{wwf-p12-11-12.png}}
 
-    \subfloat[\centering De arriba para abajo: Pozos 18, 16, 15, 20, 28, 34, 41]{\includegraphics[width=0.3\textwidth]{img/wwf-p15_16_18_20_28_34_41.png}}
+    \subfloat[\centering De arriba para abajo: Pozos 18, 16, 15, 20, 28, 34, 41]{\includegraphics[width=0.3\textwidth]{wwf-p15_16_18_20_28_34_41.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 7 y 8]{\includegraphics[width=0.3\textwidth]{img/wwf-p15_16_18_20_28_34_41-7-8.png}}
+    \subfloat[\centering Superposición pred. v. 7 y 8]{\includegraphics[width=0.3\textwidth]{wwf-p15_16_18_20_28_34_41-7-8.png}}
     \qquad
-    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{img/wwf-p15_16_18_20_28_34_41-11-12.png}}
+    \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{wwf-p15_16_18_20_28_34_41-11-12.png}}
 
     \caption{Predicciones en el área de trabajo del análisis de recursos hídricos en Marical Estigarribia.}
     \label{fig:mariscal}
