@@ -3,17 +3,16 @@
 En este capítulo se presentan los experimentos realizados, los modelos y las metodologías utilizadas en su entrenamiento, y los resultados de dichos experimentos.
 
 \subsection{Herramientas utilizadas}
-\todo[inline]{explicar mejor que es cada libreria (es python o que es)}
 
-La herramienta fundamental utilizada en los experimentos es la librería PyTorch \cite{Ansel_PyTorch_2_Faster_2024}, que implementa una gran cantidad de componentes básicos de Machine Learning, como las capas que componen a los modelos, los conjuntos de datos de entrenamiento, funciones de activación, funciones de utilidad, entre otros.
+La herramienta fundamental utilizada en los experimentos es la librería de Python {\it PyTorch} \cite{Ansel_PyTorch_2_Faster_2024}, que implementa una gran cantidad de componentes básicos de Machine Learning, como las capas que componen a los modelos, los conjuntos de datos de entrenamiento, funciones de activación, funciones de utilidad, entre otros.
 
-La librería Lightning \cite{Falcon_PyTorch_Lightning_2019} expande sobre esta base, añadiendo una capa de abstracción adicional que provee bucles de entrenamiento y validación y módulos de datos que facilitan la interacción con conjuntos de datos, permitiendo al usuario enfocarse en la arquitectura del modelo y los datos de entrenamiento en lugar del proceso de entrenamiento a bajo nivel.
+La librería de Python {\it Pytorch Lightning} \cite{Falcon_PyTorch_Lightning_2019} expande sobre esta base, añadiendo una capa de abstracción adicional que provee bucles de entrenamiento y validación y módulos de datos que facilitan la interacción con conjuntos de datos, permitiendo al usuario enfocarse en la arquitectura del modelo y los datos de entrenamiento en lugar del proceso de entrenamiento a bajo nivel.
 
-Finalmente, una capa de abstracción adicional sobre Lightning es proveída por TorchGeo \cite{Stewart_TorchGeo_Deep_Learning_2024}, una librería especializada para el análisis de datos de observación terrestre. TorchGeo provee facilidades para la creación de conjuntos de datos que, además de los datos multiespectrales de la imagen propia, tienen en cuenta la geolocalización de cada imagen. También proveen algunos modelos, opcionalmente preentrenados.
+Finalmente, una capa de abstracción adicional sobre Lightning es proveída por {\it TorchGeo} \cite{Stewart_TorchGeo_Deep_Learning_2024}, una librería de Python especializada para el análisis de datos de observación terrestre. TorchGeo provee facilidades para la creación de conjuntos de datos que, además de los datos multiespectrales de la imagen propia, tienen en cuenta la geolocalización de cada imagen. También proveen algunos modelos, opcionalmente preentrenados.
 
-Para la combinación de imágenes georreferenciadas, o para la inclusión de datos de georreferenciación a imágenes que no los tienen, se utilizó la librería Rasterio \cite{gillies_2019}.
+Para la combinación de imágenes georreferenciadas, o para la inclusión de datos de georreferenciación a imágenes que no los tienen, se utilizó la librería de Python {\it Rasterio} \cite{gillies_2019}. Esta librería convierte los diferentes formatos de imágenes en matrices de valores correspondientes a cada píxel de cada banda, lo que permite su utilización con modelos de aprendizaje automático y la síntesis de datos de entrenamiento.
 
-La implementación propia e integración de las herramientas mencionadas anteriormente se realizaron en una herramienta desarrollada para este trabajo, {\bf Torchbearer} \cite{torchbearer}. Esta permite la descripción de modelos y parámetros de entrenamiento de forma simple y paramétrica, diseñada para acelerar la iteración necesaria en la fase de experimentación y facilitar la creación de datos de inferencia (predicciones).
+La implementación propia e integración de las librerías mencionadas anteriormente se realizaron en una herramienta desarrollada para este trabajo, {\bf Torchbearer} \cite{torchbearer}, también creada en Python. Esta permite la descripción de modelos y sus parámetros de entrenamiento de forma simple y paramétrica, diseñada para acelerar la iteración necesaria en la fase de experimentación y facilitar la creación de datos de inferencia (predicciones).
 
 \subsubsection{Versiones de software}
 
@@ -74,28 +73,36 @@ Cabe resaltar que los experimentos se vieron limitados por estas en su envergadu
 
 Para las tareas de clasificación y segmentación es necesaria una verdad fundamental, ya sea una o varias etiquetas por cada imagen en el caso de la clasificación, o una máscara en el caso de la segmentación. Este es el objetivo que se quiere obtener a partir del modelo final.
 
-Las imágenes de referencia se sintetizaron a partir de estudios de la zona del abanico aluvial del Pilcomayo \cite{baudino-2023}, en donde se presentan mapas de geomorfología como en la figura \ref{fig:6}, las cuales se imitaron a base del mejor esfuerzo. Para facilitar la identificación visual de los paleocauces, se utilizaron imágenes de color falso, en especial utilizando imágenes de luz infrarroja (IR) de onda corta (SWIR por sus siglas en ingles, short wave infrared) utilizando las bandas B12 (IR de onda corta), B8A (IR cercano) y B4 (verde) en los canales rojo, verde y azul respectivamente. Diferentes tipos de suelo y vegetación reflejan estas bandas de formas variadas, y esta combinación puede resaltar estructuras geológicas como paleocauces al ojo humano mejor que imágenes de color real. \cite{earth-observatory-false-color} Un ejemplo de mascara, usando el mapa de la figura \ref{fig:6} como referencia, se demuestra en la figura \ref{fig:7}. Para la creación de estas máscaras de entrenamiento se utilizaron herramientas de dibujo digital. Ejemplos de este tipo de programa incluyen {\it Krita} y {\it GIMP}.
+Las imágenes de referencia se sintetizaron a partir de estudios de la zona del abanico aluvial del Pilcomayo \cite{baudino-2023}, en donde se presentan mapas de geomorfología como en la figura \ref{fig:mapa-pilcomayo}, las cuales se imitaron a base del mejor esfuerzo. Para facilitar la identificación visual de los paleocauces, se utilizaron imágenes de color falso, en especial utilizando imágenes de luz infrarroja (IR) de onda corta (SWIR por sus siglas en ingles, short wave infrared) utilizando las bandas B12 (IR de onda corta), B8A (IR cercano) y B4 (verde) en los canales rojo, verde y azul respectivamente. Diferentes tipos de suelo y vegetación reflejan estas bandas de formas variadas, y esta combinación puede resaltar estructuras geológicas como paleocauces al ojo humano mejor que imágenes de color real. \cite{earth-observatory-false-color} Un ejemplo de mascara, usando el mapa de la figura \ref{fig:mapa-pilcomayo} como referencia, se demuestra en la figura \ref{fig:masks}. Para la creación de estas máscaras de entrenamiento se utilizaron herramientas de dibujo digital. Ejemplos de este tipo de programa incluyen {\it Krita} y {\it GIMP}.
 
 Las máscaras utilizadas para el entrenamiento, es decir, aquellas correspondientes a las teselas T20KNA, T20KNB y T20KPC, se encuentran disponibles en el repositorio de Torchbearer \cite{torchbearer}.
-\todo[inline]{mostrar todos los datos de entrenamiento}
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=\textwidth]{abanico-pilcomayo.png}
     \caption{Mapa de geomorfología del abanico aluvial del Pilcomayo. \cite{baudino-2023}}
-    \label{fig:6}
+    \label{fig:mapa-pilcomayo}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}
     \centering
-    \subfloat[Mapa SWIR de referencia, tesela T20KNA]{\includegraphics[width=0.4\textwidth]{T20KNA_swir.jpg}}
+    \subfloat[Mapa SWIR, tesela T20KPC, este del Parque Nacional Médanos del Chaco]{\includegraphics[width=0.4\textwidth]{T20KPC_swir.jpg}}
+    \qquad
+    \subfloat[Máscara de paleocauces]{\includegraphics[width=0.4\textwidth]{T20KPC_mask.jpg}}
+
+    \subfloat[Mapa SWIR, tesela T20KNB, norte del Abanico Aluvial del Pilcomayo]{\includegraphics[width=0.4\textwidth]{T20KNB_swir.jpg}}
+    \qquad
+    \subfloat[Máscara de paleocauces]{\includegraphics[width=0.4\textwidth]{T20KNB_mask.jpg}}
+
+    \subfloat[Mapa SWIR, tesela T20KNA, norte del Abanico Aluvial del Pilcomayo]{\includegraphics[width=0.4\textwidth]{T20KNA_swir.jpg}}
     \qquad
     \subfloat[Máscara de paleocauces]{\includegraphics[width=0.4\textwidth]{T20KNA_mask.jpg}}
-    \caption{La creación de datos de entrenamiento implica la creación manual de máscaras que definen el objetivo.}
-    \label{fig:7}
+
+    \caption{Las máscaras que definen el objetivo de los modelos a entrenar.}
+    \label{fig:masks}
 \end{figure}
 
-\todo[inline]{poner un poco de python en apendice, algo en notebooks}
+\todo{poner un poco de python en apendice, algo en notebooks}
 
 \subsection{Partición de datos de entrenamiento}
 
@@ -107,10 +114,9 @@ Para la división de datos en datasets de entrenamiento, validación y prueba, s
 
 Las celdas en las cuales se dividen las imágenes no se solapan, y la estrategia de cada DataLoader puede ser elegida de acuerdo al objetivo de la etapa a la cual corresponde. Para el entrenamiento usamos un muestreo aleatorio, mientras que los DataLoaders de validación y de prueba hacen un muestreo por división en celdas, asegurando que toda el área de estos conjuntos se muestrean una sola vez y que el conjunto de imágenes creado es consistente para cada tanda de entrenamiento y para cada modelo entrenado sobre el conjunto.
 
-Cada DataLoader produce imágenes de 128$\times$128 o 192$\times$192 píxeles recortadas de las celdas asignadas al DataLoader, correspondiente a áreas de 7680m$\times$7680m y 11520m$\times$11520m respectivamente. Las imágenes de cada tesela tienen dimensiones de 1830$\times$1830 píxeles de 60m$\times$60m, abarcando un área de $109'800$m por lado, o alrededor de 110km. La grilla en la que se dividen es de seis celdas de largo, abarcando cada celda un área cuadrada de 305 píxeles de largo, lo que permite producir 4 imágenes de validación o prueba por celda.
+Cada DataLoader produce imágenes de 128$\times$128 o 192$\times$192 píxeles recortadas de las celdas asignadas al DataLoader, correspondiente a áreas de $7\,680m\times7\,680m$ y $11\,520m\times11\,520m$ respectivamente. Las imágenes de cada tesela tienen dimensiones de $1\,830\times1\,830$ píxeles de 60m$\times$60m, abarcando un área de $109\,800$m por lado, o alrededor de 110km. La grilla en la que se dividen es de seis celdas de largo, abarcando cada celda un área cuadrada de 305 píxeles de largo, lo que permite producir 4 imágenes de validación o prueba por celda.
 
 \subsection{Entrenamiento y validación}
-% \todo{clasificacion} % explain setup and failure, or only in discusion?
 
 Para la tarea de segmentación, se utilizaron tres arquitecturas bien establecidas. Las arquitecturas proveídas por TorchGeo utilizadas fueron Foreground-Aware Relation Network, o FarSeg \cite{zheng2020foregroundawarerelationnetworkgeospatial}, y una red enteramente convolucional de cinco capas conocida simplemente como FCN por sus siglas en inglés, Fully-convolutional Network. Adicionalmente se utilizó una implementación de U-Net, una red enteramente convolucional muy conocida por sus aplicaciones en el campo de la medicina, pero tambien muy capaz en imágenes de teledetección. \cite{ronneberger2015unetconvolutionalnetworksbiomedical, khryashchev2018}
 
