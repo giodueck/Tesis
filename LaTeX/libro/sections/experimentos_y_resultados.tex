@@ -186,7 +186,7 @@ Los hiperparámetros seleccionados para los experimentos se detallan en el cuadr
         \hline
 
         \rowcolor{LightBlue}
-        Versión & \bf Canales de entrada & \bf Nro. de filtros & \bf Mejor época & \bf Pérdida en prueba \\
+        Versión & \bf Canales de entrada & \bf Nro. de filtros & \bf Mejor época & \bf Pérdida \\
         \hline
 
         1 & Todos (11) & 64 & 1 & 0.4675 \\
@@ -221,47 +221,47 @@ Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres ca
 
 \begin{table}[ht!]
     \centering
-    \begin{tabular}{ |>{\bf \columncolor{LightBlue}} c|c|c|c|c| }
+    \begin{tabular}{ |>{\bf \columncolor{LightBlue}} c|l|l|r|r| }
         \hline
 
         \rowcolor{LightBlue}
-        Versión & \bf Canales de entrada & \bf Backbone & \bf Mejor época & \bf Pérdida en prueba \\
+        Versión & \bf Canales de entrada & \bf Backbone & \bf Mejor época & \bf Pérdida \\
         \hline
 
-        1 & B4, B3, B2 & ResNet-18 & 1 & 0.6560 \\
+        1 & RGB: B4, B3, B2 & ResNet-18 & 1 & 0.6560 \\
         \hline
 
-        2 & B12, B8A, B4 & ResNet-18 & 3 & 0.5866 \\
+        2 & SWIR: B12, B8A, B4 & ResNet-18 & 3 & 0.5866 \\
         \hline
 
-        3 & B4, B3, B2 & ResNet-34 & 11 & 0.4682 \\
+        3 & RGB: B4, B3, B2 & ResNet-34 & 11 & 0.4682 \\
         \hline
 
-        4 & B12, B8A, B4 & ResNet-34 & 7 & 0.5324 \\
+        4 & SWIR: B12, B8A, B4 & ResNet-34 & 7 & 0.5324 \\
         \hline
 
-        5 & B4, B3, B2 & ResNet-50 & 19 & 0.4514 \\
+        5 & RGB: B4, B3, B2 & ResNet-50 & 19 & 0.4514 \\
         \hline
 
-        6 & B12, B8A, B4 & ResNet-50 & 2 & 1.444 \\
+        6 & SWIR: B12, B8A, B4 & ResNet-50 & 2 & 1.444 \\
         \hline
 
-        7 & B4, B3, B2 & ResNet-50 & 27 & 0.4977 \\
+        7 & RGB: B4, B3, B2 & ResNet-50 & 27 & 0.4977 \\
         \hline
 
-        8 & B12, B8A, B4 & ResNet-50 & 4 & 1.056 \\
+        8 & SWIR: B12, B8A, B4 & ResNet-50 & 4 & 1.056 \\
         \hline
 
-        9 & B4, B3, B2 & ResNet-101 & 12 & 0.5897 \\
+        9 & RGB: B4, B3, B2 & ResNet-101 & 12 & 0.5897 \\
         \hline
 
-        10 & B12, B8A, B4 & ResNet-101 & 10 & 0.9042 \\
+        10 & SWIR: B12, B8A, B4 & ResNet-101 & 10 & 0.9042 \\
         \hline
 
-        11 & B4, B3, B2 & ResNet-101 & 8 & 0.6233 \\
+        11 & RGB: B4, B3, B2 & ResNet-101 & 8 & 0.6233 \\
         \hline
 
-        12 & B12, B8A, B4 & ResNet-101 & 5 & 0.5351 \\
+        12 & SWIR: B12, B8A, B4 & ResNet-101 & 5 & 0.5351 \\
         \hline
 
     \end{tabular}
@@ -271,31 +271,29 @@ Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres ca
 
 \begin{figure}
     \centering
-    \subfloat[\centering Tesela T20KNC]{\includegraphics[width=0.4\textwidth]{T20KNC_large.png}}
+    \subfloat[\centering Tesela T20KNC]{\includegraphics[width=0.5\textwidth]{T20KNC_large.png}}
 
-    \subfloat[\centering FarSeg v. 3 (RGB)]{\includegraphics[width=0.4\textwidth]{farseg-34-rgb.png}}
+    \subfloat[\centering FarSeg v. 3 (RGB, ResNet-34)]{\includegraphics[width=0.4\textwidth]{farseg-34-rgb.png}}
     \quad
-    \subfloat[\centering FarSeg v. 4 (SWIR)]{\includegraphics[width=0.4\textwidth]{farseg-34-swir.png}}
+    \subfloat[\centering FarSeg v. 4 (SWIR, ResNet-34)]{\includegraphics[width=0.4\textwidth]{farseg-34-swir.png}}
 
-    \subfloat[\centering FarSeg v. 5 y 6 (RGB)]{\includegraphics[width=0.4\textwidth]{farseg-50-rgb.png}}
+    \subfloat[\centering FarSeg v. 5 y 6 (RGB, ResNet-50)]{\includegraphics[width=0.4\textwidth]{farseg-50-rgb.png}}
     \quad
-    \subfloat[\centering FarSeg v. 9 y 11 (RGB)]{\includegraphics[width=0.4\textwidth]{farseg-101-rgb.png}}
+    \subfloat[\centering FarSeg v. 9 y 11 (RGB, ResNet-101)]{\includegraphics[width=0.4\textwidth]{farseg-101-rgb.png}}
 
-    \caption{Máscaras de predicción de paleocauces de los modelos FarSeg}
+    \caption{Máscaras de predicción de paleocauces de los modelos FarSeg. Las predicciones son escasas y de área pequeña.}
     \label{fig:farseg}
 \end{figure}
-
-\todo{hacer hablar mas a los primeros graficos. expandir sobre lo que hace}
 
 Mientras que la utilización de backbone más simple no dio buenos resultados, los modelos más complejos dieron resultados significativos. De manera interesante, los modelos con backbone ResNet-50 y entrenados sobre las bandas de color visible tomaron, en promedio, muchas más épocas para alcanzar su mejor rendimiento que los demás.
 
 La figura \ref{fig:farseg} muestra las máscaras generadas por estos modelos.
 
-Entre los resultados, los modelos con backbone ResNet-18 y ResNet-101 produjeron máscaras completamente negras, o con pocas áreas en las que predicen paleocauces. Sin embargo, aun más llamativo es el hecho que los modelos que utilizan las bandas B12, B8A, B4 producen máscaras enteramente negras, excepto con backbone ResNet-34.
+Entre los modelos resultantes, las versiones 1-2 y 9-12 produjeron máscaras completamente negras, o con pocas áreas en las que predicen paleocauces. Estos son los modelos con backbone ResNet-18 y ResNet-101. Sin embargo, aun más llamativo es el hecho que los modelos que utilizan las bandas B12, B8A, B4 producen máscaras enteramente negras, excepto con backbone ResNet-34.
 
-Las máscaras producidas por los modelos que utilizan las bandas B4, B3, B2 presentan bordes de apariencia borrosa, lo que podría ser una consecuencia de la resolución espacial de las imágenes utilizadas.
+Las máscaras producidas por los modelos que utilizan las bandas B4, B3, B2 presentan bordes de apariencia borrosa, lo que podría ser una consecuencia de la resolución espacial de las imágenes utilizadas, como también un indicio de la necesidad de datos de calidad de mejor calidad. Otra posibilidad es que las imágenes deben ser más grandes, ya que todos los modelos FarSeg entrenados procesan imágenes cuadradas de 128 píxeles de lado.
 
-Las máscaras producidas por los modelos entrenados con las bandas B12, B8A, B4 son similares a las producidas por FCN. Cada píxel de la máscara tiene el valor mínimo, y las pérdidas de las mejores versiones son mayores que la mayor versión de FCN.
+Las máscaras producidas por los modelos entrenados con las bandas B12, B8A, B4 son similares a las producidas por FCN. Cada píxel de la máscara tiene el valor mínimo, y las pérdidas de las mejores versiones son mayores que la mayor versión de FCN. Es posible que la elección de combinaciones de bandas diferentes produzca resultados más satisfactorios, pero los resultados presentados no demostraron el potencial suficiente para continuar la exploración en esa dirección.
 
 \subsubsection{U-Net}
 
@@ -311,11 +309,11 @@ Los hiperparámetros utilizados y los resultados de los experimentos se visualiz
 
 \begin{table}[ht!]
     \centering
-    \begin{tabular}{ |>{\bf \columncolor{LightBlue}} c|c|c|c|c| }
+    \begin{tabular}{ |>{\bf \columncolor{LightBlue}} c|c|l|r|r| }
         \hline
 
         \rowcolor{LightBlue}
-        Versión & \bf Canales de entrada & \bf Niveles & \bf Mejor época & \bf Pérdida en prueba \\
+        Versión & \bf Canales de entrada & \bf Niveles & \bf Mejor época & \bf Pérdida \\
         \hline
 
         1 & Todos (11) & 64, 128, 256, 512 & 10 & 0.4421 \\
@@ -343,11 +341,11 @@ Los hiperparámetros utilizados y los resultados de los experimentos se visualiz
 
 \begin{table}[ht!]
     \centering
-    \begin{tabular}{ |>{\bf \columncolor{LightBlue}} c|c|c|c|c| }
+    \begin{tabular}{ |>{\bf \columncolor{LightBlue}} c|c|l|r|r| }
         \hline
 
         \rowcolor{LightBlue}
-        Versión & \bf Canales de entrada & \bf Niveles & \bf Mejor época & \bf Pérdida en prueba \\
+        Versión & \bf Canales de entrada & \bf Niveles & \bf Mejor época & \bf Pérdida \\
         \hline
 
         7 & Todos (11) & 64, 128, 256, 512 & 11 & 0.4385 \\
@@ -389,23 +387,29 @@ Los hiperparámetros utilizados y los resultados de los experimentos se visualiz
     \quad
     \subfloat[\centering U-Net v. 11 y 12]{\includegraphics[width=0.3\textwidth]{unet-2_11-12.png}}
 
-    \caption{Máscaras de predicción de paleocauces de los modelos U-Net}
+    \caption{Máscaras de predicción de paleocauces de los modelos U-Net. Las predicciones se acercan mucho más a los datos de entrenamiento que con modelos FCN o FarSeg.}
     \label{fig:unet}
 \end{figure}
 
 La pérdida de estos modelos es en promedio menor que la pérdida promedio de los modelos anteriores, y las máscaras generadas son mucho más detalladas. Estas máscaras se muestran en la figura \ref{fig:unet}.
 
-Observando los resultados producidos por los modelos entrenados, es evidente que el análisis de imágenes más pequeñas produce predicciones más limitadas, en donde solamente áreas con un contraste más pronunciado son designadas como áreas de paleocauces, mientras que el análisis de imágenes que cubren un área más extensa producen predicciones más similares a las máscaras de entrenamiento. Por ejemplo, las versiones 11 y 12 son las únicas que producen una predicción sustancial para los paleocauces a lo largo del margen izquierdo de la imagen.
+En todas las máscaras excepto de las versiones 9 y 10 se muestra un nivel de detalle mucho más alto que los mapas generados por los modelos FarSeg. Esto se debe en gran parte a la capacidad de generar detalle a partir de datos de resolución baja, lo cual el modelo aprende mediante la subida por los niveles en los que aumenta la resolución de las imágenes de inferencia. Una ventaja más es la posibilidad de usar todas las bandas disponibles en el conjunto de datos, a diferencia de la arquitectura FarSeg, creada para el procesamiento de imágenes en color visible, lo que permite extraer detalles adicionales.
 
-Las versiones 9 y 10 producen predicciones muy limitadas para esta zona, que presenta características de paleocauces colmatados. Aquellas zonas, en las que estas versiones producen predicciones significativas, son húmedas, sugiriendo un posible sesgo hacia los paleocauces activos. Aun así, los resultados de estas versiones son claramente limitados, posiblemente debido a su arquitectura que presenta un nivel inicial de 32 capas en lugar de 64.
+Observando los resultados producidos por los modelos entrenados, es aparente que el análisis de imágenes más pequeñas produce predicciones más limitadas, con apariencia granular, en donde solamente áreas con un contraste más pronunciado son designadas como áreas de paleocauces.
+
+El análisis de imágenes que cubren un área más extensa producen predicciones más similares a las máscaras de entrenamiento, siendo estas más extensas y más contiguas. Por ejemplo, las versiones 11 y 12 son las únicas que producen una predicción sustancial para los paleocauces a lo largo del margen izquierdo de la imagen.
+
+Las versiones 9 y 10 producen predicciones muy limitadas para esta zona, que presenta características de paleocauces colmatados. Aquellas zonas, en las que estas versiones producen predicciones significativas, son húmedas, sugiriendo un posible sesgo hacia los paleocauces activos. Aun así, los resultados de estas versiones son claramente de poca utilidad, posiblemente debido a su arquitectura que presenta un nivel inicial de 32 capas en lugar de 64.
 
 Una ventaja de las versiones 1-6 es que sus predicciones son más consistentes, con las versiones 7-12 dependiendo mucho más de la composición de los niveles.
 
 \subsubsection{Predicción en conjunto}
 
-Un problema con las máscaras generadas por los modelos es la cantidad de artefactos y diferencias en los resultados, aun con la misma arquitectura y la misma distribución de datos de entrenamiento. Por esta razón, también experimentamos con la creación de máscaras usando un conjunto de modelos, cuyos resultados fueron adicionados para generar una sola máscara. Esto permite generar mapas de calor más consistentes, en los cuales los puntos ciegos de un modelo pueden ser cubiertos por los puntos fuertes de otro.
+Un problema con las máscaras generadas por los modelos es la cantidad de artefactos y diferencias en los resultados, aun con la misma arquitectura y la misma distribución de datos de entrenamiento. Por esta razón, también experimentamos con la creación de máscaras usando un conjunto de modelos, cuyos resultados fueron adicionados para generar una sola máscara. Esto permite generar mapas de predicciones más consistentes, en los cuales los puntos ciegos de un modelo pueden ser cubiertos por los puntos fuertes de otro.
 
-Aun con las diferencias entre los modelos, es común encontrar zonas en las cuales ningún modelo predice ocurrencias de paleocauces, mientras que en otras zonas la mayoría predice positivamente con alta certeza.
+La figura \ref{fig:combined} muestra máscaras generadas por una combinación de las predicciones de varios modelos, presentando predicciones más completas. Las predicciones FarSeg contrastan fuertemente con las predicciones U-Net, presentando ninguna ventaja sobre estas últimas.
+
+Comparando las predicciones de las versiones U-Net 1-6 y 7-12, las últimas cubren dos grandes debilidades de las primeras, que son los paleocauces más estrechos originando en el río Parapetí en la esquina superior izquierda de la imagen, y los paleocauces en el margen inferior iquierdo de la tesela.
 
 \begin{figure}
     \centering
@@ -424,8 +428,6 @@ Aun con las diferencias entre los modelos, es común encontrar zonas en las cual
     \caption{Máscaras de predicción producidas por una combinación de las predicciones anteriores}
     \label{fig:combined}
 \end{figure}
-
-La figura \ref{fig:combined} muestra máscaras generadas por una combinación de las predicciones de varios modelos, presentando predicciones más completas.
 
 \subsection{Comparación con trabajos anteriores}
 
