@@ -16,6 +16,7 @@ En el mapa de Regiones y Subregiones de Humedales del Paraguay en la figura \ref
     \caption{Parque Nacional Médanos del Chaco (verde) y Abanico Aluvial del Pilcomayo (azul). Elaboración propia con el mapa de OpenStreetMap. \cite{OpenStreetMap}}
     \label{fig:4}
 \end{figure}
+\todo{mejorar mapa con escala, coord UTM, norte en qgis}
 
 \begin{figure}[h!]
     \centering
@@ -33,7 +34,7 @@ Para el procesamiento de datos se utilizó el lenguaje de programación Python c
 
 Las imágenes utilizadas se obtuvieron del programa Copernicus de la ESA, a través de su portal {\it Copernicus Browser}. Las imágenes son multiespectrales, con 13 bandas capturadas por instrumentos a bordo de los satélites Sentinel-2, un par de satélites en la misma órbita polar desfasados en 180 grados. Estas imágenes son de acceso abierto a todo público, necesitando solamente la creación de un usuario. \cite{copernicus-sentinel-2-data-collections}
 
-Los satélites capturan una franja de 290 kilómetros (km) de ancho con un tiempo de revisita de 5 días en el ecuador, capturando imágenes de resoluciones espaciales de 10, 20 y 60 metros (m). Estas imágenes se disponibilizan particionadas en teselas georeferenciadas de 110km x 110km que solapan con teselas adyacentes, en las cuales las bandas se acceden por medio de archivos individuales en formato JPEG2000 con valores entre $0$ y $10'000$ para cada píxel. \cite{sentiwiki-s2-products}
+Los satélites capturan una franja de 290 kilómetros (km) de ancho con un tiempo de revisita de 5 días en el ecuador, capturando imágenes de resoluciones espaciales de 10, 20 y 60 metros (m). Estas imágenes se disponibilizan particionadas en teselas georeferenciadas de 110km x 110km que solapan con teselas adyacentes, en las cuales las bandas se acceden por medio de archivos individuales en formato JPEG2000 con valores entre $0$ y $10\,000$ para cada píxel. \cite{sentiwiki-s2-products}
 
 Existen varios niveles que representan productos diferentes. El producto utilizado para este estudio es el nivel 2A (L2A).
 
@@ -209,13 +210,15 @@ Como las estructuras que se buscan reconocer son extensas, basta con utilizar im
 
 Una clase proveída por la librería Torchgeo, {\it RasterDataset}, permite cargar imágenes satelitales de diversas bandas teniendo en cuenta su geolocalización. Esto permite un manejo abstracto del conjunto de datos, por lo cual no es necesario una preparación extensa de los datos obtenidos de Copernicus.
 
+\todo[inline]{add figure of what the end result might look like}
+
 \subsubsection{Limpieza de datos}
 
 Las teselas incluyen máscaras de píxeles erróneos. Como tenemos una gran cantidad de datos disponibles gracias al tiempo corto de revisita de los satélites, podemos simplemente descartar imágenes con errores significativos.
 
 Una inevitabilidad de las imágenes producidas por Sentinel-2 es la falta de datos de una porción de ciertas teselas. Esta es una consecuencia de la división de imágenes en teselas, algunas de las cuales abarcan los bordes de la franja capturada en un sobrevuelo. Los valores de los píxeles en estas regiones son 0.
 
-Como estas regiones faltantes (pero no erróneas) son sustanciales, dependiendo de la tesela escogida, estos píxeles no se modificaron en las imágenes afectadas. Nuestra expectativa fue que los modelos se adecuarían a este valor, dado que mientras los valores posibles abarcan el rango entre $0$ y $10'000$, nunca toman valores cercanos a $0$ en imágenes libres de errores. Un ejemplo de este fenómeno se encuentra en el cuadro \ref{table:tiles}, en el margen izquierdo de la tesela {\it T20KPC}.
+Como estas regiones faltantes (pero no erróneas) son sustanciales, dependiendo de la tesela escogida, estos píxeles no se modificaron en las imágenes afectadas. Nuestra expectativa fue que los modelos se adecuarían a este valor, dado que mientras los valores posibles abarcan el rango entre $0$ y $10\,000$, nunca toman valores cercanos a $0$ en imágenes libres de errores. Un ejemplo de este fenómeno se encuentra en el cuadro \ref{table:tiles}, en el margen izquierdo de la tesela {\it T20KPC}.
 
 \subsubsection{Resumen del procesamiento de los datos}
 

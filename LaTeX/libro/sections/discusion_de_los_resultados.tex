@@ -24,6 +24,8 @@
 
 En esta sección se presentan las conclusiones obtenidas a partir de los resultados de los experimentos realizados a lo largo de este trabajo Proyecto Final de Carrera. También se discuten recomendaciones para trabajos futuros así como para posibles implementaciones, se detallan las contribuciones del proyecto, y posibilidades para expandir sobre este proyecto en trabajos posteriores.
 
+\todo{expandir}
+
 \subsection{Conclusión}
 
 En el curso de este trabajo se han buscado e implementado métodos de creación de modelos de redes neuronales convolucionales (CNN) para su uso en el análisis de imágenes satelitales. Se consideraron tareas de clasificación y segmentación de imágenes, llegando a la conclusión que la clasificación es inadecuada para la tarea específica de la detección de paleocauces. Se evaluó la viabilidad del uso de varias arquitecturas de modelos CNN y se experimentó con los parámetros de los mismos.
@@ -44,11 +46,19 @@ En comparaciones hechas entre trabajos de campo en el Chaco Argentino, algunas v
 
 Los modelos producen predicciones para ambos tipos de paleocauces, activos y colmatados. Los paleocauces activos, más fácilmente detectables debido a su alto grado de humedad en la superficie, producen predicciones más fácilmente. Sin embargo, predicciones de paleocauces colmatados en el Chaco Paraguayo son mucho más importantes debido a su capacidad de capturar agua por tiempos prolongados y, por ende, abastecer más consistentemente a las comunidades locales.
 
+\todo{hablar mas sobre comparacion con otros trabajos}
+
+\todo{agregar seccion de limitaciones}
+
 \subsection{Recomendaciones}
 
 Una posible mejora se puede alcanzar por medio de la especialización de modelos para cada tipo de paleocauce. La creación de modelos especializados podría necesitar de más datos de entrenamiento, tomadas en el área que corresponde para cada tipo. El Chaco Paraguayo, que presenta un grande sistema de paleocauces colmatados, y el Chaco Argentino, con grandes cantidades de paleocauces activos, proveerían datos de entrenamiento para cada tipo de paleocauce.
 
 Otra posibilidad es el uso de hardware profesional para permitir el análisis de ventanas más grandes y resoluciones más altas que 60 metros. Dado que los resultados con ventanas de 192 píxeles de lado son mejores que con ventanas de 128, es posible que ventanas aun más amplias produzcan predicciones aun mejores.
+
+\todo{expandir en recomendaciones sobre trabajos futuros}
+
+\todo{"para continuar esta linea de investigacion, recomiendo tal y tal" recomendaciones}
 
 \subsection{Contribuciones}
 
@@ -70,5 +80,5 @@ Este trabajo expande el estado del arte en lo referente al uso de modelos CNN en
     \item Expansión de los modelos para la generación de predicciones de múltiples etiquetas, en lugar de una sola.
     \item Mejora de resultados de arquitecturas CNN menos complejas, reduciendo el costo y tiempo de entrenamiento e inferencia.
     \item Trabajos de campo para la exploración de zonas de paleocauces menos estudiados.
-    \item Análisis de datos provenientes de otros proveedores, haciendo uso de un conjunto sensores diferentes.
+    \item Análisis de datos provenientes de otros proveedores, haciendo uso de un conjunto sensores diferentes. \todo[inline]{proveedores... de que}
 \end{itemize}

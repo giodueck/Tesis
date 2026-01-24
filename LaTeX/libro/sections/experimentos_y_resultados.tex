@@ -3,6 +3,7 @@
 En este capítulo se presentan los experimentos realizados, los modelos y las metodologías utilizadas en su entrenamiento, y los resultados de dichos experimentos.
 
 \subsection{Herramientas utilizadas}
+\todo[inline]{explicar mejor que es cada libreria (es python o que es)}
 
 La herramienta fundamental utilizada en los experimentos es la librería PyTorch \cite{Ansel_PyTorch_2_Faster_2024}, que implementa una gran cantidad de componentes básicos de Machine Learning, como las capas que componen a los modelos, los conjuntos de datos de entrenamiento, funciones de activación, funciones de utilidad, entre otros.
 
@@ -76,6 +77,7 @@ Para las tareas de clasificación y segmentación es necesaria una verdad fundam
 Las imágenes de referencia se sintetizaron a partir de estudios de la zona del abanico aluvial del Pilcomayo \cite{baudino-2023}, en donde se presentan mapas de geomorfología como en la figura \ref{fig:6}, las cuales se imitaron a base del mejor esfuerzo. Para facilitar la identificación visual de los paleocauces, se utilizaron imágenes de color falso, en especial utilizando imágenes de luz infrarroja (IR) de onda corta (SWIR por sus siglas en ingles, short wave infrared) utilizando las bandas B12 (IR de onda corta), B8A (IR cercano) y B4 (verde) en los canales rojo, verde y azul respectivamente. Diferentes tipos de suelo y vegetación reflejan estas bandas de formas variadas, y esta combinación puede resaltar estructuras geológicas como paleocauces al ojo humano mejor que imágenes de color real. \cite{earth-observatory-false-color} Un ejemplo de mascara, usando el mapa de la figura \ref{fig:6} como referencia, se demuestra en la figura \ref{fig:7}. Para la creación de estas máscaras de entrenamiento se utilizaron herramientas de dibujo digital. Ejemplos de este tipo de programa incluyen {\it Krita} y {\it GIMP}.
 
 Las máscaras utilizadas para el entrenamiento, es decir, aquellas correspondientes a las teselas T20KNA, T20KNB y T20KPC, se encuentran disponibles en el repositorio de Torchbearer \cite{torchbearer}.
+\todo[inline]{mostrar todos los datos de entrenamiento}
 
 \begin{figure}[h!]
     \centering
@@ -92,6 +94,8 @@ Las máscaras utilizadas para el entrenamiento, es decir, aquellas correspondien
     \caption{La creación de datos de entrenamiento implica la creación manual de máscaras que definen el objetivo.}
     \label{fig:7}
 \end{figure}
+
+\todo[inline]{poner un poco de python en apendice, algo en notebooks}
 
 \subsection{Partición de datos de entrenamiento}
 
@@ -274,6 +278,8 @@ Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres ca
     \caption{Máscaras de predicción de paleocauces de los modelos FarSeg}
     \label{fig:farseg}
 \end{figure}
+
+\todo{hacer hablar mas a los primeros graficos. expandir sobre lo que hace}
 
 Mientras que la utilización de backbone más simple no dio buenos resultados, los modelos más complejos dieron resultados significativos. De manera interesante, los modelos con backbone ResNet-50 y entrenados sobre las bandas de color visible tomaron, en promedio, muchas más épocas para alcanzar su mejor rendimiento que los demás.
 
