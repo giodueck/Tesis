@@ -24,8 +24,6 @@
 
 En esta sección se presentan las conclusiones obtenidas a partir de los resultados de los experimentos realizados a lo largo de este trabajo Proyecto Final de Carrera. También se discuten recomendaciones para trabajos futuros así como para posibles implementaciones, se detallan las contribuciones del proyecto, y posibilidades para expandir sobre este proyecto en trabajos posteriores.
 
-\todo{expandir}
-
 \subsection{Conclusión}
 
 En el curso de este trabajo se han buscado e implementado métodos de creación de modelos de redes neuronales convolucionales (CNN) para su uso en el análisis de imágenes satelitales. Se consideraron tareas de clasificación y segmentación de imágenes, llegando a la conclusión que la clasificación es inadecuada para la tarea específica de la detección de paleocauces. Se evaluó la viabilidad del uso de varias arquitecturas de modelos CNN y se experimentó con los parámetros de los mismos.
@@ -42,23 +40,29 @@ Una limitación potencial para estas arquitecturas son los datos de entrenamient
 
 La mejor arquitectura estudiada es U-Net, bien conocida por su capacidad de segmentación de imágenes médicas. Los resultados de estos modelos dependen también de los datos de entrenamiento, aunque parecen producir predicciones más generales. Dado que las imágenes procesadas por esta arquitectura pasan por filtros que reducen la resolución de la imagen, y luego por filtros que sintetizan datos nuevos al aumentar nuevamente la resolución, estos modelos pueden aprender los patrones deseados de forma muy general, incluso con datos de entrenamiento imperfectos.
 
-En comparaciones hechas entre trabajos de campo en el Chaco Argentino, algunas versiones de los modelos U-Net lograron una predicción correcta en todas las áreas de sondeos geoeléctricos y pozos. En el Chaco Paraguayo, los modelos predicen correctamente entre ocho y nueve de las localidades de pozos dentro y fuera de paleocauces, de un total de diez. Excluyendo versiones del modelo desproporcionalmente limitadas en su eficacia, esto resulta en una correctitud de entre 80\% y 100\%.
+En comparaciones hechas entre trabajos de campo en el Chaco Argentino, algunas versiones de los modelos U-Net lograron una predicción correcta en todas las áreas de sondeos geoeléctricos y pozos. Esta zona presenta muchos paleocauces que se formaron en paralelo y pueden caracterizarse como paleocauces activos, ya que presentan mucha humedad en la superficie y una gran abundancia de lagunas, ambas características clásicas de este tipo de paleocauces. Específicamente, las versiones 7, 8, 11 y 12 producen predicciones correctas en el 100\% de los sitios de sondeos o pozos, mientras que las versiones 9 y 10 producen predicciones significativas correctas en solamente 33\% de los mismos sitios, sugeriendo que su arquitectura es enteramente inadecuada.
 
-Los modelos producen predicciones para ambos tipos de paleocauces, activos y colmatados. Los paleocauces activos, más fácilmente detectables debido a su alto grado de humedad en la superficie, producen predicciones más fácilmente. Sin embargo, predicciones de paleocauces colmatados en el Chaco Paraguayo son mucho más importantes debido a su capacidad de capturar agua por tiempos prolongados y, por ende, abastecer más consistentemente a las comunidades locales.
+En el Chaco Paraguayo, los modelos predicen correctamente entre ocho y nueve de las localidades de pozos dentro y fuera de paleocauces, de un total de diez. Esta zona está dotada principalmente de paleocauces colmatados, presentando una superficie arenosa, con poca humedad y poca vegetación, que conforman el Sistema Acuífero Paleocauce. En específico, las versiones 7 y 8 tienen predicciones 90\% correctas, y las versiones 11 y 12 son correctas en el 80\% de los sitios. Sin embargo, las versiones 9 y 10 nuevamente produjeron mapas muy esparcidos, con predicciones correctas menores al 30\%.
 
-\todo{hablar mas sobre comparacion con otros trabajos}
+Aunque los resultados son en general mejores en zonas de paleocauces activos, con resultados entre 10\% y 20\% mejores gracias a sus distintivas características superficiales, los paleocauces colmatados son de mayor interés. Esto se debe a que paleocauces activos están dotados de lagunas y humedales, y en las zonas mencionadas, se presentan en cercanía de rios, mientras que los paleocauces colmatados del Chaco Central se presentan en un ambiente semi-árido en el cual el agua se considera un recurso mucho más escaso, especialmente en sequías cuando las reservas de agua más accesibles pueden agotarse rápidamente.
 
-\todo{agregar seccion de limitaciones}
+\subsection{Limitaciones}
+
+La principal limitación en trabajos de clasificación y segmentación son los datos de entrenamiento. Si estos datos son de mala calidad, los modelos entrenados no alcanzan zu máximo potencial. Mientras que los resultados de este Proyecto Final de Carrera son muy interesantes y prometedores, esta limitación está presente. Las máscaras objetivo fueron creadas a base de un mejor esfuerzo, basadas en imágenes de baja resolución y reconocimiento visual. Mapas de mayor fidelidad pueden generar modelos que producen resultados menos ruidosos, con mejor exactitud y bordes más definidos.
+
+Otra limitación importante fue la disponibilidad de recursos computacionales. Los recursos utilizados para este trabajo son hardware de consumidor, no siendo especializados para cargas de trabajo de entrenamiento de redes neuronales o inferencia. Este factor limita la velocidad del entrenamiento, pero impone una barrera en cuanto al tamaño y complejidad de las arquitecturas CNN utilizadas. El uso de equipamiento profesional, que cuentan con una mayor cantidad de memoria y poder de procesamiento, puede tanto acelerar el entrenamiento como permitir la implementación de modelos mucho más complejos.
+
+En cuanto a los modelos entrenados, una limitación es la precisión de predicciones en zonas de paleocauces colmatados, y más allá, la cantidad de predicciones confundidas por zonas urbanas, calles y caminos, y campos cultivados. Esta limitación es evidente en las imágenes de la figura \ref{fig:mariscal}. Una mejora en las limitaciones discutidas anteriormente puede mitigar esta tercera.
+
+Otra consecuencia de las dos primeras limitaciones es la restricción a imágenes de resolución baja. Debido al gran tamaño de las estructuras de paleocauces, es necesario incluir un gran contexto. En este estudio se utilizaron regiones cuadradas de 128 y 192 píxeles por la limitación de memoria disponible para el entrenamiento. Esto resulta en regiones de $7\,680m$ y $11\,520m$ con imágenes de 60 metros de resolución, y se demostró que los resultados mejoraron con la región mayor. Para utilizar imágenes de 20 o 10 metros, sería necesario no sólo aumentar la capacidad de cómputo, pero también la calidad y resolución de los datos de entrenamiento.
 
 \subsection{Recomendaciones}
 
-Una posible mejora se puede alcanzar por medio de la especialización de modelos para cada tipo de paleocauce. La creación de modelos especializados podría necesitar de más datos de entrenamiento, tomadas en el área que corresponde para cada tipo. El Chaco Paraguayo, que presenta un grande sistema de paleocauces colmatados, y el Chaco Argentino, con grandes cantidades de paleocauces activos, proveerían datos de entrenamiento para cada tipo de paleocauce.
+Para continuar esta línea de investigación, recomendamos que trabajos futuros se enfoquen principalmente en el problema de la recolección y preparación de datos de entrenamiento. Esto puede hacerse por medio de una especialización sobre los paleocauces colmatados del Chaco Paraguayo, o más bien mediante la creación de mapas de mayor calidad por medio de estudios geológicos.
 
-Otra posibilidad es el uso de hardware profesional para permitir el análisis de ventanas más grandes y resoluciones más altas que 60 metros. Dado que los resultados con ventanas de 192 píxeles de lado son mejores que con ventanas de 128, es posible que ventanas aun más amplias produzcan predicciones aun mejores.
+La creación de modelos especializados podría necesitar de más datos de entrenamiento, tomadas en el área que corresponde para cada tipo, pero resultando en predicciones mucho más eficaces. El Chaco Paraguayo, que presenta un grande sistema de paleocauces colmatados, y el Chaco Argentino, con grandes cantidades de paleocauces activos, serían las posibles fuentes principales datos de entrenamiento para cada tipo de paleocauce.
 
-\todo{expandir en recomendaciones sobre trabajos futuros}
-
-\todo{"para continuar esta linea de investigacion, recomiendo tal y tal" recomendaciones}
+Otra posibilidad es el uso de hardware profesional para permitir el análisis de ventanas más grandes y resoluciones más altas que 60 metros. Dado que los resultados con ventanas de 192 píxeles de lado son mejores que con ventanas de 128, es posible que ventanas aun más amplias produzcan predicciones aun mejores. También se pueden emplear arquitecturas más complejas, no utilizadas en este trabajo debido a esta limitación.
 
 \subsection{Contribuciones}
 
@@ -71,14 +75,13 @@ Partiendo de las conclusiones en las secciones anteriores, podemos afirmar que a
 
 \subsection{Trabajos futuros}
 
-Este trabajo expande el estado del arte en lo referente al uso de modelos CNN en aplicaciones de segmentación y determinación de uso de suelo por medio de imágenes satelitales. Existen varias posibilidades para construir sobre este Proyecto Final de Carrera:
+Este trabajo expande el estado del arte en lo referente al uso de modelos CNN en aplicaciones de segmentación y determinación de uso de suelo por medio de imágenes satelitales del Chaco Paraguayo. Existen varias posibilidades para construir sobre este Proyecto Final de Carrera:
 
 \begin{itemize}
     \item Implementación y comprobación de la eficacia de más modelos, como por ejemplo las variantes más complejas de U-Net.
-    \item Implementación en equipamiento profesional para hacer uso de grandes imágenes o mosaicos de imágenes.
     \item La creación de metodologías más rigurosas para la creación de conjuntos de datos de entrenamiento.
     \item Expansión de los modelos para la generación de predicciones de múltiples etiquetas, en lugar de una sola.
-    \item Mejora de resultados de arquitecturas CNN menos complejas, reduciendo el costo y tiempo de entrenamiento e inferencia.
-    \item Trabajos de campo para la exploración de zonas de paleocauces menos estudiados.
-    \item Análisis de datos provenientes de otros proveedores, haciendo uso de un conjunto sensores diferentes. \todo[inline]{proveedores... de que}
+    \item Exploración del uso de arquitecturas CNN menos complejas, reduciendo el costo y tiempo de entrenamiento e inferencia.
+    \item Trabajos de campo para la exploración de zonas de paleocauces menos estudiados, detectados por modelos predictivos.
+    \item Análisis de datos provenientes de otros proveedores de imágenes satelitales, por ejemplo Landsat, haciendo uso de un conjunto sensores diferentes.
 \end{itemize}
