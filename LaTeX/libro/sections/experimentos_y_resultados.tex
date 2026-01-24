@@ -75,7 +75,7 @@ Para las tareas de clasificación y segmentación es necesaria una verdad fundam
 
 Las imágenes de referencia se sintetizaron a partir de estudios de la zona del abanico aluvial del Pilcomayo \cite{baudino-2023}, en donde se presentan mapas de geomorfología como en la figura \ref{fig:6}, las cuales se imitaron a base del mejor esfuerzo. Para facilitar la identificación visual de los paleocauces, se utilizaron imágenes de color falso, en especial utilizando imágenes de luz infrarroja (IR) de onda corta (SWIR por sus siglas en ingles, short wave infrared) utilizando las bandas B12 (IR de onda corta), B8A (IR cercano) y B4 (verde) en los canales rojo, verde y azul respectivamente. Diferentes tipos de suelo y vegetación reflejan estas bandas de formas variadas, y esta combinación puede resaltar estructuras geológicas como paleocauces al ojo humano mejor que imágenes de color real. \cite{earth-observatory-false-color} Un ejemplo de mascara, usando el mapa de la figura \ref{fig:6} como referencia, se demuestra en la figura \ref{fig:7}. Para la creación de estas máscaras de entrenamiento se utilizaron herramientas de dibujo digital. Ejemplos de este tipo de programa incluyen {\it Krita} y {\it GIMP}.
 
-Las máscaras utilizadas para el entrenamiento, es decir, aquellas correspoindientes a las teselas T20KNA, T20KNB y T20KPC, se encuentran disponibles en el repositorio de Torchbearer \cite{torchbearer}.
+Las máscaras utilizadas para el entrenamiento, es decir, aquellas correspondientes a las teselas T20KNA, T20KNB y T20KPC, se encuentran disponibles en el repositorio de Torchbearer \cite{torchbearer}.
 
 \begin{figure}[h!]
     \centering
@@ -275,7 +275,7 @@ Como la arquitectura FarSeg disponible a través de TorchGeo solo acepta tres ca
     \label{fig:farseg}
 \end{figure}
 
-Mientras que el use de backbone más simples no dio buenos resultados, los modelos más grandes dieron resultados significantes. Interesantemente, los modelos con backbone ResNet-50 y entrenados sobre las bandas de color visible tomaron, en promedio, muchas más épocas para alcanzar su mejor rendimiento que los demás.
+Mientras que la utilización de backbone más simple no dio buenos resultados, los modelos más complejos dieron resultados significativos. De manera interesante, los modelos con backbone ResNet-50 y entrenados sobre las bandas de color visible tomaron, en promedio, muchas más épocas para alcanzar su mejor rendimiento que los demás.
 
 La figura \ref{fig:farseg} muestra las máscaras generadas por estos modelos.
 
@@ -291,7 +291,7 @@ Una de las arquitecturas más conocidas para la tarea de segmentación es U-Net.
 
 En cada descenso a un nivel inferior, los datos crecen en la cantidad de canales y decrecen en la resolución de cada canal, es decir, la imagen disminuye en su tamaño. Inversamente, al ascender a un nivel superior, disminuye la cantidad de canales e incrementa la resolución de cada canal. El cuello de botella es el último nivel, en el cual la resolución es mínima y la cantidad de canales es máxima.
 
-En adición a las conexiones entre niveles adyacentes, existen conexiones entre los caminos descendientes y ascendientes del mismo nivel, saltando niveles en estas conexiones.
+En adición a las conexiones entre niveles adyacentes, existen conexiones entre los caminos descendentes y ascendentes del mismo nivel, saltando niveles en estas conexiones.
 
 Cada nivel tiene un tamaño que describe la cantidad de filtros, y debe ser el doble que el nivel anterior o la mitad del nivel siguiente. Cada nivel disminuye y aumenta la resolución de la imagen por un factor de 4, o sea un factor de 2 por cada dimensión.
 
@@ -385,7 +385,7 @@ La pérdida de estos modelos es en promedio menor que la pérdida promedio de lo
 
 Observando los resultados producidos por los modelos entrenados, es evidente que el análisis de imágenes más pequeñas produce predicciones más limitadas, en donde solamente áreas con un contraste más pronunciado son designadas como áreas de paleocauces, mientras que el análisis de imágenes que cubren un área más extensa producen predicciones más similares a las máscaras de entrenamiento. Por ejemplo, las versiones 11 y 12 son las únicas que producen una predicción sustancial para los paleocauces a lo largo del margen izquierdo de la imagen.
 
-Las versiones 9 y 10 producen predicciones muy limitadas para esta zona, que presenta características de paleocauces colmatados. Aquellas zonas, en las que estas versiones producen predicciones significantes, son húmedas, sugeriendo un posible sesgo hacia los paleocauces activos. Aun así, los resultados de estas versiones son claramente limitados, posiblemente debido a su arquitectura que presenta un nivel inicial de 32 capas en lugar de 64.
+Las versiones 9 y 10 producen predicciones muy limitadas para esta zona, que presenta características de paleocauces colmatados. Aquellas zonas, en las que estas versiones producen predicciones significativas, son húmedas, sugiriendo un posible sesgo hacia los paleocauces activos. Aun así, los resultados de estas versiones son claramente limitados, posiblemente debido a su arquitectura que presenta un nivel inicial de 32 capas en lugar de 64.
 
 Una ventaja de las versiones 1-6 es que sus predicciones son más consistentes, con las versiones 7-12 dependiendo mucho más de la composición de los niveles.
 
@@ -417,7 +417,7 @@ La figura \ref{fig:combined} muestra máscaras generadas por una combinación de
 
 \subsection{Comparación con trabajos anteriores}
 
-Existen varios trabajos investigando la ocurrencia de paleocauces en el Chaco Central Paraguayo y en el Chaco Argentino. De particular interés son aquellos trabajos que incluyen una prospección de estas áreas, ya sea un sondeo geoeléctrico o mediante la creación de pozos.
+Existen varios trabajos investigando la ocurrencia de paleocauces en el Chaco Central Paraguayo y en el Chaco Argentino. De particular interés son aquellos trabajos que incluyen una prospección de estas áreas, ya sea un sondeo geoeléctrico o mediante la construcción de pozos.
 
 Dos investigaciones son de gran interés, la primera por parte del Instituto Nacional de Tecnología Industrial (INTI) de Argentina en la provincia de Chaco \cite{inti-2015}, y la segunda como parte de un proyecto de la organización World Wildlife Fund (WWF) Paraguay, realizada en el distrito de Mariscal Estigarribia, departamento Boquerón. \cite{garcia-2021}
 
@@ -433,7 +433,7 @@ Creando máscaras de predicción y combinándolas con mapas del área, podemos c
 
 Las áreas incluidas se escojieron debido a la presencia de pozos en la cercanía de los sondeos, lo cual es un buen indicador de la posible ocurrencia de paleocauces en la zona. Estas se listan en la tabla \ref{table:inti}.
 
-Todas las localidades caen dentro de áreas en donde los modelos versiones 11 y 12, descritos en la tabla \ref{table:unet2}, predicen ocurrencias de paleocauces. Sin embargo, las versiones 9 y 10 predicen que solo dos de las cinco áreas sondeadas se encuentran sobre paleocauces, una se encuentra en la cercanía de una predicción significante, y las dos restantes se encuentran lejos de predicciones significantes. Ya que las predicciones de las versiones 7 y 8 son muy similares a las de las versiones 11 y 12 en las zonas de los sondeos, no las incluimos en la figura \ref{fig:inti}.
+Todas las localidades caen dentro de áreas en donde los modelos versiones 11 y 12, descritos en la tabla \ref{table:unet2}, predicen ocurrencias de paleocauces. Sin embargo, las versiones 9 y 10 predicen que solo dos de las cinco áreas sondeadas se encuentran sobre paleocauces, una se encuentra en la cercanía de una predicción significativa, y las dos restantes se encuentran lejos de predicciones significativas. Ya que las predicciones de las versiones 7 y 8 son muy similares a las de las versiones 11 y 12 en las zonas de los sondeos, no las incluimos en la figura \ref{fig:inti}.
 
 Mientras que las versiones 9 y 10 parecen predecir positivamente sólo áreas muy húmedas, las versiones 11 y 12 son mucho más generales. Como
 
@@ -515,7 +515,7 @@ La investigación realizada en Mariscal Estigarribia \enquote{Análisis De Recur
 
 Como parte del análisis, se reporta una lista de pozos en la zona de trabajo y sus alrededores. De esta lista se seleccionan diez pozos para una red de monitoreo de calidad de agua, los cuales se encuentran listados con sus coordenadas en sistema de coordenadas universal transversal de Mercator (UTM por sus siglas en inglés) en la tabla \ref{table:mariscal}. Solo uno de estos pozos, el pozo número 12, no se encuentra en la zona estudiada, pero se selecciona debido a la alta calidad del agua que provee, siendo este un pozo profundo perteneciendo al Acuífero profundo Yrendá.
 
-En esta zona, ya que las predicciones de las versiones 9 y 10 de los modelos son mínimas y muy diferentes a las demás, decidimos excluirlas. Esto se debe potencialmente a la humedad reducida del suelo en esta región en contraste con las imágenes de la provindia de Chaco en Argentina, para la cual las predicciones de estos modelos sí son significantes.
+En esta zona, ya que las predicciones de las versiones 9 y 10 de los modelos son mínimas y muy diferentes a las demás, decidimos excluirlas. Esto se debe potencialmente a la humedad reducida del suelo en esta región en contraste con las imágenes de la provindia de Chaco en Argentina, para la cual las predicciones de estos modelos sí son significativas.
 
 Los mapas de los pozos y las predicciones superpuestas se encuentran en la figura \ref{fig:mariscal}. Corresponden a las teselas T20KPA y T20KQA referenciadas en la tabla \ref{table:tiles}.
 
@@ -592,6 +592,6 @@ La mayoría de los pozos se predicen correctamente como ubicados en paleocauces.
     \qquad
     \subfloat[\centering Superposición pred. v. 11 y 12]{\includegraphics[width=0.3\textwidth]{wwf-p15_16_18_20_28_34_41-11-12.png}}
 
-    \caption{Predicciones en el área de trabajo del análisis de recursos hídricos en Marical Estigarribia.}
+    \caption{Predicciones en el área de trabajo del análisis de recursos hídricos en Marical.}
     \label{fig:mariscal}
 \end{figure}

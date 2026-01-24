@@ -211,11 +211,11 @@ Una clase proveída por la librería Torchgeo, {\it RasterDataset}, permite carg
 
 \subsubsection{Limpieza de datos}
 
-Las teselas incluyen máscaras de píxeles erróneos. Como tenemos una gran cantidad de datos disponibles gracias al tiempo corto de revisita de los satélites, podemos simplemente descartar imágenes con significantes errores.
+Las teselas incluyen máscaras de píxeles erróneos. Como tenemos una gran cantidad de datos disponibles gracias al tiempo corto de revisita de los satélites, podemos simplemente descartar imágenes con errores significativos.
 
 Una inevitabilidad de las imágenes producidas por Sentinel-2 es la falta de datos de una porción de ciertas teselas. Esta es una consecuencia de la división de imágenes en teselas, algunas de las cuales abarcan los bordes de la franja capturada en un sobrevuelo. Los valores de los píxeles en estas regiones son 0.
 
-Como estas regiones faltantes (pero no erróneas) son sustanciales, dependiendo de la tesela escojida, estos píxeles no se modificaron en las imágenes afectadas. Nuestra expectativa fue que los modelos se adecuarían a este valor, dado que mientras los valores posibles abarcan el rango entre $0$ y $10'000$, nunca toman valores cercanos a $0$ en imágenes libres de errores. Un ejemplo de este fenómeno se encuentra en el cuadro \ref{table:tiles}, en el margen izquierdo de la tesela {\it T20KPC}.
+Como estas regiones faltantes (pero no erróneas) son sustanciales, dependiendo de la tesela escogida, estos píxeles no se modificaron en las imágenes afectadas. Nuestra expectativa fue que los modelos se adecuarían a este valor, dado que mientras los valores posibles abarcan el rango entre $0$ y $10'000$, nunca toman valores cercanos a $0$ en imágenes libres de errores. Un ejemplo de este fenómeno se encuentra en el cuadro \ref{table:tiles}, en el margen izquierdo de la tesela {\it T20KPC}.
 
 \subsubsection{Resumen del procesamiento de los datos}
 
