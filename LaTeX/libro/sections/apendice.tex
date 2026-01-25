@@ -1,6 +1,32 @@
 \section{Apéndice}
 
-\todo{apendice}
-
 % configuration examples
 % map examples: too wet, too dry, good
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{jupyter-sample-1.png}
+    \caption{Una muestra de imagen de entrenamiento visualizada con Jupyter. Las imágenes resultantes se muestran en la figura \ref{apx:jupyter-sample-2}.}
+    \label{apx:jupyter-sample-1}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{jupyter-sample-2.png}
+    \caption{Una muestra de imagen de entrenamiento visualizada con Jupyter. La imagen satelital (arriba) tiene una coloración azul a causa del uso de bandas de diferentes espectros como los colores de la imagen. La máscara (abajo) demarca en amarillo a un paleocauce. Es posible ver las limitaciones de la máscara, que no cubre exactamente al paleocauce.}
+    \label{apx:jupyter-sample-2}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{job-config.png}
+    \caption{Un ejemplo de configuración del modelo y parámetros de entrenamiento en YAML. Este modelo es igual en arquitectura y parámetros a las versiones 7 y 8 de los modelos U-Net presentados.}
+    \label{apx:job-config}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{inferrence_plot.png}
+    \caption{Una visualización de los resultados de predicción del modelo entrenado U-Net, versión 11, para una imagen de entrada de 192 píxeles de lado. Las imágenes son (a) (superior izquierda) la imagen satelital en color, (b) (superior derecha) la máscara de objetivo con azul denotando áreas de paleocauce, (c) (inferior izquierda) la predicción, con valores más negativos en blanco y valores más positivos en azul, y (d) (inferior derecha) la predicción con un umbral, con valores negativos o cero en blanco y valores positivos en azul. Es aparente que la predicción (d) es mucho más detallada que la máscara de entrenamiento (b).}
+    \label{apx:inferrence-plot}
+\end{figure}

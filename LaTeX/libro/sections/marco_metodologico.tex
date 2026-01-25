@@ -205,11 +205,9 @@ Las imágenes utilizadas se identifican por su número de tesela, asignado por C
 
 Seleccionados los datos, estos se mantienen en su formato y estructura de archivos original, de donde pueden ser leídas las imágenes para cada banda disponible para cada resolución (de 10m, 20m o 60m).
 
-Como las estructuras que se buscan reconocer son extensas, basta con utilizar imágenes con una resolución de 60m por píxel. Esto, además de reducir la potencial complejidad y el tamaño de los modelos que analizen las imágenes, permite utilizar ventanas de mayor área sin correr el riesgo de necesitar de una gran cantidad de recursos de memoria para realizar el análisis. Para la resolución de 60m existen once (11) capas, cada una representada en una imagen de un canal, es decir de un color.
+Como las estructuras que se buscan reconocer son extensas, basta con utilizar imágenes con una resolución de 60m por píxel. Esto, además de reducir la potencial complejidad y el tamaño de los modelos que analizen las imágenes, permite utilizar ventanas de mayor área sin correr el riesgo de necesitar de una gran cantidad de recursos de memoria para realizar el análisis. Para utilizar resoluciones más altas de manera efectiva, sería necesario emplear equipos de mayor capacidad de cómputo; esta limitación se detalla en el siguiente capítulo, Experimentos y Resultados. Para la resolución de 60m existen once (11) capas, cada una representada en una imagen de un canal, es decir de un color.
 
 Una clase proveída por la librería Torchgeo, {\it RasterDataset}, permite cargar imágenes satelitales de diversas bandas teniendo en cuenta su geolocalización. Esto permite un manejo abstracto del conjunto de datos, por lo cual no es necesario una preparación extensa de los datos obtenidos de Copernicus.
-
-\todo[inline]{add figure of what the end result might look like}
 
 \subsubsection{Limpieza de datos}
 

@@ -73,7 +73,9 @@ Cabe resaltar que los experimentos se vieron limitados por estas en su envergadu
 
 Para las tareas de clasificación y segmentación es necesaria una verdad fundamental, ya sea una o varias etiquetas por cada imagen en el caso de la clasificación, o una máscara en el caso de la segmentación. Este es el objetivo que se quiere obtener a partir del modelo final.
 
-Las imágenes de referencia se sintetizaron a partir de estudios de la zona del abanico aluvial del Pilcomayo \cite{baudino-2023}, en donde se presentan mapas de geomorfología como en la figura \ref{fig:mapa-pilcomayo}, las cuales se imitaron a base del mejor esfuerzo. Para facilitar la identificación visual de los paleocauces, se utilizaron imágenes de color falso, en especial utilizando imágenes de luz infrarroja (IR) de onda corta (SWIR por sus siglas en ingles, short wave infrared) utilizando las bandas B12 (IR de onda corta), B8A (IR cercano) y B4 (verde) en los canales rojo, verde y azul respectivamente. Diferentes tipos de suelo y vegetación reflejan estas bandas de formas variadas, y esta combinación puede resaltar estructuras geológicas como paleocauces al ojo humano mejor que imágenes de color real. \cite{earth-observatory-false-color} Un ejemplo de mascara, usando el mapa de la figura \ref{fig:mapa-pilcomayo} como referencia, se demuestra en la figura \ref{fig:masks}. Para la creación de estas máscaras de entrenamiento se utilizaron herramientas de dibujo digital. Ejemplos de este tipo de programa incluyen {\it Krita} y {\it GIMP}.
+Las imágenes de referencia se crearon a partir de estudios de la zona del abanico aluvial del Pilcomayo \cite{baudino-2023}, en donde se presentan mapas de geomorfología como en la figura \ref{fig:mapa-pilcomayo}, las cuales se imitaron a base del mejor esfuerzo. Para facilitar la identificación visual de los paleocauces, se utilizaron imágenes de color falso, en especial utilizando imágenes de luz infrarroja (IR) de onda corta (SWIR por sus siglas en ingles, short wave infrared) utilizando las bandas B12 (IR de onda corta), B8A (IR cercano) y B4 (verde) en los canales rojo, verde y azul respectivamente. Diferentes tipos de suelo y vegetación reflejan estas bandas de formas variadas, y esta combinación puede resaltar estructuras geológicas como paleocauces al ojo humano mejor que imágenes de color real. \cite{earth-observatory-false-color} Las máscaras utilizadas, usando el mapa de la figura \ref{fig:mapa-pilcomayo} como referencia, se visualizan en la figura \ref{fig:masks}. Para la creación de estas máscaras de entrenamiento se utilizaron herramientas de dibujo digital. Ejemplos de este tipo de programa incluyen {\it Krita} y {\it GIMP}.
+
+Estas máscaras son imágenes georreferenciadas, lo que permite la unificación de estas imágenes con el conjunto de datos de imágenes satelitales, por medio de una funcionalidad en TorchGeo.
 
 Las máscaras utilizadas para el entrenamiento, es decir, aquellas correspondientes a las teselas T20KNA, T20KNB y T20KPC, se encuentran disponibles en el repositorio de Torchbearer \cite{torchbearer}.
 
@@ -86,15 +88,15 @@ Las máscaras utilizadas para el entrenamiento, es decir, aquellas correspondien
 
 \begin{figure}
     \centering
-    \subfloat[Mapa SWIR, tesela T20KPC, este del Parque Nacional Médanos del Chaco]{\includegraphics[width=0.4\textwidth]{T20KPC_swir.jpg}}
+    \subfloat[Mapa SWIR, tesela T20KPC, zona este del Parque Nacional Médanos del Chaco]{\includegraphics[width=0.4\textwidth]{T20KPC_swir.jpg}}
     \qquad
     \subfloat[Máscara de paleocauces]{\includegraphics[width=0.4\textwidth]{T20KPC_mask.jpg}}
 
-    \subfloat[Mapa SWIR, tesela T20KNB, norte del Abanico Aluvial del Pilcomayo]{\includegraphics[width=0.4\textwidth]{T20KNB_swir.jpg}}
+    \subfloat[Mapa SWIR, tesela T20KNB, zona norte del Abanico Aluvial del Pilcomayo]{\includegraphics[width=0.4\textwidth]{T20KNB_swir.jpg}}
     \qquad
     \subfloat[Máscara de paleocauces]{\includegraphics[width=0.4\textwidth]{T20KNB_mask.jpg}}
 
-    \subfloat[Mapa SWIR, tesela T20KNA, norte del Abanico Aluvial del Pilcomayo]{\includegraphics[width=0.4\textwidth]{T20KNA_swir.jpg}}
+    \subfloat[Mapa SWIR, tesela T20KNA, zona sur del Abanico Aluvial del Pilcomayo]{\includegraphics[width=0.4\textwidth]{T20KNA_swir.jpg}}
     \qquad
     \subfloat[Máscara de paleocauces]{\includegraphics[width=0.4\textwidth]{T20KNA_mask.jpg}}
 
@@ -102,19 +104,17 @@ Las máscaras utilizadas para el entrenamiento, es decir, aquellas correspondien
     \label{fig:masks}
 \end{figure}
 
-\todo{poner un poco de python en apendice, algo en notebooks}
-
 \subsection{Partición de datos de entrenamiento}
-
-% \todo{diagram of $random_grid_cell_assignment$}
 
 El conjunto de datos en PyTorch también se conoce como {\it Dataset}, y el componente que disponibiliza estos datos como {\it DataLoader}. Lightning provee una abstracción, el {\it DataModule}, que abstrae al Dataset y permite proveer DataLoaders distintos para las tareas de entrenamiento, validación, prueba e inferencia.
 
-Para la división de datos en datasets de entrenamiento, validación y prueba, se utilizaron métodos proveídos por TorchGeo. El procedimiento consiste en dividir los datos de entrenamiento en celdas, las cuales se asignan pseudoaleatoriamente a subconjuntos de entrenamiento, validación y prueba en una proporción de 70/20/10 respectivamente. Para cada subconjunto, luego, definimos un DataLoader que provee acceso a los datos.
+Para la división de datos en datasets de entrenamiento, validación y prueba, se utilizaron métodos proveídos por TorchGeo. El procedimiento consiste en dividir los datos de entrenamiento en una grilla de celdas, las cuales se asignan pseudoaleatoriamente a subconjuntos de entrenamiento, validación y prueba en una proporción de 70/20/10 respectivamente. Para cada subconjunto, luego, definimos un DataLoader que provee acceso a los datos. La grilla en la que se dividen es de seis celdas de largo, abarcando cada celda un área cuadrada de 305 píxeles de largo.
 
-Las celdas en las cuales se dividen las imágenes no se solapan, y la estrategia de cada DataLoader puede ser elegida de acuerdo al objetivo de la etapa a la cual corresponde. Para el entrenamiento usamos un muestreo aleatorio, mientras que los DataLoaders de validación y de prueba hacen un muestreo por división en celdas, asegurando que toda el área de estos conjuntos se muestrean una sola vez y que el conjunto de imágenes creado es consistente para cada tanda de entrenamiento y para cada modelo entrenado sobre el conjunto.
+Las celdas en las cuales se dividen las imágenes no se solapan, y la estrategia de cada DataLoader puede ser elegida de acuerdo al objetivo de la etapa a la cual corresponde. Esto evita que las imágenes de entrenamiento sean las mismas que las de validación o prueba. Para el entrenamiento usamos un muestreo aleatorio, mientras que los DataLoaders de validación y de prueba hacen un muestreo por división en celdas, asegurando que toda el área de estos conjuntos se muestreen una sola vez y que el conjunto de imágenes creado sea consistente para cada tanda de entrenamiento y para cada modelo entrenado sobre el conjunto.
 
-Cada DataLoader produce imágenes de 128$\times$128 o 192$\times$192 píxeles recortadas de las celdas asignadas al DataLoader, correspondiente a áreas de $7\,680m\times7\,680m$ y $11\,520m\times11\,520m$ respectivamente. Las imágenes de cada tesela tienen dimensiones de $1\,830\times1\,830$ píxeles de 60m$\times$60m, abarcando un área de $109\,800$m por lado, o alrededor de 110km. La grilla en la que se dividen es de seis celdas de largo, abarcando cada celda un área cuadrada de 305 píxeles de largo, lo que permite producir 4 imágenes de validación o prueba por celda.
+Cada DataLoader produce imágenes de 128$\times$128 o 192$\times$192 píxeles recortadas de las celdas asignadas al DataLoader, correspondiente a áreas de $7\,680m\times7\,680m$ y $11\,520m\times11\,520m$ respectivamente. Las imágenes de cada tesela tienen dimensiones de $1\,830\times1\,830$ píxeles de 60m$\times$60m, abarcando un área de $109\,800$m por lado, o alrededor de 110km.
+
+Un ejemplo visualizado de esta segmentación se encuentra en la figuras \ref{apx:jupyter-sample-1} y \ref{apx:jupyter-sample-2} en el apéndice.
 
 \subsection{Entrenamiento y validación}
 
@@ -124,7 +124,7 @@ Lightning provee un componente llamado Trainer, que implementa bucles de entrena
 
 El Trainer también brinda la posibilidad de definir un {\it checkpoint}, es decir un punto de control, que se encarga de mantener una copia de los parámetros del modelo en el punto en el que muestra el mejor rendimiento a lo largo del entrenamiento. Este checkpoint es la forma en la que el Trainer provee el modelo entrenado para luego ser usado en tareas de inferencia.
 
-Más allá de estos procedimientos simples, la mayoría del esfuerzo fue dedicada a la creación del conjunto de datos etiquetados y a la verificación de los resultados brindados por el entrenamiento sobre estos.
+Estas funcionalidades fueron abstraídas en Torchbearer, que provee una interfaz de configuración paramétrica de modelos. Un ejemplo se demuestra en la figura \ref{apx:job-config} en el apéndice. La mayoría del esfuerzo, sin embargo, fue dedicada a la creación del conjunto de datos etiquetados y a la verificación de los resultados brindados por el entrenamiento sobre estos.
 
 \subsection{Resultados}
 
@@ -168,7 +168,9 @@ Para cada arquitectura, se realizaron experimentos con diferentes hiperparámetr
 
 También se demuestran resultados en teselas nuevas, no utilizadas en el DataModule de entrenamiento, para demostrar las predicciones en datos completamente desconocidos. Estas teselas son aquellas cuya función es \enquote{Prueba} en el cuadro \ref{table:tiles} del capítulo anterior. En particular, la tesela T20KNC que incluye la frontera entre Paraguay y Bolivia, una sección del oeste del Parque Nacional Médanos del Chaco, y un sistema de paleocauces prominente hacia el sur del rio Parapetí en Bolivia, será utilizada como imagen de prueba.
 
-Para la visualización de las predicciones, se convierten las matrices de salida al formato de imagen georreferenciada GeoTiff. Las predicciones de los modelos son matrices de números decimales, para los cuales un valor cercano a o mayor que $1.0$ significa una predicción de ocurrencia de paleocauce en ese píxel, mientras que un valor cercano a o menor que $0.0$ significa una predicción de ausencia de paleocauce en ese píxel. Estos valores se fijan al intérvalo $[0,1]$, con valores menores que 0 y mayores que 1 siendo convertidos a 0 y 1 respectivamente. La matriz resultante es la máscara de predicciones para una celda de $128\times128$ o $192\times192$ píxeles, y cada píxel se convierte a un valor en la escala de grises, con 0 y 1 correspondiendo a negro y blanco respectivamente.
+Para la visualización de las predicciones, se convierten las matrices de salida al formato de imagen georreferenciada GeoTiff. Las predicciones de los modelos son matrices de números decimales, para los cuales un valor más positivo significa una predicción de ocurrencia de paleocauce en ese píxel, mientras que un valor cercano a o menor que $0.0$ significa una predicción de ausencia de paleocauce en ese píxel. Estos valores se fijan al intérvalo $[0,1]$, con valores menores que 0 y mayores que 1 siendo convertidos a 0 y 1 respectivamente. La matriz resultante es la máscara de predicciones para una celda de $128\times128$ o $192\times192$ píxeles, y cada píxel se convierte a un valor en la escala de grises, con 0 y 1 correspondiendo a negro y blanco respectivamente.
+
+Un ejemplo de las máscaras generadas para una imagen, comparadas con la imagen de entrada, se encuentra en la figura \ref{apx:inferrence-plot} en el apéndice.
 
 Estas celdas de $128\times128$ o $192\times192$ píxeles se combinan para formar un mosaico de predicciones. Para mitigar los artefactos que pueden surgir en los bordes de estas celdas, estas se solapan ligeramente. Se toman pasos de la mitad del tamaño de lado de las celdas, que luego se combinan en una imagen, eligiendo el valor máximo para cada píxel. De esta manera podemos asegurar que la predicción en los bordes de cada imagen no se vea comprometida.
 
