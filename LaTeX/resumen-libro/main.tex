@@ -1,4 +1,4 @@
-\documentclass[a4paper, 11pt]{article}
+\documentclass[a4paper, 10pt]{article}
 \usepackage[margin=1.25cm]{geometry}
 
 \usepackage[utf8]{inputenc}
@@ -45,7 +45,7 @@
 
 \renewcommand{\abstractname}{\vspace{-\baselineskip}}
 \begin{abstract}
-\noindent\textbf{Resumen} Las imágenes satelitales han creado una gran cantidad de datos fácilmente accesibles sobre la superficie terrestre, pero su análisis requiere de habilidad experta y una gran cantidad de tiempo. Las Redes Neuronales Convolucionales (CNN) brindan una forma de realizar este análisis de una manera rápida y generalizada, en especial para trabajos de segmentación y clasificación de uso de suelo. Este proyecto se enfoca en el desarrollo de herramientas y metodologías que apliquen arquitecturas CNN al problema del análisis a gran escala de imágenes satelitales libremente disponibles, con el objetivo específico de la detección de paleocauces, cauces de ríos o arroyos abandonados, en la región del Chaco en Paraguay. Estas formaciones geológicas son de gran interés por su utilidad como fuente de agua subterránea en lugares en los que no se disponen de fuentes más accesibles. Estudios anteriores han demostrado que las CNN son aptas para la segmentación y detección de objetos en imágenes satelitales. Este proyecto propone una forma de aplicar estas tecnologías de una manera simple y extensible a este problema, y más generalmente a cualquier problema de clasificación de uso de suelo. Para este propósito, se desarrolló una herramienta que simplifica la iteración y la prueba de diferentes configuraciones de conjuntos de datos y modelos, llamada \enquote{Torchbearer}. El área de estudio, consta de dos zonas, el Parque Nacional Médanos del Chaco y el Abanico Aluvial del Pilcomayo, que fueron elegidos por la existencia de estudios previos de paleocauces y por el constante interés en una fuente segura y constante de agua en la región semi-árida del Chaco. Cuando se utilizan con imágenes que contienen las coordenadas de estudios geológicos anteriores en las regiones del Chaco Paraguayo y Chaco Argentino, modelos entrenados en el marco del proyecto lograron una precisión de 80-100\%.
+\noindent \textbf{Resumen} Las imágenes satelitales han creado una gran cantidad de datos fácilmente accesibles sobre la superficie terrestre, pero su análisis requiere de habilidad experta y una gran cantidad de tiempo. Las Redes Neuronales Convolucionales (CNN) brindan una forma de realizar este análisis de una manera rápida y generalizada, en especial para trabajos de segmentación y clasificación de uso de suelo. Este proyecto se enfoca en el desarrollo de herramientas y metodologías que apliquen arquitecturas CNN al problema del análisis a gran escala de imágenes satelitales libremente disponibles, con el objetivo específico de la detección de paleocauces, cauces de ríos o arroyos abandonados, en la región del Chaco en Paraguay. Estas formaciones geológicas son de gran interés por su utilidad como fuente de agua subterránea en lugares en los que no se disponen de fuentes más accesibles. Estudios anteriores han demostrado que las CNN son aptas para la segmentación y detección de objetos en imágenes satelitales. Este proyecto propone una forma de aplicar estas tecnologías de una manera simple y extensible a este problema, y más generalmente a cualquier problema de clasificación de uso de suelo. Para este propósito, se desarrolló una herramienta que simplifica la iteración y la prueba de diferentes configuraciones de conjuntos de datos y modelos, llamada \enquote{Torchbearer}. El área de estudio, consta de dos zonas, el Parque Nacional Médanos del Chaco y el Abanico Aluvial del Pilcomayo, que fueron elegidos por la existencia de estudios previos de paleocauces y por el constante interés en una fuente segura y constante de agua en la región semi-árida del Chaco. Cuando se utilizan con imágenes que contienen las coordenadas de estudios geológicos anteriores en las regiones del Chaco Paraguayo y Chaco Argentino, modelos entrenados en el marco del proyecto lograron una precisión de 80-100\%.
 
 \vspace{0.1cm}
 
@@ -141,6 +141,7 @@ También se incluyeron trabajos relevantes para la universidad y la realidad loc
 \subsection{Resultados}
 
 Los resultados de la búsqueda se detallan en las tablas \ref{table:1}, \ref{table:2} y \ref{table:3}.
+\vspace{-1.3cm}
 
 \begin{center}
     \vspace{-\topsep}
@@ -229,7 +230,8 @@ Los resultados de la búsqueda se detallan en las tablas \ref{table:1}, \ref{tab
     \vspace{-\topsep}
 \end{center}
 
-\subsubsection{Discusión de los resultados}
+\vspace{0.5cm}
+\noindent \textbf{Discusión de los resultados}
 
 El campo de análisis de datos de teledetección ha visto muchos proyectos en los últimos años, y las redes convolucionales han sido una pieza crucial para crear modelos mas poderosos y eficientes que las redes neuronales convencionales. Las exploración de alternativas a redes neuronales, como RF y SVN, indica que la CNN es la tecnología más prometedora para la clasificación de una gran cantidad de datos.
 
@@ -247,13 +249,15 @@ Para la captura de estas imágenes se emplean varios métodos, que se dividen en
 
 Los primeros programas de observación de la tierra por medio de satélites surgieron en los años 70 y 80. El primero fue el programa Landsat de los Estados Unidos en 1972, y le siguieron programas similares en India, Francia y la Unión Europea. \autocite{esa-space-year-2007}
 
-\subsubsection{Aplicaciones}
+\vspace{0.5cm}
+\noindent \textbf{Aplicaciones}
 
 Imágenes satelitales proveen información muy útil para todo tipo de estadísticas en áreas relacionadas con el territorio, como por ejemplo la agricultura, silvicultura y el estudio de uso del suelo. El estudio de la agricultura a gran escala por medio de la teledetección se realizó por primera vez entre 1974 y 1977 por medio de datos de Landsat 1, a cargo de la NASA, la Oficina Nacional de Administración Oceánica y Atmosférica (NOAA) y el Departamento de Agricultura de los Estados Unidos (USDA). \autocite{allen-usda-study}
 
 Dado que las imágenes producidas generalmente cubren toda o casi toda el área de estudio, y que suelen ser multiespectrales, lo que provee datos que fotografías ordinarias no contienen, cualquier aplicación que involucre estudiar un área vasta puede beneficiarse de ellas. Dependiendo de la resolución, aplicaciones que involucren detalles más finos también las pueden aprovechar, como por ejemplo su uso en aplicaciones de mapas digitales.
 
-\subsubsection{Características de los datos}
+\vspace{0.5cm}
+\noindent \textbf{Características de los datos}
 
 La calidad de imágenes recolectadas por teledetección se mide de cuatro formas, estas son su resolución espacial, espectral, radiométrica y temporal.
 
@@ -265,7 +269,8 @@ La calidad de imágenes recolectadas por teledetección se mide de cuatro formas
 
 {\bf Resolución temporal}: la cantidad de sobrevuelos del avión o satélite, importante solamente cuando se realizan series de tiempo, promedios o mosaicos, como por ejemplo en el monitoreamiento de la agricultura.
 
-\subsubsection{Disponibilidad de recursos}
+\vspace{0.5cm}
+\noindent \textbf{Disponibilidad de recursos}
 
 Existen varios repositorios de datos de teledetección disponibles para usos comerciales como académicos. Los programas de observación terrestre de la NASA y de la ESA, Landsat y Copernicus respectivamente, disponibilizan recursos por medio de portales en la internet. Para los datos de Landsat, uno de los recursos más accesibles es Google Earth Engine, que permite el procesamiento de imágenes en línea, de forma gratuita para usos no comerciales. \autocite{landsat-data-access} El programa Copernicus por otro lado provee un navegador de imágenes, una forma de descargar datos con algunos filtros, y todo esto de forma gratuita tanto para fines académicos como comerciales. \autocite{copernicus-licences} También ofrecen un espacio de trabajo en línea, similar en propósito a Google Earth Engine. \autocite{copernicus-ds-about}
 
@@ -280,13 +285,15 @@ Por ejemplo, considerando una red neuronal con una capa de entrada y una capa si
 
 Para el procesamiento se utilizan los filtros de convolución, matrices de dimensiones reducidas comparadas con la imagen, cuyas celdas contienen coeficientes. Este filtro se superpone sobre una sección de la imagen, y los valores de los píxeles se multiplican con los de la celda superpuesta del filtro, y la suma de los productos es el resultado de la convolución del grupo de píxeles. Con una representación adecuada de los datos de cada píxel, estos filtros, también llamados {\it kernels }, pueden usarse en la detección de bordes en cualquier orientación, reducción de ruido, aumentación de intensidad de píxeles de cierto color o brillo, entre otros. \autocite{ciresan-cnn}
 
-\subsubsection{Aplicaciones}
+\vspace{0.5cm}
+\noindent \textbf{Aplicaciones}
 
 CNN ya se han utilizado en todo tipo de aplicaciones relacionadas con imágenes y videos, entre ellas clasificación de imágenes, segmentación de imágenes, detección de objetos e inclusive en análisis de imágenes de inundación para predecir la gravedad de uno de estos tipos de desastre natural. \autocite{pally2022105285}
 
 También se ha usado extensivamente en aplicaciones relacionadas a la teledetección, con una gran colección de técnicas, conjuntos de datos, material de aprendizaje y software de libre acceso en artículos web, videos y repositorios de código. \autocite{tds-landuse-classification} \autocite{repo-satellite-image-dl} Queda claro que los modelos convolucionales son muy eficaces en el procesamiento de imágenes, y la cantidad de material estudiado relacionado a las imágenes satelitales facilitaría enormemente la aplicación en el tema de este proyecto.
 
-\subsubsection{Técnicas y arquitecturas}
+\vspace{0.5cm}
+\noindent \textbf{Técnicas y arquitecturas}
 
 Las primeras CNN surgieron en los años 90, con LeNet siendo la primera implementación que ganó atención. Esta red se desarrolló para el reconocimiento de dígitos escritos a mano, y consistía de capas convolucionales, de {\it pooling}, el proceso de reducir la resolución y agrupar información de la capa anterior, y capas densamente, es decir completamente, conectadas.
 
@@ -300,7 +307,8 @@ Otra arquitectura importante es la U-Net, diseñada para la segmentación de im�
 
 Las formas más comunes de análisis de imágenes son la clasificación, la segmentación, la detección de cambios y las series de tiempo. Existen muchas técnicas usadas en aplicaciones más específicas, como la predicción del rendimiento de una plantación o la salud de la vegetación, la reducción de ruido o redes generativas, que no se aplican tan directamente para el objetivo de este trabajo.
 
-\subsubsection{Clasificación}
+\vspace{0.5cm}
+\noindent \textbf{Clasificación}
 
 La clasificación es una tarea fundamental en el análisis de datos de teledetección, en el cual el objetivo es etiquetar cada imagen, como por ejemplo \enquote{área urbana}, \enquote{bosque}, \enquote{agricultura}, etc. El proceso de asignar etiquetas a imágenes se conoce como clasificación a nivel de imagen. \autocite{repo-satellite-image-dl}
 
@@ -308,7 +316,8 @@ Sin embargo, en algunos casos una imagen puede contener más de un tipo de uso d
 
 Es importante no confundir la clasificación a nivel de imagen con la clasificación a nivel de píxel, también conocida como segmentación semántica. Mientras que clasificación a nivel de imagen asigna una etiqueta a una imagen entera, la segmentación semántica asigna una etiqueta a cada píxel de la imagen, lo que resulta en una representación detallada y precisa del uso de suelo en una imagen. \autocite{cole-segmentation}
 
-\subsubsection{Segmentación}
+\vspace{0.5cm}
+\noindent \textbf{Segmentación}
 
 La segmentación consiste en dividir una imagen en segmentos o regiones semánticamente significativas. El proceso de segmentación de imágenes asigna una etiqueta de clase a cada píxel de una imagen, transformándola de una grilla 2D de píxeles a una grilla 2D de etiquetas. Una aplicación común es la segmentación de calles o edificios, donde el objetivo es separar las calles y los edificios de otras características de la imagen. \autocite{repo-satellite-image-dl}
 
@@ -316,7 +325,8 @@ Para realizar esta tarea, modelos de una clase única son frecuentemente entrena
 
 Otras aplicaciones comunes se encuentran en la agricultura o clasificación de uso de suelo en una imagen. En este caso, se utilizan modelos multiclase que son capaces de diferenciar entre varias clases en una imagen, como por ejemplo bosques, áreas urbanas y tierra agrícola. Estos modelos son capaces de reconocer relaciones más complejas entre tipos de uso de suelo, y permiten un entendimiento más integral del contenido de la imagen. \autocite{cole-segmentation}
 
-\subsubsection{Detección de cambios}
+\vspace{0.5cm}
+\noindent \textbf{Detección de cambios}
 
 Detección de cambios es un componente vital del análisis de teledetección, permitiendo el monitoreo de cambios de un paisaje a lo largo del tiempo. Esta técnica se puede aplicar para identificar una amplia gama de cambios, entre otros el cambio de uso de suelo, desarrollo urbano, erosión costal y deforestación. \autocite{repo-satellite-image-dl}
 
@@ -324,7 +334,8 @@ Detección de cambios puede ser realizada entre dos imágenes tomadas en diferen
 
 Una consideración importante es que la detección de cambios puede verse afectada por la presencia de nubes y sombras. Estos factores dinámicos pueden alterar la apariencia de un paisaje y causar falsos positivos en los resultados. Por ende, es importante considerar estos factores y emplear técnicas que puedan mitigar estos efectos. \autocite{repo-satellite-image-dl}
 
-\subsubsection{Serie de tiempo}
+\vspace{0.5cm}
+\noindent \textbf{Serie de tiempo}
 
 La serie de tiempo consiste en una serie de datos ordenados por el tiempo. A menudo se trata de muestras tomadas en intervalos regulares, pero no necesariamente debe ser así. El análisis de series de tiempo se persigue con el fin de extraer estadísticas, patrones o características generales de los datos.
 
@@ -352,26 +363,27 @@ En esta sección describimos la forma de la que se realizó el estudio. Se descr
 
 El área de estudio incluye al Parque Nacional Médanos del Chaco en la zona noroeste del Chaco Paraguayo, en los departamentos de Boquerón y Alto Paraguay, y al Abanico Aluvial del río Pilcomayo, en las fronteras con Bolivia y Argentina.
 
-Los alrededores del Parque Nacional son las áreas de mayor interés, ya que forman parte del área ocupada por una serie de paleocauces originando en el río Parapeti en Bolivia. Sin embargo, el abanico aluvial del Pilcomayo representa un extenso sistema de paleocauces que son más prominentes. Por ende, el área del Pilcomayo puede servir de zona de pruebas de técnicas de análisis de datos antes de aplicarlos a las imágenes del Chaco central. Esta última abarca la región de la triple frontera entre Paraguay, Bolivia y Argentina. La figura \ref{fig:4} incluye todas las zonas descritas.
-
-En el mapa de Regiones y Subregiones de Humedales del Paraguay en la figura \ref{fig:5} , elaborado por la Ex Secretaria del Ambiente (SEAM) del Paraguay, actualmente Ministerio del Ambiente y Desarrollo Sostenible (MADES), las áreas de estudio se ubican en las regiones PY01 y PY02, los Grandes Abanicos Aluviales del Chaco de la Cuenca del Bajo Chaco, y PY03, Humedales de ríos senescente y temporarios. Estas son las regiones de colores celeste, amarillo y rojo en el Chaco, respectivamente.
-
-\begin{figure}[h!]
+\begin{wrapfigure}{L}{0.6\textwidth}
     \centering
     \includegraphics[width=0.6\textwidth]{area-de-estudio.png}
     \caption{Parque Nacional Médanos del Chaco y Abanico Aluvial del Pilcomayo. Elaboración propia con OpenStreetMap. \cite{OpenStreetMap}}
     \label{fig:4}
-\end{figure}
+\end{wrapfigure}
 
-\begin{figure}[h!]
+Los alrededores del Parque Nacional son las áreas de mayor interés, ya que forman parte del área ocupada por una serie de paleocauces originando en el río Parapeti en Bolivia. Sin embargo, el abanico aluvial del Pilcomayo representa un extenso sistema de paleocauces que son más prominentes. Por ende, el área del Pilcomayo puede servir de zona de pruebas de técnicas de análisis de datos antes de aplicarlos a las imágenes del Chaco central. Esta última abarca la región de la triple frontera entre Paraguay, Bolivia y Argentina. La figura \ref{fig:4} incluye todas las zonas descritas.
+
+En el mapa de Regiones y Subregiones de Humedales del Paraguay en la figura \ref{fig:5} , elaborado por la Ex Secretaria del Ambiente (SEAM) del Paraguay, actualmente Ministerio del Ambiente y Desarrollo Sostenible (MADES), las áreas de estudio se ubican en las regiones PY01 y PY02, los Grandes Abanicos Aluviales del Chaco de la Cuenca del Bajo Chaco, y PY03, Humedales de ríos senescente y temporarios. Estas son las regiones de colores celeste, amarillo y rojo en el Chaco, respectivamente.
+
+\begin{wrapfigure}{L}{0.6\textwidth}
     \centering
     \includegraphics[width=0.6\textwidth]{mapa-humedales.png}
     \caption{Mapa de Regiones y Subregiones de Humedales de Paraguay. \cite{seam-2015}}
     \label{fig:5}
-\end{figure}
+\end{wrapfigure}
 
 \subsection{Estrategia de procesamiento de datos}
-\subsubsection{Recopilación de datos}
+\vspace{0.5cm}
+\noindent \textbf{Recopilación de datos}
 
 Las imágenes utilizadas se obtuvieron del programa Copernicus de la ESA, a través de su portal {\it Copernicus Browser}. Las imágenes son multiespectrales, con 13 bandas capturadas por instrumentos a bordo de los satélites Sentinel-2, un par de satélites en la misma órbita polar desfasados en 180 grados. Estas imágenes son de acceso abierto a todo público, necesitando solamente la creación de un usuario. \cite{copernicus-sentinel-2-data-collections}
 
@@ -379,7 +391,8 @@ Los satélites capturan una franja de 290 kilómetros (km) de ancho con un tiemp
 
 Existen varios niveles que representan productos diferentes. El producto utilizado para este estudio es el nivel 2A (L2A).
 
-\subsubsection{Selección de archivos}
+\vspace{0.5cm}
+\noindent \textbf{Selección de archivos}
 
 Una vez establecida el área de estudio, se seleccionan las teselas relevantes y se agregan en un conjunto de datos de entrenamiento y de prueba. Como el objetivo es una detección robusta sin importar la temporada, se seleccionan datos de varias fechas distribuidas a lo largo de los años.
 
@@ -391,9 +404,9 @@ Por otro lado, sequías severas pueden tener un efecto similar y opuesto, oculta
 
 Las imágenes utilizadas se identifican por su número de tesela, asignado por Copernicus, y la fecha del sobrevuelo. Las imágenes utilizadas se listan en el cuadro \ref{table:tiles}.
 
-\begin{table}[ht!]
+\begin{wraptable}{L}{12cm}
     \centering
-    \begin{tabular}{|l|l|p{5cm}|l|l|}
+    \begin{tabular}{|l|l|p{4cm}|l|}
         \hline
 
         \rowcolor{LightBlue}
@@ -409,7 +422,7 @@ Las imágenes utilizadas se identifican por su número de tesela, asignado por C
             2025/10/03\\
         \end{tabular} &
         Abanico aluvial Pilcomayo, frontera Paraguay-Argentina. &
-        Entrenamiento \\
+        Entrenam. \\
         \hline
 
         T20KNB       &
@@ -420,7 +433,7 @@ Las imágenes utilizadas se identifican por su número de tesela, asignado por C
             2025/10/03\\
         \end{tabular} &
         Abanico aluvial Pilcomayo, fronteras Paraguay-Argentina-Bolivia. &
-        Entrenamiento \\
+        Entrenam. \\
         \hline
 
         T20KNC       &
@@ -440,7 +453,7 @@ Las imágenes utilizadas se identifican por su número de tesela, asignado por C
             2025/09/13\\
         \end{tabular} &
         Médanos del Chaco, noroeste del departamento Boquerón. &
-        Entrenamiento \\
+        Entrenam. \\
         \hline
 
         T20KPA       &
@@ -494,9 +507,10 @@ Las imágenes utilizadas se identifican por su número de tesela, asignado por C
     \end{tabular}
     \caption{Teselas utilizadas y fechas de sobrevuelo del satélite.}
     \label{table:tiles}
-\end{table}
+\end{wraptable}
 
-\subsubsection{Unificación y preparación de datos}
+\vspace{0.5cm}
+\noindent \textbf{Unificación y preparación de datos}
 
 Seleccionados los datos, estos se mantienen en su formato y estructura de archivos original, de donde pueden ser leídas las imágenes para cada banda disponible para cada resolución (de 10m, 20m o 60m).
 
@@ -504,7 +518,8 @@ Como las estructuras que se buscan reconocer son extensas, basta con utilizar im
 
 Una clase proveída por la librería Torchgeo, {\it RasterDataset}, permite cargar imágenes satelitales de diversas bandas teniendo en cuenta su geolocalización. Esto permite un manejo abstracto del conjunto de datos, por lo cual no es necesario una preparación extensa de los datos obtenidos de Copernicus.
 
-\subsubsection{Limpieza de datos}
+\vspace{0.5cm}
+\noindent \textbf{Limpieza de datos}
 
 Las teselas incluyen máscaras de píxeles erróneos. Como tenemos una gran cantidad de datos disponibles gracias al tiempo corto de revisita de los satélites, podemos simplemente descartar imágenes con errores significativos.
 
@@ -513,17 +528,6 @@ Una inevitabilidad de las imágenes producidas por Sentinel-2 es la falta de dat
 Como estas regiones faltantes (pero no erróneas) son sustanciales, dependiendo de la tesela escogida, estos píxeles no se modificaron en las imágenes afectadas. Nuestra expectativa fue que los modelos se adecuarían a este valor, dado que mientras los valores posibles abarcan el rango entre $0$ y $10\,000$, nunca toman valores cercanos a $0$ en imágenes libres de errores. Un ejemplo de este fenómeno se encuentra en el cuadro \ref{table:tiles}, en el margen izquierdo de la tesela {\it T20KPC}.
 
 \section{Experimentos y Resultados}
-
-\subsubsection{Hardware utilizado}
-
-Los experimentos se realizaron exclusivamente en hardware de consumidor. Se utilizaron dos máquinas:
-
-\begin{enumerate}
-    \item Una computadora portátil con un procesador de 12 núcleos lógicos, 16GiB de memoria RAM, y una tarjeta gráfica Nvidia GeForce GTX 1050 Ti, que cuenta con 4GiB de memoria de video.
-    \item Una computadora de escritorio con un procesador de 12 núcleos lógicos, 32GiB de memoria RAM, y una tarjeta gráfica AMD Radeon RX 7600, que cuenta con 8GiB de memoria de video.
-\end{enumerate}
-
-Cabe resaltar que los experimentos se vieron limitados por estas en su envergadura, sin embargo son reproducibles en hardware más actual o profesional. En donde sea relevante, la máquina en la cual se hizo el entrenamiento se referencia por esta enumeración.
 
 \subsection{Síntesis de datos de entrenamiento}
 
@@ -559,11 +563,13 @@ Para todos los experimentos, las únicas variables son los modelos usados y sus 
 
 El entrenamiento de los modelos de cada arquitectura se hizo con un DataLoader que produce imágenes de 128 píxeles de lado para el entrenamiento y la inferencia. Excepto cuando se especifique lo contrario, el entrenamiento se hizo exclusivamente con esta resolución de imágenes.
 
-\subsubsection{FCN}
+\vspace{0.5cm}
+\noindent \textbf{FCN}
 
 La arquitectura más simple en este trabajo, consiste de cinco capas convolucionales con activación de tipo {\it LeakyReLU}, la cual mantiene valores positivos iguales y multiplica valores negativos por un número pequeño para minimizar su magnitud. Una arquitectura así de simple necesita de patrones simples y obvios para ser útil. Tal vez predeciblemente, esta arquitectura no dio resultados útiles, creando predicciones uniformes para cualquier tesela. Todos los experimentos resultan en un modelo que produce una máscara de probabilidades en la que cada píxel es negro, y la cantidad de épocas necesarias para alcanzar la menor pérdida sugiere que no se aprendieron patrones entre iteraciones.
 
-\subsubsection{FarSeg}
+\vspace{0.5cm}
+\noindent \textbf{FarSeg}
 
 La arquitectura Foreground-Aware Relation Network es una arquitectura diseñada para la segmentación geoespacial de objetos en imágenes de alta resolución espacial \cite{zheng2020foregroundawarerelationnetworkgeospatial}. Mientras que solamente utilizamos imágenes de 60m de resolución espacial, dieron resultados mucho más prometedores que FCN.
 
@@ -589,7 +595,8 @@ La figura \ref{fig:farseg} muestra las máscaras generadas por estos modelos.
 
 Entre los modelos resultantes, las versiones 1-2 y 9-12 produjeron máscaras completamente negras, o con pocas áreas en las que predicen paleocauces. Estos son los modelos con backbone ResNet-18 y ResNet-101. Sin embargo, aun más llamativo es el hecho que los modelos que utilizan las bandas B12, B8A, B4 producen máscaras enteramente negras, excepto con backbone ResNet-34.
 
-\subsubsection{U-Net}
+\vspace{0.5cm}
+\noindent \textbf{U-Net}
 
 Una de las arquitecturas más conocidas para la tarea de segmentación es U-Net. La estructura consiste de varios niveles por los cuales desciende la imagen de entrada hasta llegar a un nivel de cuello de botella, de donde asciende nuevamente por los niveles hasta llegar a la resolución de la imagen de salida, que en este caso es igual a la resolución de la imagen de entrada.
 
@@ -627,7 +634,8 @@ Existen varios trabajos investigando la ocurrencia de paleocauces en el Chaco Ce
 
 Dos investigaciones son de gran interés, la primera por parte del Instituto Nacional de Tecnología Industrial (INTI) de Argentina en la provincia de Chaco \cite{inti-2015}, y la segunda como parte de un proyecto de la organización World Wildlife Fund (WWF) Paraguay, realizada en el distrito de Mariscal Estigarribia, departamento Boquerón. \cite{garcia-2021}
 
-\subsubsection{Provincia de Chaco, Argentina}
+\vspace{0.5cm}
+\noindent \textbf{Provincia de Chaco, Argentina}
 
 Los estudios geoeléctricos del INTI en la provincia de Chaco en Argentina se detallan en \enquote{Estudios Geoeléctricos En El Departamento Libertador San Martín - Provincia De Chaco}. Realizados en el año 2014, tuvieron como objetivos la transferencia de conocimientos especiales en lo referente a captación de águas subterráneas y la evaluación su disponibilidad mediante sondeos eléctricos verticales (SEV). El trabajo incluye la ubicación de estos sondeos, además de algunos pozos utilizados por miembros de la comunidad. \cite{inti-2015}
 
@@ -656,7 +664,8 @@ Algunos de los mapas de los alrededores de varias zonas estudiadas y las predicc
     \label{fig:inti}
 \end{figure}
 
-\subsubsection{Distrito de Mariscal Estigarribia}
+\vspace{0.5cm}
+\noindent \textbf{Distrito de Mariscal Estigarribia}
 
 La investigación realizada en Mariscal Estigarribia \enquote{Análisis De Recursos Hídricos Para El Aprovechamiento Múltiple En La Ciudad De Mariscal Estigarribia Y Zona Periurbana, Departamento Boquerón}, como parte de un proyecto de la organización WWF, tiene como objetivo el análisis de recursos hídricos en la ciudad y en la zona periurbana. El acuífero principal a investigar es el Sistema Acuífero Paleocauce (SAP), conformado por el sistema de paleocauces en el Chaco central. Fuera del área de trabajo, un segundo acuífero es accesible mediante pozos profundos, el Sistema Acuífero Yrendá. \cite{garcia-2021}
 
@@ -693,21 +702,15 @@ Las imágenes utilizadas cubren rangos temporales a lo largo del año, teniendo 
 
 Por medio de una herramienta desarrollada para este trabajo, Torchbearer, el entrenamiento de modelos se realizó de forma paramétrica, con los modelos resultantes siendo empleados directamente en la creación de mapas de inferencia.
 
-Entre las arquitecturas presentados en el capítulo de Experimentos y Resultados, la menos apta para la tarea de segmentación es el FCN, o red enteramente contectada. Esta arquitectura produce modelos que producen predicciones completamente uniformes.
+Entre las arquitecturas presentados en el capítulo de Experimentos y Resultados, la menos apta para la tarea de segmentación es el FCN, con modelos que producen predicciones completamente uniformes. La arquitectura FarSeg produjo resultados más prometedores. Mientras que no son predicciones muy significativas, los resultados dependen enteramente de la selección de tres bandas de la imagen. Es posible que una selección diferente a las utilizadas en los experimentos produzca resultados más concretos.
 
-La arquitectura FarSeg, o Foreground-Aware Relation Network, produjo resultados más prometedores. Mientras que no son predicciones muy significativas, los resultados dependen enteramente de la selección de tres bandas de la imagen. Es posible que una selección diferente a las utilizadas en los experimentos produzca resultados más concretos. Aun así, los mejores resultados de estos modelos produjeron predicciones muy poco extensas.
+La mejor arquitectura estudiada es \textbf{U-Net}, bien conocida por su capacidad de segmentación de imágenes médicas. Los resultados de estos modelos dependen también de los datos de entrenamiento, aunque parecen producir predicciones más generales. Dado que las imágenes procesadas por esta arquitectura pasan por filtros que reducen la resolución de la imagen, y luego por filtros que sintetizan datos nuevos al aumentar nuevamente la resolución, estos modelos pueden aprender los patrones deseados de forma muy general, incluso con datos de entrenamiento imperfectos.
 
-Una limitación potencial para estas arquitecturas son los datos de entrenamiento, creados en base a un mejor esfuerzo para recrear mapas de paleocauces ya conocidos en el Gran Chaco. Datos de mejor calidad podrían ser lo que hace viable a ambas arquitecturas.
+En comparaciones hechas entre trabajos de campo en el Chaco Argentino, algunas versiones de los modelos U-Net lograron una predicción correcta en todas las áreas de sondeos geoeléctricos y pozos. Esta zona presenta muchos paleocauces que se formaron en paralelo y pueden caracterizarse como paleocauces activos, ya que presentan mucha humedad en la superficie y una gran abundancia de lagunas. Específicamente, las versiones 7, 8, 11 y 12 producen predicciones correctas en el \textbf{100\%} de los sitios de sondeos o pozos, mientras que las versiones 9 y 10 producen predicciones significativas correctas en solamente 33\% de los mismos sitios, sugeriendo que su arquitectura es enteramente inadecuada.
 
-La mejor arquitectura estudiada es U-Net, bien conocida por su capacidad de segmentación de imágenes médicas. Los resultados de estos modelos dependen también de los datos de entrenamiento, aunque parecen producir predicciones más generales. Dado que las imágenes procesadas por esta arquitectura pasan por filtros que reducen la resolución de la imagen, y luego por filtros que sintetizan datos nuevos al aumentar nuevamente la resolución, estos modelos pueden aprender los patrones deseados de forma muy general, incluso con datos de entrenamiento imperfectos.
+En el Chaco Paraguayo, los modelos predicen correctamente entre ocho y nueve de las localidades de pozos dentro y fuera de paleocauces, de un total de diez. Esta zona está dotada principalmente de paleocauces colmatados, presentando una superficie arenosa, con poca humedad y poca vegetación, que conforman el Sistema Acuífero Paleocauce. En específico, las versiones 7 y 8 tienen predicciones \textbf{90\%} correctas, y las versiones 11 y 12 son correctas en el \textbf{80\%} de los sitios. Las versiones 9 y 10 nuevamente produjeron mapas poco útiles, con predicciones correctas menores al 30\%.
 
-En comparaciones hechas entre trabajos de campo en el Chaco Argentino, algunas versiones de los modelos U-Net lograron una predicción correcta en todas las áreas de sondeos geoeléctricos y pozos. Esta zona presenta muchos paleocauces que se formaron en paralelo y pueden caracterizarse como paleocauces activos, ya que presentan mucha humedad en la superficie y una gran abundancia de lagunas, ambas características clásicas de este tipo de paleocauces. Específicamente, las versiones 7, 8, 11 y 12 producen predicciones correctas en el 100\% de los sitios de sondeos o pozos, mientras que las versiones 9 y 10 producen predicciones significativas correctas en solamente 33\% de los mismos sitios, sugeriendo que su arquitectura es enteramente inadecuada.
-
-En el Chaco Paraguayo, los modelos predicen correctamente entre ocho y nueve de las localidades de pozos dentro y fuera de paleocauces, de un total de diez. Esta zona está dotada principalmente de paleocauces colmatados, presentando una superficie arenosa, con poca humedad y poca vegetación, que conforman el Sistema Acuífero Paleocauce. En específico, las versiones 7 y 8 tienen predicciones 90\% correctas, y las versiones 11 y 12 son correctas en el 80\% de los sitios. Sin embargo, las versiones 9 y 10 nuevamente produjeron mapas muy esparcidos, con predicciones correctas menores al 30\%.
-
-Entre los resultados obtenidos, la comparación con los datos del estudio del Chaco Paraguayo tiene más impacto que la comparación con datos de Argentina. Esto es debido principalmente a que la región menos húmeda del Chaco Paraguayo causa que las predicciones de los modelos presentados cubran menos área, sin impactar en gran medida el éxito de las predicciones.
-
-Aunque los resultados son en general mejores en zonas de paleocauces activos, con resultados entre 10\% y 20\% mejores gracias a sus distintivas características superficiales, los paleocauces colmatados son de mayor interés. Esto se debe a que paleocauces activos están dotados de lagunas y humedales, y en las zonas mencionadas, se presentan en cercanía de rios, mientras que los paleocauces colmatados del Chaco Central se presentan en un ambiente semi-árido en el cual el agua se considera un recurso mucho más escaso, especialmente en sequías cuando las reservas de agua más accesibles pueden agotarse rápidamente.
+Entre los resultados obtenidos, la comparación con los datos del estudio del Chaco Paraguayo tiene más impacto que la comparación con datos de Argentina, aun con el menor porcentaje de predicciones correctas. Esto es debido principalmente a que la región menos húmeda del Chaco Paraguayo causa que las predicciones de los modelos presentados cubran menos área, sin impactar en gran medida el éxito de las predicciones. Aunque los resultados son en general mejores en zonas de paleocauces activos, con resultados entre 10\% y 20\% mejores gracias a sus distintivas características superficiales, los paleocauces colmatados son de mayor interés. Esto se debe a que paleocauces colmatados del Chaco Central se presentan en un ambiente semi-árido en el cual el agua se considera un recurso mucho más escaso, especialmente en sequías cuando las reservas de agua más accesibles pueden agotarse rápidamente.
 
 \subsection{Limitaciones}
 
